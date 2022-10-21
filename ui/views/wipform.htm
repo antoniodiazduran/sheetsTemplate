@@ -1,0 +1,127 @@
+<div style="padding: 5px;">
+<h3>&nbsp; &nbsp; <a href="/wip"><<</a> &nbsp; &nbsp; Reporte de Produccion</h3>
+</div>
+<div class="container">
+  <form action="/wip/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <!--<label for="customer">Cliente</label>//-->
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Cliente</label><p>
+	<input type="radio" id="customer" name="customer" value="Atlas">
+	<label for="html">Atlas</label><br>
+	<input type="radio" id="customer" name="customer" value="Bergstrom">
+        <label for="html">Bergstrom</label><br>
+	<input type="radio" id="customer" name="customer" value="Capacity">
+        <label for="html">Capacity</label><br>
+	<input type="radio" id="customer" name="customer" value="California">
+        <label for="html">California</label><br>
+	<input type="radio" id="customer" name="customer" value="Collins">
+        <label for="html">Collins</label><br>
+	<input type="radio" id="customer" name="customer" value="Kalmar">
+        <label for="html">Kalmar</label><br>
+	<input type="radio" id="customer" name="customer" value="Proterra">
+        <label for="html">Proterra</label><br>
+	<input type="radio" id="customer" name="customer" value="Spartan">
+        <label for="html">Spartan</label><br>
+	<input type="radio" id="customer" name="customer" value="Utilimaster">
+        <label for="html">Utilimaster</label><br>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="partnumber"># Parte</label><p>
+        <input type="text" id="partnumber" name="partnumber" placeholder="Numero de parte...">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="quantity">Cantidad</label><p>
+        <input type="number" id="quantity" name="quantity" placeholder="Numero de piezas">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="traveler">Traveler</label><p>
+        <input type="number" id="traveler" name="traveler" placeholder="Numero de trabajo (Job)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="area">Area</label><p>
+        <input type="radio" id="area" name="area" value="Corte">
+        <label for="html">Corte</label><br>
+        <input type="radio" id="area" name="area" value="Liberacion">
+        <label for="html">Liberacion</label><br>
+        <input type="radio" id="area" name="area" value="Ensamble">
+        <label for="html">Ensamble</label><br>
+        <input type="radio" id="area" name="area" value="Loom">
+        <label for="html">Loom</label><br>
+        <input type="radio" id="area" name="area" value="Pruebas">
+        <label for="html">Pruebas</label><br>
+        <input type="radio" id="area" name="area" value="Embarques">
+        <label for="html">Embarques</label><br>
+        <input type="radio" id="area" name="area" value="Retrabajo">
+        <label for="html">Retrabajo*</label><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="notes">Notas</label><p>
+        <textarea id="notes" name="notas" placeholder="Cortos..." style="height:200px"></textarea>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+	<div class="col-75">
+      		<input type="reset" value="Limpiar">
+      		<input type="submit" value="Submit">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let cus = document.forms["wipform"]["customer"].value;
+ let nop = document.forms["wipform"]["partnumber"].value;
+ let are = document.forms["wipform"]["area"].value;
+ let qua = document.forms["wipform"]["quantity"].value;
+ let ale = "";
+ if ( nop.length=== 0) { ale = ale + "Numero de parte incompleto <br>"; }
+ if ( cus.length=== 0) { ale = ale + "Seleccione un Cliente<br>"; }
+ if ( are.length=== 0) { ale = ale + "Seleccione el  Area<br>"; }
+ if ( qua.length=== 0) { ale = ale + "Agrege la cantidad<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

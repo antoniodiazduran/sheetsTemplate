@@ -1,0 +1,8 @@
+<tr>
+	<td align="left">{{ substr(@cols.DateTime,0,10) }}</td>
+	<td align="left"><a href="area/{{ @cols.Area }}">{{ @cols.Area }}</a></td>
+	<td align="left"><a href="partnumber{{ @cols.PartNumber }}</td>
+	<td align="left">{{ @cols.Traveler }}</td>
+	<td align="left">{{ @cols.Quantity }}</td>
+	<td align="left"><a href="customers/{{@cols.Customer}}">{{ @cols.Customer }}</a></td>
+</tr>
