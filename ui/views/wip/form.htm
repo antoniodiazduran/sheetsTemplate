@@ -1,8 +1,10 @@
-<div style="padding: 5px;">
-<h3>&nbsp; &nbsp; <a href="/wip"><<</a> &nbsp; &nbsp; Reporte de Produccion</h3>
+<include href="nav.htm">
+
+<div style="padding:1px; background-color:navy; opacity:0.7;">
+	<h3>Reporte de Produccion</h3>
 </div>
 <div class="container">
-  <form action="/wip/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
     <div class="row">
 	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
 	</div>
@@ -63,6 +65,8 @@
       </div>
       <div class="col-75">
         <label class="titles" for="area">Area</label><p>
+        <input type="radio" id="area" name="area" value="Escritorio">
+        <label for="html">Escritorio</label><br>
         <input type="radio" id="area" name="area" value="Corte">
         <label for="html">Corte</label><br>
         <input type="radio" id="area" name="area" value="Liberacion">
@@ -91,7 +95,7 @@
     <div class="row">
 	<div class="col-75">
       		<input type="reset" value="Limpiar">
-      		<input type="submit" value="Submit">
+      		<input type="submit" value="Guardar">
 	</div>
     </div>
   </form>

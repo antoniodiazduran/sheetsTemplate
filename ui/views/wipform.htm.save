@@ -1,6 +1,0 @@
-<form method="post" action="/{{ @section }}/{{ @mode}}" >
-
-<input type="text" name="ordernumber">
-
-<input type="submit" name="mode"
-</form>

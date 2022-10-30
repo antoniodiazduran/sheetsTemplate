@@ -1,0 +1,88 @@
+<include href="nav.htm">
+
+<div style="padding: 5px; background-color:lightgreen; opacity:0.7;">
+	<h3>Reporte de Salidas</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="cageout" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <!--<label for="customer">Cliente</label>//-->
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Cliente</label><p>
+	<input type="radio" id="customer" name="customer" value="Capacity">
+        <label for="html">Capacity</label><br>
+	<input type="radio" id="customer" name="customer" value="California">
+        <label for="html">California</label><br>
+	<input type="radio" id="customer" name="customer" value="Collins">
+        <label for="html">Collins</label><br>
+	<input type="radio" id="customer" name="customer" value="Spartan">
+        <label for="html">Spartan</label><br>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="partnumber"># Parte</label><p>
+        <input type="text" id="partnumber" name="partnumber" placeholder="Numero de parte...">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="quantity">Cantidad</label><p>
+        <input type="number" id="quantity" name="quantity" placeholder="Numero de piezas">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="traveler">Traveler</label><p>
+        <input type="number" id="traveler" name="traveler" placeholder="Numero de trabajo (Job)">
+      </div>
+    </div>
+	<p>
+    <div class="row">
+	<div class="col-75">
+      		<input type="reset" value="Limpiar">
+      		<input type="submit" value="Submit">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let cus = document.forms["cageout"]["customer"].value;
+ let nop = document.forms["cageout"]["partnumber"].value;
+ let qua = document.forms["cageout"]["quantity"].value;
+ let ale = "";
+ if ( nop.length=== 0) { ale = ale + "Numero de parte incompleto <br>"; }
+ if ( cus.length=== 0) { ale = ale + "Seleccione un Cliente<br>"; }
+ if ( qua.length=== 0) { ale = ale + "Agrege la cantidad<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

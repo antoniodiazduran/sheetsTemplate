@@ -1,0 +1,42 @@
+<?php
+
+class Cage extends Controller {
+
+    public function all() {
+	 	$data[] = $this->GSheetsRead('pw.cageout');
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','cageout');
+                $this->f3->set('field','all');
+		$this->f3->set('c1',0);
+	        $this->f3->set('customer','yes');
+		$this->f3->set('t1',count($data[0])-50);
+                $this->f3->set('headers','cageout/headers.htm');
+                $this->f3->set('fields','cageout/fields.htm');
+                $this->f3->set('content','cageout/list.htm');
+    }
+    public function form() {
+                $this->f3->set('breadcrumbs','cageout');
+                $this->f3->set('mode','create');
+                $this->f3->set('content','cageout/form.htm');
+    }
+    public function insertRow() {
+		// Gathering data from form
+		$fields[] = $this->f3->get('POST');
+		// Creating array to insert into Google Sheets
+		date_default_timezone_set("America/Mexico_City");
+		$row = array(
+                        'DateTime'=>date('m/d/Y H:i:s'),
+                        'Customer'=>$fields[0]['customer'],
+                        'PartNumber'=>$fields[0]['partnumber'],
+                        'Traveler'=>$fields[0]['traveler'],
+                        'Quantity'=>$fields[0]['quantity'],
+                	);
+		// Inserting data into Google Sheets
+		$data[] = $this->GSheetsInsert('pw.cageout',$row);
+		// Displaying new data
+		$this->f3->reroute('/cagelist');
+
+    }
+}
+?>
+

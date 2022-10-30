@@ -4,5 +4,7 @@
 	<td align="left"><a href="traveler/{{ @cols.Traveler }}">{{ @cols.Traveler }}</a></td>
 	<td align="left"><a href="partnumber/{{ @cols.PartNumber }}">{{ @cols.PartNumber }}</a></td>
 	<td align="right">{{ @cols.Quantity }}</td>
-<!--	<td align="left"><a href="customers/{{@cols.Customer}}">{{ substr(@cols.Customer,0,1)."...".substr(@cols.Customer,-1,1) }}</a></td>//-->
+	<check if="{{ @customer == 'yes'}}">
+	<td align="left"><a href="customers/{{@cols.Customer}}">{{ substr(@cols.Customer,0,2)."...".substr(@cols.Customer,-2,2) }}</a></td>
+	</check>
 </tr>

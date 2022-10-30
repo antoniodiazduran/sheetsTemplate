@@ -23,14 +23,27 @@ if ((float)PCRE_VERSION<8.0)
 // Load configuration
 $f3->config('config.ini');
 
-// Routes for application
-$f3->route('GET /area/@area','Wip->alist');
-$f3->route('GET /traveler/@traveler','Wip->tlist');
-$f3->route('GET /customers/@customer','Wip->clist');
-$f3->route('GET /partnumber/@partnumber','Wip->plist');
-$f3->route('GET /rdp','Wip->form');
-$f3->route('POST /wip/create','Wip->insertRow');
-$f3->route('GET /wip','Wip->all');
+//WIP
+$f3->route('POST /wip/create','Wip->insertRow'); 
+$f3->route('GET /rdp','Wip->form'); 
+$f3->route('GET /wip','Wip->form'); 
+$f3->route('GET /wiplist','Wip->all'); 
+$f3->route('GET /wlog','Wip->wlog');
+$f3->route('GET /area/@area','Wip->alist'); 
+$f3->route('GET /traveler/@traveler','Wip->tlist'); 
+$f3->route('GET /customers/@customer','Wip->clist'); 
+$f3->route('GET /partnumber/@partnumber','Wip->plist'); 
+
+//Cageout
+$f3->route('POST /cageout/create','Cage->insertRow'); 
+$f3->route('GET /cageout','Cage->form'); 
+$f3->route('GET /cageoutlist','Cage->all'); 
+
+//Shortage
+$f3->route('POST /shortage/create','Shortage->insertRow'); 
+$f3->route('GET /shortage','Shortage->form'); 
+$f3->route('GET /shortagelist','Shortage->all'); 
+
 
 // Welcome page
 $f3->route('GET /',

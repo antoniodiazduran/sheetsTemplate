@@ -1,0 +1,43 @@
+<include href="nav.htm">
+<table>
+	<include href="{{ @headers }}"/>
+	<repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >
+<check if="{{ @c1 < @t1 }}">
+<true>
+ <!-- {{ @c1++ }}//-->
+</true>
+<false>
+	<check if="{{ @field == 'all' }}">
+        		<include href="{{ @fields }}"/>
+	</check>
+	<check if="{{ @field == 'traveler' }}">
+		<check if="{{ strtolower(@traveler) == strtolower(@cols.Traveler) }}">
+        		<include href="{{ @fields }}"/>
+		</check>
+	</check>
+	<check if="{{ @field == 'customer' }}">
+		<check if="{{ strtolower(@customer) == strtolower(@cols.Customer) }}">
+        		<include href="{{ @fields }}"/>
+		</check>
+	</check>
+	<check if="{{ @field == 'area' }}">
+		<check if="{{ strtolower(@area) == strtolower(@cols.Area) }}">
+        		<include href="{{ @fields }}"/>
+		</check>
+	</check>
+	<check if="{{ @field == 'partnumber' }}">
+		<check if="{{ strtolower(@partnumber) == strtolower(@cols.PartNumber) }}">
+        		<include href="{{ @fields }}"/>
+		</check>
+	</check>
+	<check if="{{ @field == 'detail' }}">
+		<check if="{{ strtolower(@customer) == strtolower(@cols.Customer) }}">
+        		<check if="{{ strtolower(@area) == strtolower(@cols.Area) }}">
+        			<include href="wipfields.htm"/>
+        		</check>
+		</check>
+	</check>
+</false>
+</check>
+	</repeat>
+</table>

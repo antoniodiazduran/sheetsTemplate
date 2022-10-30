@@ -7,33 +7,33 @@ class Wip extends Controller {
                 $data[] = $this->GSheetsRead('pw.wip');
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('traveler',$this->f3->get('PARAMS.traveler'));
-                $this->f3->set('headers','wipheaders.htm');
-                $this->f3->set('fields','wipfields.htm');
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','traveler');
                 $this->f3->set('details',$data);
-                $this->f3->set('content','list.htm');
+                $this->f3->set('content','wip/list.htm');
     }
     public function plist() 
     {
                 $data[] = $this->GSheetsRead('pw.wip');
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('partnumber',$this->f3->get('PARAMS.partnumber'));
-                $this->f3->set('headers','wipheaders.htm');
-                $this->f3->set('fields','wipfields.htm');
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','partnumber');
                 $this->f3->set('details',$data);
-                $this->f3->set('content','list.htm');
+                $this->f3->set('content','wip/list.htm');
     }
     public function clist() 
     {
                 $data[] = $this->GSheetsRead('pw.wip');
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('customer',$this->f3->get('PARAMS.customer'));
-                $this->f3->set('headers','wipheaders.htm');
-                $this->f3->set('fields','wipfields.htm');
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','customer');
                 $this->f3->set('details',$data);
-                $this->f3->set('content','list.htm');
+                $this->f3->set('content','wip/list.htm');
     }
     public function alist() {
 		$data[] = $this->GSheetsRead('pw.wip');
@@ -41,9 +41,21 @@ class Wip extends Controller {
                 $this->f3->set('area',$this->f3->get('PARAMS.area'));
                 $this->f3->set('details',$data);
                 $this->f3->set('field','area');
-                $this->f3->set('headers','wipheaders.htm');
-                $this->f3->set('fields','wipfields.htm');
-                $this->f3->set('content','list.htm');
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
+                $this->f3->set('content','wip/list.htm');
+    }
+    public function wlog() {
+	 	$data[] = $this->GSheetsRead('pw.log');
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','wlog');
+                $this->f3->set('field','all');
+		$this->f3->set('c1',0);
+	        $this->f3->set('customer','yes');
+		$this->f3->set('t1',count($data[0])-350);
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
+                $this->f3->set('content','wip/list.htm');
     }
     public function all() {
 	 	$data[] = $this->GSheetsRead('pw.wip');
@@ -51,15 +63,16 @@ class Wip extends Controller {
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('field','all');
 		$this->f3->set('c1',0);
-		$this->f3->set('t1',count($data[0])-30);
-                $this->f3->set('headers','wipheaders.htm');
-                $this->f3->set('fields','wipfields.htm');
-                $this->f3->set('content','list.htm');
+	        $this->f3->set('customer','no');
+		$this->f3->set('t1',count($data[0])-50);
+                $this->f3->set('headers','wip/headers.htm');
+                $this->f3->set('fields','wip/fields.htm');
+                $this->f3->set('content','wip/list.htm');
     }
     public function form() {
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('mode','create');
-                $this->f3->set('content','wipform.htm');
+                $this->f3->set('content','wip/form.htm');
     }
     public function insertRow() {
 		// Gathering data from form

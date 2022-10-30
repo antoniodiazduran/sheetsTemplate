@@ -1,0 +1,9 @@
+<tr>
+	<td align="left" style="font-size:0.7em;">{{ substr(@cols.DateTime,0,19) }}</td>
+	<check if="{{ @customer == 'yes'}}">
+	<td align="left">{{ @cols.Customer }}</td>
+	</check>
+	<td align="left">{{ @cols.PartNumber }}</td>
+	<td align="left">{{ @cols.Traveler }}</td>
+	<td align="right">{{ @cols.Quantity }}</td>
+</tr>

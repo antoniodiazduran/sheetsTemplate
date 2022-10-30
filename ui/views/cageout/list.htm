@@ -1,14 +1,4 @@
-<div class="row" style="font-weight:bolder; padding-left:20px; padding-right:20px">
-<div class="col-25">
-<p><a href="/{{ @breadcrumbs }}">Inicio</a></p>
-</div>
-<div class="col-75">
-<p style="text-align: right;">
-	<a href="/rdp">Agregar</a>
-</p>
-</div>
-</div>
-
+<include href="nav.htm">
 <table>
 	<include href="{{ @headers }}"/>
 	<repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >

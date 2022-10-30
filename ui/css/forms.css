@@ -98,6 +98,23 @@ input[type=submit]:hover {
   margin-top: 10px;
 }
 
+.col-25x {
+  float: left;
+  width: 20%;
+  border-top-left-radius:.5em;
+  border-bottom-left-radius:.5em;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.col-75x {
+  float: left;
+  width: 75%;
+  border-top-right-radius:.5em;
+  border-bottom-right-radius:.5em;
+  margin-top: 10px;
+}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";

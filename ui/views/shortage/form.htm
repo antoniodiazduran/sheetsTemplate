@@ -1,0 +1,90 @@
+<include href="nav.htm">
+
+<div style="padding: 5px; background-color:red; opacity:0.7;">
+	<h3>Reporte de Faltantes</h3>
+</div>
+<div class="container">
+  <form action="/shortage/{{ @mode }}" method="POST" name="shortage" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <!--<label for="customer">Cliente</label>//-->
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Cliente</label><p>
+	<input type="radio" id="customer" name="customer" value="Capacity">
+        <label for="html">Capacity</label><br>
+	<input type="radio" id="customer" name="customer" value="California">
+        <label for="html">California</label><br>
+	<input type="radio" id="customer" name="customer" value="Collins">
+        <label for="html">Collins</label><br>
+	<input type="radio" id="customer" name="customer" value="Spartan">
+        <label for="html">Spartan</label><br>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="harness">Harness</label><p>
+        <input type="text" id="traveler" name="harness" placeholder="Numero de trabajo (Job)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="partnumber"># Parte</label><p>
+        <input type="text" id="partnumber" name="partnumber" placeholder="Numero de parte...">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="quantity">Cantidad</label><p>
+        <input type="number" id="quantity" name="quantity" placeholder="Numero de piezas">
+      </div>
+    </div>
+	<p>
+    <div class="row">
+	<div class="col-75">
+      		<input type="reset" value="Limpiar">
+      		<input type="submit" value="Submit">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let cus = document.forms["shortage"]["customer"].value;
+ let har = document.forms["shortage"]["harness"].value;
+ let nop = document.forms["shortage"]["partnumber"].value;
+ let qua = document.forms["shortage"]["quantity"].value;
+ let ale = "";
+ if ( nop.length=== 0) { ale = ale + "Numero de parte incompleto <br>"; }
+ if ( har.length=== 0) { ale = ale + "Agregue el arnes<br>"; }
+ if ( cus.length=== 0) { ale = ale + "Seleccione un Cliente<br>"; }
+ if ( qua.length=== 0) { ale = ale + "Agregue la cantidad<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>
