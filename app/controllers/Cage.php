@@ -30,6 +30,7 @@ class Cage extends Controller {
                         'PartNumber'=>$fields[0]['partnumber'],
                         'Traveler'=>$fields[0]['traveler'],
                         'Quantity'=>$fields[0]['quantity'],
+                        'Unit'=>$fields[0]['unit'],
                 	);
 		// Inserting data into Google Sheets
 		$data[] = $this->GSheetsInsert('pw.cageout',$row);

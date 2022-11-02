@@ -50,7 +50,19 @@
         <input type="number" id="quantity" name="quantity" placeholder="Numero de piezas">
       </div>
     </div>
-	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="unit">Unidad</label><p>
+        <select id="unit" name="unit">
+                <option>
+                <option value="feet">metro/pies
+                <option value="each">pieza
+        </select>
+      </div>
+    </div>
+    <p>
     <div class="row">
 	<div class="col-75">
       		<input type="reset" value="Limpiar">
@@ -68,11 +80,13 @@ function validateForm() {
  let har = document.forms["shortage"]["harness"].value;
  let nop = document.forms["shortage"]["partnumber"].value;
  let qua = document.forms["shortage"]["quantity"].value;
+ let uni = document.forms["shortage"]["unit"].value;
  let ale = "";
  if ( nop.length=== 0) { ale = ale + "Numero de parte incompleto <br>"; }
  if ( har.length=== 0) { ale = ale + "Agregue el arnes<br>"; }
  if ( cus.length=== 0) { ale = ale + "Seleccione un Cliente<br>"; }
  if ( qua.length=== 0) { ale = ale + "Agregue la cantidad<br>"; }
+ if ( uni.length=== 0) { ale = ale + "Seleccione la unidad de medida<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";

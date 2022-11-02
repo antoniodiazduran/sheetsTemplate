@@ -30,6 +30,7 @@ class Shortage extends Controller {
                         'PartNumber'=>$fields[0]['partnumber'],
                         'Harness'=>$fields[0]['harness'],
                         'Quantity'=>$fields[0]['quantity'],
+                        'Unit'=>$fields[0]['unit'],
                 	);
 		// Inserting data into Google Sheets
 		$data[] = $this->GSheetsInsert('pw.shortage',$row);

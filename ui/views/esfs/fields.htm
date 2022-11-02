@@ -1,0 +1,13 @@
+<tr>
+	<check if="{{ @tdate == 'yes'}}">
+		<td align="left" style="font-size:0.7em;">{{ substr(@cols.DateTime,0,11) }}</td>
+	</check>
+	<td align="left">{{ @cols.Line }}</a></td>
+	<td align="left">{{ substr(@cols.Description,0,80) }}</td>
+	<check if="{{ @customer == 'yes'}}">
+		<td align="left">{{ @cols.Customer }}</a></td>
+	</check>
+	<td align="left">{{ @cols.UnitNumber }}</td>
+	<td align="left">{{ @cols.DueDate }}</td>
+	<td align="left">{{ @cols.Urgency }}</td>
+</tr>

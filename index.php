@@ -36,6 +36,7 @@ $f3->route('GET /partnumber/@partnumber','Wip->plist');
 
 //Cageout
 $f3->route('POST /cageout/create','Cage->insertRow'); 
+$f3->route('GET /cagelist','Cage->form'); 
 $f3->route('GET /cageout','Cage->form'); 
 $f3->route('GET /cageoutlist','Cage->all'); 
 
@@ -44,6 +45,10 @@ $f3->route('POST /shortage/create','Shortage->insertRow');
 $f3->route('GET /shortage','Shortage->form'); 
 $f3->route('GET /shortagelist','Shortage->all'); 
 
+// ENC engineering shop floor support
+$f3->route('POST /esfs/create','Esfs->insertRow'); 
+$f3->route('GET /esfs','Esfs->form'); 
+$f3->route('GET /esfslist','Esfs->all'); 
 
 // Welcome page
 $f3->route('GET /',
