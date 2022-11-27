@@ -12,11 +12,11 @@ class Controller {
 	 echo \Template::instance()->render('layout.htm');
     }
 
-    function GSheetsInsert($sheetid,$row) {
+    function GSheetsInsert($sheetid,$row,$fileid) {
                 //require '/home/antoniodiazduran/vendor/autoload.php';
                 $client = Google_Spreadsheet::getClient('/home/antoniodiazduran/data/credentials.json');
                 // Get the sheet instance by sheets_id and sheet name (antoniodiazduran)
-                $sheet = $client->file('1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w')->sheet($sheetid);
+                $sheet = $client->file($fileid)->sheet($sheetid);
 		// Inserting data into Google Sheet
 		$sheet->insert($row);
                 // Fetch data from remote (or cache)
@@ -24,11 +24,11 @@ class Controller {
                 // Return all rows in the sheet
                 return $sheet->fetch(true)->items;
     }
-    function GSheetsRead($sheetid) {
+    function GSheetsRead($sheetid,$fileid) {
                 //require '/home/antoniodiazduran/vendor/autoload.php';
                 $client = Google_Spreadsheet::getClient('/home/antoniodiazduran/data/credentials.json');
                 // Get the sheet instance by sheets_id and sheet name (antoniodiazduran)
-                $sheet = $client->file('1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w')->sheet($sheetid);
+                $sheet = $client->file($fileid)->sheet($sheetid);
                 // Fetch data from remote (or cache)
                 $sheet->fetch();
                 // Return all rows in the sheet

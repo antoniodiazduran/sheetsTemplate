@@ -15,12 +15,12 @@
       </div>
       <div class="col-75">
         <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Welding">
-	<label for="html">Welding</label><br>
-	<input type="radio" id="line" name="line" value="Paint">
-        <label for="html">Paint</label><br>
+	<input type="radio" id="line" name="line" value="Weld">
+	<label for="html">Weld</label><br>
 	<input type="radio" id="line" name="line" value="Line 5">
         <label for="html">Line 5</label><br>
+	<input type="radio" id="line" name="line" value="Paint">
+        <label for="html">Paint</label><br>
 	<input type="radio" id="line" name="line" value="Line 1">
         <label for="html">Line 1</label><br>
 	<input type="radio" id="line" name="line" value="Line 3">
@@ -67,12 +67,14 @@
       </div>
       <div class="col-75">
         <label class="titles" for="urgency">Urgency</label><p>
-        <input type="radio" id="urgency" name="urgency" value="High">
-        <label for="html">High</label><br>
-        <input type="radio" id="urgency" name="urgency" value="Medium">
-        <label for="html">Medium</label><br>
-        <input type="radio" id="urgency" name="urgency" value="Low">
-        <label for="html">Low</label><br>
+        <input type="radio" id="urgency" name="urgency" value="Line Stopper">
+        <label for="html">Line Stopper</label><br>
+        <input type="radio" id="urgency" name="urgency" value="Urgent">
+        <label for="html">Urgent</label><br>
+        <input type="radio" id="urgency" name="urgency" value="See due date">
+        <label for="html">See due date</label><br>
+        <input type="radio" id="urgency" name="urgency" value="As available">
+        <label for="html">As available</label><br>
       </div>
     </div>
     <div class="row">
@@ -85,10 +87,6 @@
     </div>
     <div class="row">
       <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="owner">Owner</label><p>
-        <input type="text" id="owner" name="owner" placeholder="Owner name">
       </div>
     </div>
     <div class="row">
@@ -120,7 +118,6 @@ function validateForm() {
  let due = document.forms["wipform"]["duedate"].value;
  let urg = document.forms["wipform"]["urgency"].value;
  let ecn = document.forms["wipform"]["ecn"].value;
- let own = document.forms["wipform"]["owner"].value;
  let ale = "";
  if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
  if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
@@ -129,7 +126,6 @@ function validateForm() {
  if ( due.length=== 0) { ale = ale + "Add Due Date<br>"; }
  if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
  if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
- if ( own.length=== 0) { ale = ale + "Add your name<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";

@@ -49,6 +49,8 @@ $f3->route('GET /shortagelist','Shortage->all');
 $f3->route('POST /esfs/create','Esfs->insertRow'); 
 $f3->route('GET /esfs','Esfs->form'); 
 $f3->route('GET /esfslist','Esfs->all'); 
+$f3->route('GET /rdgd','Esfs->form'); 
+$f3->route('GET /rdgdaody','Esfs->all'); 
 
 // Welcome page
 $f3->route('GET /',

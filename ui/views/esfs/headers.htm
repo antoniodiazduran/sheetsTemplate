@@ -1,13 +1,14 @@
-<tr style="background:red; opacity:0.8;">
+<tr style="background:black; opacity:0.8;">
 	<check if="{{ @tdate == 'yes'}}">
 		<th>Date</th>
 	</check>
-	<th style="width:130px">Line</th>
-	<th style="width:380px">Description</th>
+	<th style="width:90px">Line</th>
+	<th style="width:580px">Description</th>
 	<check if="{{ @customer == 'yes'}}">
 		<th>Customer</th>
 	</check>
-	<th>Unit ID</th>
-	<th>Due Date</th>
-	<th>Urgency</th>
+	<th style="width:90px">Unit ID</th>
+	<th style="width:110px">Due Date</th>
+	<th style="width:110px">Owner</th>
+	<th style="width:160px">Urgency &nbsp; &nbsp; <a href="/esfs"><i class="bi bi-arrow-return-left"></i></a></th>
 </tr>

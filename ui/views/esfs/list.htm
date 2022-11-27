@@ -1,15 +1,56 @@
-<meta http-equiv="refresh" content="10">
-<include href="nav.htm">
-
+<meta http-equiv="refresh" content="30">
+<check if="{{ @navs=='yes' }}">
+  <include href="nav.htm">
+</check>
 <table>
+		<!-- {{ @t1++ }}//-->
 <include href="{{ @headers }}"/>
 <repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >
+<check if="{{ @cols.Status <> 'Complete' }}">
 <check if="{{ @cols.Display == 'y' }}">
 <check if="{{ @c1 < @t1 }}">
 	<true>
 		<!-- {{ @c1++ }}//-->
 	</true>
 	<false>
+	<set trcolor="white"/>
+	<set ftcolor="black"/>
+	<check if="{{ @cols.Line =='Weld' }}">
+	  <set trcolor='#4bc1fc'/>
+	</check>
+	<check if="{{ @cols.Line =='Line 5' }}">
+	  <set trcolor='#060606'/>
+	  <set ftcolor='#ffffff'/>
+	</check>
+	<check if="{{ @cols.Line =='Paint' }}">
+	  <set trcolor='#5cfe5b'/>
+	</check>
+	<check if="{{ @cols.Line =='Final' }}">
+	  <set trcolor='#fecc5b'/>
+	</check>
+	<check if="{{ @cols.Line =='Line 1' }}">
+	  <set trcolor='#fc5bfe'/>
+	</check>
+	<check if="{{ @cols.Line =='Line 3' }}">
+	  <set trcolor='#ff256f'/>
+	</check>
+
+	<check if="{{ @cols.Urgency =='Line Stopper' }}">
+	  <set tdcolor='#ff2548'/>
+	  <set urcolor='#000000'/>
+	</check>
+	<check if="{{ @cols.Urgency =='Urgent' }}">
+	  <set tdcolor='#ffd225'/>
+	  <set urcolor='#f66e02'/>
+	</check>
+	<check if="{{ @cols.Urgency =='See due date' }}">
+	  <set tdcolor='#25ff48'/>
+	  <set urcolor='#010912'/>
+	</check>
+	<check if="{{ @cols.Urgency =='As available' }}">
+	  <set tdcolor='#ffffff'/>
+	  <set urcolor='#000000'/>
+	</check>
 	<check if="{{ @field == 'all' }}">
         		<include href="{{ @fields }}"/>
 	</check>
@@ -19,6 +60,7 @@
 		</check>
 	</check>
 	</false>
+</check>
 </check>
 </check>
 </repeat>

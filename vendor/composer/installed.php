@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'bcosca/fatfree',
-        'pretty_version' => '3.8.0',
-        'version' => '3.8.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'aaf3dfd496fee888a26248febd9aebdb13564fff',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'bcosca/fatfree' => array(
-            'pretty_version' => '3.8.0',
-            'version' => '3.8.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'aaf3dfd496fee888a26248febd9aebdb13564fff',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -25,6 +25,15 @@
             'reference' => 'cdd878db018280369b643fce62f70e55044f9ac4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../bcosca/fatfree-core',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'mongodb/mongodb' => array(
+            'pretty_version' => '1.5.2',
+            'version' => '1.5.2.0',
+            'reference' => '9480f994de9f70e2ae5a946b21e6fc04bf5a6c3c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mongodb/mongodb',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

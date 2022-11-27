@@ -3,7 +3,7 @@
 class Shortage extends Controller {
 
     public function all() {
-	 	$data[] = $this->GSheetsRead('pw.shortage');
+	 	$data[] = $this->GSheetsRead('pw.shortage','1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w');
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','shortage');
                 $this->f3->set('field','all');
@@ -27,13 +27,13 @@ class Shortage extends Controller {
 		$row = array(
                         'DateTime'=>date('m/d/Y H:i:s'),
                         'Customer'=>$fields[0]['customer'],
-                        'PartNumber'=>$fields[0]['partnumber'],
+                        'PartNumber'=>strtoupper($fields[0]['partnumber']),
                         'Harness'=>$fields[0]['harness'],
                         'Quantity'=>$fields[0]['quantity'],
                         'Unit'=>$fields[0]['unit'],
                 	);
 		// Inserting data into Google Sheets
-		$data[] = $this->GSheetsInsert('pw.shortage',$row);
+		$data[] = $this->GSheetsInsert('pw.shortage',$row,'1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w');
 		// Displaying new data
 		$this->f3->reroute('/shortagelist');
 
