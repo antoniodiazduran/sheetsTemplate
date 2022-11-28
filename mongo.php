@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 $client = new MongoDB\Client(
-    'mongodb+srv://adiaz:ichcealnem@cluster0.zqpgfah.mongodb.net/myFirstDatabase?serverSelectionTryOnce=false&serverSelectionTimeoutMS=15000');
+    'mongodb+srv://user:pass@cluster0.zqpgfah.mongodb.net/myFirstDatabase?serverSelectionTryOnce=false&serverSelectionTimeoutMS=15000');
 
 $collection = $client->demo->beers;
 
