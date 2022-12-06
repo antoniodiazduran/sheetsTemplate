@@ -3,7 +3,7 @@
 class Esfs extends Controller {
 
     public function all() {
-	 	$data[] = $this->GSheetsRead('enc.esfs','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
+	 	$data[] = $this->GSheetsRead('enc.sort','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','esfs');
                 $this->f3->set('field','all');
