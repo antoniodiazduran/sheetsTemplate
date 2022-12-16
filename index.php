@@ -5,7 +5,7 @@ if (file_exists('vendor/autoload.php')) {
 	// load via composer
 	require_once('vendor/autoload.php');
 	// loaf Google connection for Google Sheets
-        require '/home/antoniodiazduran/vendor/autoload.php';
+        //require '/home/antoniodiazduran/vendor/autoload.php';
 	$f3 = \Base::instance();
 } elseif (!file_exists('lib/base.php')) {
 	die('fatfree-core not found. Run `git submodule init` and `git submodule update` or install via composer with `composer install`.');

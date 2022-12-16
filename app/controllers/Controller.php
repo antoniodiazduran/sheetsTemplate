@@ -14,7 +14,7 @@ class Controller {
 
     function GSheetsInsert($sheetid,$row,$fileid) {
                 //require '/home/antoniodiazduran/vendor/autoload.php';
-                $client = Google_Spreadsheet::getClient('/home/antoniodiazduran/data/credentials.json');
+                $client = Google_Spreadsheet::getClient('data/credentials.json');
                 // Get the sheet instance by sheets_id and sheet name (antoniodiazduran)
                 $sheet = $client->file($fileid)->sheet($sheetid);
 		// Inserting data into Google Sheet
@@ -26,7 +26,7 @@ class Controller {
     }
     function GSheetsRead($sheetid,$fileid) {
                 //require '/home/antoniodiazduran/vendor/autoload.php';
-                $client = Google_Spreadsheet::getClient('/home/antoniodiazduran/data/credentials.json');
+                $client = Google_Spreadsheet::getClient('data/credentials.json');
                 // Get the sheet instance by sheets_id and sheet name (antoniodiazduran)
                 $sheet = $client->file($fileid)->sheet($sheetid);
                 // Fetch data from remote (or cache)
