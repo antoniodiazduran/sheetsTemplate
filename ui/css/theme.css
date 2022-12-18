@@ -47,15 +47,15 @@ img {
 }
 
 table {
-	font-size:.8em;
+	font-size:0.8em;
 	color:#666 !important;
 	background:#fefefe;
-	width:98%;
+	width:90%;
 	border-radius:.5em;
-	table-layout: fixed;
+/*	table-layout: fixed; 
 	word-wrap: break-word;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto; */
 }
 
 table code {
@@ -72,7 +72,7 @@ tr:last-child {
 }
 
 th,td {
-	font-size:1em;
+	font-size:0.8em;
 	line-height:1.25em;
 	margin:2;
 	padding:0.5em;
@@ -85,7 +85,7 @@ th {
 	text-align:left;
 	text-transform:uppercase;
 	color:#fff;
-/*	background:#999;*/
+	background:#999;
 }
 
 th a {

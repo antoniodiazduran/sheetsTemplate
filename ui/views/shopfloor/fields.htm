@@ -1,0 +1,12 @@
+<tr style="background-color:{{ @trcolor }}; color:{{ @ftcolor}};">
+	<td align="left" style="font-size:0.7em;">{{ substr(@cols.DateTime,0,11) }}</td>
+	<td align="left">{{ @cols.Line }}</a></td>
+	<td align="left">{{ substr(@cols.Description,0,60) }}</td>
+	<check if="{{ @customer == 'yes'}}">
+		<td align="left">{{ @cols.Customer }}</a></td>
+	</check>
+	<td align="left">{{ @cols.UnitNumber }}</td>
+	<td align="left">{{ @cols.DueDate }}</td>
+	<td align="left">{{ @cols.Owner }}</td>
+	<td align="left" style="border:2px solid white;background-color:{{ @tdcolor}};color:{{@urcolor}};">{{ @cols.Urgency }}</td>
+</tr>

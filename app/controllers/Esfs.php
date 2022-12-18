@@ -14,6 +14,7 @@ class Esfs extends Controller {
 		$this->f3->set('t1',count($data[0])-50);
                 $this->f3->set('headers','esfs/headers.htm');
                 $this->f3->set('fields','esfs/fields.htm');
+                $this->f3->set('layout','layout.htm');
                 $this->f3->set('content','esfs/list.htm');
     }
     public function form() {
