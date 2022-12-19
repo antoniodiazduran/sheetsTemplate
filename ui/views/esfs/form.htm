@@ -50,8 +50,8 @@
       <div class="col-25">
       </div>
       <div class="col-75">
-        <label class="titles" for="unitnumber">Unit #</label><p>
-        <input type="number" id="unitnumber" name="unitnumber" placeholder="Unit ID">
+        <label class="titles" for="unitnumber">Unit</label><p>
+        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID">
       </div>
     </div>
     <div class="row">
@@ -69,8 +69,6 @@
         <label class="titles" for="urgency">Urgency</label><p>
         <input type="radio" id="urgency" name="urgency" value="Line Stopper">
         <label for="html">Line Stopper</label><br>
-        <input type="radio" id="urgency" name="urgency" value="Urgent">
-        <label for="html">Urgent</label><br>
         <input type="radio" id="urgency" name="urgency" value="See due date">
         <label for="html">See due date</label><br>
         <input type="radio" id="urgency" name="urgency" value="As available">
@@ -83,6 +81,14 @@
       <div class="col-75">
         <label class="titles" for="ecn">ECN #</label><p>
         <input type="text" id="ecn" name="ecn" placeholder="ECN number/none">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ecn">Requestor</label><p>
+        <input type="text" id="requestor" name="requestor" placeholder="Type your name">
       </div>
     </div>
     <div class="row">
@@ -101,7 +107,7 @@
     <div class="row">
 	<div class="col-75">
       		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>
     </div>
   </form>
@@ -118,14 +124,16 @@ function validateForm() {
  let due = document.forms["wipform"]["duedate"].value;
  let urg = document.forms["wipform"]["urgency"].value;
  let ecn = document.forms["wipform"]["ecn"].value;
+ let req = document.forms["wipform"]["requestor"].value;
  let ale = "";
  if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
  if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
  if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
  if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
- if ( due.length=== 0) { ale = ale + "Add Due Date<br>"; }
+ if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
  if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
  if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
+ if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";
