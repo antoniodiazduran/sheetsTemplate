@@ -10,14 +10,16 @@ class Shortage extends Controller {
 		$this->f3->set('c1',0);
 	        $this->f3->set('customer','yes');
 		$this->f3->set('t1',count($data[0])-50);
-                $this->f3->set('headers','shortage/headers.htm');
+                $this->f3->set('layout','layout.htm');
+		$this->f3->set('headers','shortage/headers.htm');
                 $this->f3->set('fields','shortage/fields.htm');
                 $this->f3->set('content','shortage/list.htm');
     }
     public function form() {
                 $this->f3->set('breadcrumbs','shortage');
                 $this->f3->set('mode','create');
-                $this->f3->set('content','shortage/form.htm');
+                $this->f3->set('layout','layout.htm');
+		$this->f3->set('content','shortage/form.htm');
     }
     public function insertRow() {
 		// Gathering data from form

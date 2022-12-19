@@ -52,6 +52,10 @@ $f3->route('GET /esfslist','Esfs->all');
 $f3->route('GET /rdgd','Esfs->form'); 
 $f3->route('GET /rdgdaody','Esfs->all'); 
 
+// ENC shopfloor screen using AJAX
+$f3->route('GET /sf','Shopfloor->sf'); 
+$f3->route('GET /sfapi','Shopfloor->apiall'); 
+
 // Welcome page
 $f3->route('GET /',
 	function($f3) {

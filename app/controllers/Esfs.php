@@ -12,6 +12,7 @@ class Esfs extends Controller {
 	        $this->f3->set('navs','no');
 	        $this->f3->set('customer','yes');
 		$this->f3->set('t1',count($data[0])-50);
+		$this->f3->set('layout','layout.htm');
                 $this->f3->set('headers','esfs/headers.htm');
                 $this->f3->set('fields','esfs/fields.htm');
                 $this->f3->set('content','esfs/list.htm');
@@ -21,7 +22,8 @@ class Esfs extends Controller {
 		$this->f3->set('engineers',$eng[0]);
                 $this->f3->set('breadcrumbs','esfs');
 	        $this->f3->set('navs','yes');
-                $this->f3->set('mode','create');
+                $this->f3->set('layout','layout.htm');
+		$this->f3->set('mode','create');
                 $this->f3->set('content','esfs/form.htm');
     }
     public function insertRow() {

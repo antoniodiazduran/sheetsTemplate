@@ -9,7 +9,8 @@ class Controller {
     }
 
     function afterRoute() {
-	 echo \Template::instance()->render('layout.htm');
+	 //echo \Template::instance()->render('layout.htm');
+	 echo \Template::instance()->render($this->f3->get('layout'));
     }
 
     function GSheetsInsert($sheetid,$row,$fileid) {
@@ -38,6 +39,9 @@ class Controller {
     function __construct() {
         $f3=Base::instance();
 
+	// Enabling saving data to sqlite
+	$db = new DB\SQL('sqlite:data/enc.sqlite');
+
 //        $db=new DB\SQL(
 //            $f3->get('db_dns') . $f3->get('db_name'),
 //            $f3->get('db_user'),
@@ -45,7 +49,7 @@ class Controller {
 //        );
 
 	$this->f3=$f3;
-//	$this->db=$db;
+	$this->db=$db;
 
     }
 }

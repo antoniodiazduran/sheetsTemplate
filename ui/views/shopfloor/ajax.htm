@@ -1,0 +1,77 @@
+<script>
+function ajax(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/sfapi", true);
+  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      // Response
+      var response = JSON.parse(this.responseText);
+	//console.log(response[0]);
+	createTable(response[0]); 
+   }
+  };
+  xhttp.send();
+}
+
+function createTable(data) {
+
+ var headers = ['Line','Description','UnitNumber','Customer','DueDate','Urgency'];
+ var  tbl = document.createElement('table'),
+     tbdy = document.createElement('tbody');
+     thd = document.createElement('thead');
+
+     tbl.setAttribute('class','table table-responsive table-borderless');
+
+  var tr = document.createElement('tr');
+   Object.values(headers).forEach(hdr => {
+     var th = document.createElement('th');
+     th.setAttribute('class','table-dark');
+     th.appendChild(document.createTextNode(hdr));
+     tr.appendChild(th);
+   });
+  thd.appendChild(tr);
+  tbl.appendChild(thd);
+
+  Object.values(data).forEach(rows => {
+     var tr = document.createElement('tr');
+    Object.keys(rows).forEach(cols => {
+       	Object.values(headers).forEach(key => {
+	  if (cols == key){
+	    var td = document.createElement('td');	
+	    td.appendChild(document.createTextNode(rows[cols].substr(0,40)));
+    	    tr.appendChild(td);
+	  }
+	});
+    });
+    tbdy.appendChild(tr);
+  });
+
+  tbl.appendChild(tbdy);
+  var div4=document.getElementById("table-container");
+   div4.innerHTML="";
+   div4.appendChild(tbl);
+  var div6=document.getElementById("last-update");
+   const d = new Date();
+   let time = d.getTime()
+   div6.innerHTML=time;
+   console.log(time);
+
+}
+setInterval(function(){
+  ajax()
+}, 30000);
+
+</script>
+
+<check if="{{ @navs=='yes' }}">
+  <include href="nav.htm">
+</check>
+
+<div id="table-container">
+</div>
+<div id="last-update">
+</div>
+  <input type="button" value="Data" onclick="ajax();">
+<p>
+{{ date('l jS \of F Y h:i:s A') }}
