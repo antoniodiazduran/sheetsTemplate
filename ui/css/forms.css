@@ -137,19 +137,3 @@ input[type=submit]:hover {
   }
 }
 
-/* Blink for esfs list line stoppers*/
-.blink {
-  animation: blinker 3s linear infinite;
-}
-
- @keyframes blinker{
-    0%{
-     opacity: 0;
-   }
-   50%{
-     opacity: 0.5;
-   }
-   100%{
-     opacity: 1;
-   }
- }

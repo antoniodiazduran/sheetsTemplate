@@ -52,9 +52,21 @@ $f3->route('GET /esfslist','Esfs->all');
 $f3->route('GET /rdgd','Esfs->form'); 
 $f3->route('GET /rdgdaody','Esfs->all'); 
 
+// ENC maintenance support
+$f3->route('POST /mrf/create','Maintenance->insertRow'); 
+$f3->route('GET /mrf','Maintenance->form'); 
+$f3->route('GET /mrflist','Maintenance->maint'); 
+$f3->route('GET /maint','Maintenance->maint'); 
+$f3->route('GET /maintapi','Maintenance->apiall'); 
+
 // ENC shopfloor screen using AJAX
 $f3->route('GET /sf','Shopfloor->sf'); 
 $f3->route('GET /sfapi','Shopfloor->apiall'); 
+
+// ENC BOM screen
+$f3->route('POST /bom/create','BOM->insertTable');
+$f3->route('GET /bomapi','BOM->readData');
+$f3->route('GET /bom','BOM->bomTable');
 
 // Welcome page
 $f3->route('GET /',

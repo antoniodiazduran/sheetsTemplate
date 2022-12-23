@@ -1,0 +1,105 @@
+<script>
+function ajax(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/bomapi", true);
+  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      // Response
+      var response = JSON.parse(this.responseText);
+	//console.log(response['AX CUSTOMER']);
+	createTable(response); 
+   }
+  };
+  xhttp.send();
+}
+
+function createTable(data) {
+
+ var headers = ['FAIRFIELDS','TEMPLE','ANNAPOLIS','FAIRFIELDS-2','NORTH HEMPS'];
+ var  tbl = document.createElement('table'),
+     tbdy = document.createElement('tbody');
+     thd = document.createElement('thead');
+     tbl.setAttribute('class','table table-responsive table-borderless');
+
+
+ console.log(data);
+  var tr = document.createElement('tr'); 
+  pp=0;
+   for (const key in data) {
+    if(pp==0){
+     var th = document.createElement('th');
+     th.setAttribute('class','table-dark');
+     th.appendChild(document.createTextNode(''));
+     tr.appendChild(th);
+    }
+     if(pp==0){
+       for (const [k,v] of  Object.entries(data[key])) { 
+         var th = document.createElement('th');
+         th.setAttribute('class','table-dark');
+         th.appendChild(document.createTextNode(v));
+         tr.appendChild(th);
+       }
+       pp++;
+     }
+   }
+  thd.appendChild(tr);
+  tbl.appendChild(thd);
+  
+  kk=0;
+   for (const key in data) {
+     if(kk>0) {
+         var tr = document.createElement('tr'); 
+         var td = document.createElement('td');
+         td.appendChild(document.createTextNode(key));
+         tr.appendChild(td);
+       for (const [k,v] of  Object.entries(data[key])) {
+          var td = document.createElement('td');
+	  perc = v*100;
+          td.appendChild(document.createTextNode(perc.toFixed()+'%'));
+	  td.setAttribute('style','text-align:right;')
+	  if (perc < 70 && perc > 49) { td.setAttribute('class','bg-info'); }
+	  if (perc < 50 && perc > 30) { td.setAttribute('class','bg-warning'); }
+	  if (perc < 30 && perc > 15) { td.setAttribute('class','bg-danger'); }
+	  if (perc < 16) { td.setAttribute('class','bg-light'); }
+
+          tr.appendChild(td);
+       }
+      tbdy.appendChild(tr);
+     }
+    kk++;
+   }
+  tbl.appendChild(tbdy);
+
+  var div4=document.getElementById("table-container");
+   div4.innerHTML="";
+   div4.appendChild(tbl);
+  var div6=document.getElementById("last-update");
+   const d = new Date();
+   var f = new Date();
+   f.setHours(d.getHours());
+   let time = f.toLocaleString();
+   div6.innerHTML='<p class=text-muted><i>Last updated:'+time+'</i></p>';
+   console.log(time);
+
+
+
+}
+//setInterval(function(){
+//  ajax()
+//}, 30000);
+
+</script>
+
+<check if="{{ @navs=='yes' }}">
+  <include href="nav.htm">
+</check>
+
+<div id="table-container">
+</div>
+<div id="last-update">
+</div>
+<p>
+<p class=text-muted><small>Page loaded: {{ date('l jS \of F Y h:i:s A') }} UTC</small></p>
+<p>
+<input type="button" value="Data" onclick="ajax();">

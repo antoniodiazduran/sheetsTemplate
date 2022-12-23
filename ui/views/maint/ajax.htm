@@ -1,7 +1,7 @@
 <script>
 function ajax(){
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "/sfapi", true);
+  xhttp.open("GET", "/maintapi", true);
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -16,12 +16,12 @@ function ajax(){
 
 function createTable(data) {
 
- var headers = ['Line','Description','UnitNumber','Customer','DueDate','Urgency'];
+ var headers = ['Line','Description','DueDate','Urgency','Requestor'];
  var  tbl = document.createElement('table'),
      tbdy = document.createElement('tbody');
      thd = document.createElement('thead');
 
-     tbl.setAttribute('class','table table-responsive table-borderless');
+     tbl.setAttribute('class','table table-responsive table-borderless table-striped');
 
   var tr = document.createElement('tr');
    Object.values(headers).forEach(hdr => {
@@ -40,27 +40,12 @@ function createTable(data) {
 	  if (cols == key){
 	    var td = document.createElement('td');	
 	    td.appendChild(document.createTextNode(rows[cols].substr(0,40)));
-		if(rows[cols] == 'Weld') {
-                        tr.setAttribute('class','bg-info text-dark');
-                }
-		if(rows[cols] == 'Line 1') {
-                        tr.setAttribute('style','background-color:#fc5bfe; color:#fffff');
-                }
-		if(rows[cols] == 'Final') {
-                        tr.setAttribute('class','bg-warning text-dark');
-                }
-		if(rows[cols] == 'Line 5') {
-                        tr.setAttribute('class','bg-dark text-white');
-                }
-		if(rows[cols] == 'Line Stopper') {
-                        td.setAttribute('class','bg-danger blink');
-                }
-		if(rows[cols] == 'See due date') {
-                        td.setAttribute('class','bg-warning');
-                }
-		if(rows[cols].toLowerCase() == 'as available') {
-                        td.setAttribute('class','bg-white');
-                }
+		if(rows[cols] == 'Office') {
+			tr.setAttribute('class','table-warning');
+		}
+		if(rows[cols] == 'Show Stopper') {
+			td.setAttribute('class','table-danger blink');
+		}
     	    tr.appendChild(td);
 	  }
 	});
@@ -77,7 +62,7 @@ function createTable(data) {
    var f = new Date();
    f.setHours(d.getHours());
    let time = f.toLocaleString();
-   div6.innerHTML='<p class=text-muted><i>Last updated:'+time+'</i></p>';
+   div6.innerHTML='Last updated:'+time;
    console.log(time);
 
 }
@@ -96,6 +81,5 @@ setInterval(function(){
 <div id="last-update">
 </div>
 <p>
-<p class=text-muted><small>Page loaded: {{ date('l jS \of F Y h:i:s A') }} UTC</small></p>
-<p>
+<p class="text-muted"><small>Page loaded: {{ date('l jS \of F Y h:i:s A') }} UTC</small></p>
 <input type="button" value="Data" onclick="ajax();">
