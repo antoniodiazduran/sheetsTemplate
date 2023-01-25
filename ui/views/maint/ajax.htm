@@ -35,6 +35,7 @@ function createTable(data) {
 
   Object.values(data).forEach(rows => {
      var tr = document.createElement('tr');
+ if(rows['Display']=='y') {
     Object.keys(rows).forEach(cols => {
        	Object.values(headers).forEach(key => {
 	  if (cols == key){
@@ -50,6 +51,7 @@ function createTable(data) {
 	  }
 	});
     });
+   }
     tbdy.appendChild(tr);
   });
 
