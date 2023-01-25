@@ -5,6 +5,7 @@
 	"type": "project",
 	"license": "GPL-3.0",
 	"require": {
-		"bcosca/fatfree-core": "^3.8"
+		"bcosca/fatfree-core": "^3.8",
+		"mach3/google-spreadsheet": "^1.1"
 	}
 }
