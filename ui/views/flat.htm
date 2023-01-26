@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="{{ @ENCODING }}" />
+		<title>Powered by {{ @TITLE }}</title>
+		<base href="{{ @SCHEME .'://'.@HOST.':'.@PORT.@BASE.'/' }}" />
+	</head>
+	<body>
+		<include href="{{ @content }}">
+	</body> 
+</html>

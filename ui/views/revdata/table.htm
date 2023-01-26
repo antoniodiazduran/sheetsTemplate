@@ -1,0 +1,16 @@
+
+<table border="0">
+  <tr>
+   <repeat group="{{ @uhbs.0 }}" key="{{ @ikey }}" value="{{ @cols }}" >
+	<th style="color:white;">{{ @ikey}}</th>	
+   </repeat>
+  </tr>
+  <repeat group="{{ @uhbs }}" key="{{ @ikey }}" value="{{ @cols }}" >
+   <tr>
+	<repeat group="{{ @cols }}" value="{{ @vals }}">
+	<td style="color:white;">{{ @vals }}</td>
+ 	</repeat>
+   </tr>
+  </repeat>
+</table>
+

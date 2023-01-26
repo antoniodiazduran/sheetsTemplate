@@ -41,25 +41,26 @@ function createTable(data) {
 	    var td = document.createElement('td');	
 	    td.appendChild(document.createTextNode(rows[cols].substr(0,40)));
 		if(rows[cols] == 'Weld') {
-                        tr.setAttribute('class','bg-info text-dark');
+                        tr.setAttribute('class','bg-info text-dark fontSize');
                 }
 		if(rows[cols] == 'Line 1') {
                         tr.setAttribute('style','background-color:#fc5bfe; color:#fffff');
+                        tr.setAttribute('class','fontSize');
                 }
 		if(rows[cols] == 'Final') {
-                        tr.setAttribute('class','bg-warning text-dark');
+                        tr.setAttribute('class','bg-warning text-dark fontSize');
                 }
 		if(rows[cols] == 'Line 5') {
-                        tr.setAttribute('class','bg-dark text-white');
+                        tr.setAttribute('class','bg-dark text-white fontSize');
                 }
 		if(rows[cols] == 'Line Stopper') {
-                        td.setAttribute('class','bg-danger blink');
+                        td.setAttribute('class','bg-danger blink fontSize');
                 }
 		if(rows[cols] == 'See due date') {
-                        td.setAttribute('class','bg-warning');
+                        td.setAttribute('class','bg-warning fontSize');
                 }
 		if(rows[cols].toLowerCase() == 'as available') {
-                        td.setAttribute('class','bg-white');
+                        td.setAttribute('class','bg-white fontSize');
                 }
     	    tr.appendChild(td);
 	  }
@@ -86,6 +87,10 @@ setInterval(function(){
 }, 30000);
 
 </script>
+<style>
+   .fontSize { font-size:1.3vw; }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <check if="{{ @navs=='yes' }}">
   <include href="nav.htm">

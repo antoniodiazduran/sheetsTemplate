@@ -68,6 +68,11 @@ $f3->route('POST /bom/create','BOM->insertTable');
 $f3->route('GET /bomapi','BOM->readData');
 $f3->route('GET /bom','BOM->bomTable');
 
+// REV data
+$f3->route('GET /unithoursbystation','Revdata->unithoursbystation');
+$f3->route('GET /unithoursbyline','Revdata->unithoursbyline');
+$f3->route('GET /data/@id','Revdata->tableData');
+
 // Welcome page
 $f3->route('GET /',
 	function($f3) {

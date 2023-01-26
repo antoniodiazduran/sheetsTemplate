@@ -4,6 +4,7 @@ class Controller {
 
     protected $f3;
     protected $db;
+    protected $rev;
 
     function beforeRoute() {
     }
@@ -41,6 +42,7 @@ class Controller {
 
 	// Enabling saving data to sqlite
 	$db = new DB\SQL('sqlite:data/enc.sqlite');
+	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 
 //        $db=new DB\SQL(
 //            $f3->get('db_dns') . $f3->get('db_name'),
@@ -50,6 +52,7 @@ class Controller {
 
 	$this->f3=$f3;
 	$this->db=$db;
+	$this->rev=$rev;
 
     }
 }
