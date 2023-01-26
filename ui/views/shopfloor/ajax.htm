@@ -26,32 +26,36 @@ function createTable(data) {
   var tr = document.createElement('tr');
    Object.values(headers).forEach(hdr => {
      var th = document.createElement('th');
-     th.setAttribute('class','table-dark');
+     th.setAttribute('class','table-dark fontSize');
      th.appendChild(document.createTextNode(hdr));
      tr.appendChild(th);
    });
   thd.appendChild(tr);
   tbl.appendChild(thd);
 
+  
   Object.values(data).forEach(rows => {
      var tr = document.createElement('tr');
+     var ih = Math.trunc(window.innerHeight/10);
+     var attr1 = `height: ${ih}px; vertical-align:middle;`;
+     tr.setAttribute('style',attr1);
     Object.keys(rows).forEach(cols => {
        	Object.values(headers).forEach(key => {
 	  if (cols == key){
 	    var td = document.createElement('td');	
-	    td.appendChild(document.createTextNode(rows[cols].substr(0,40)));
+	    td.appendChild(document.createTextNode(rows[cols].substr(0,70)));
 		if(rows[cols] == 'Weld') {
                         tr.setAttribute('class','bg-info text-dark fontSize');
                 }
 		if(rows[cols] == 'Line 1') {
                         tr.setAttribute('style','background-color:#fc5bfe; color:#fffff');
-                        tr.setAttribute('class','fontSize');
+                        tr.setAttribute('class','fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Final') {
-                        tr.setAttribute('class','bg-warning text-dark fontSize');
+                        tr.setAttribute('class','bg-warning text-dark fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line 5') {
-                        tr.setAttribute('class','bg-dark text-white fontSize');
+                        tr.setAttribute('class','bg-dark text-white fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line Stopper') {
                         td.setAttribute('class','bg-danger blink fontSize');
@@ -80,7 +84,8 @@ function createTable(data) {
    let time = f.toLocaleString();
    div6.innerHTML='<p class=text-muted><i>Last updated:'+time+'</i></p>';
    console.log(time);
-
+   console.log(window.innerWidth);
+   console.log(window.innerHeight);
 }
 setInterval(function(){
   ajax()
@@ -88,7 +93,8 @@ setInterval(function(){
 
 </script>
 <style>
-   .fontSize { font-size:1.3vw; }
+   .fontSize { font-size:1.4vw; }
+   td { height:70px;}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

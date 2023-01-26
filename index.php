@@ -4,8 +4,6 @@
 if (file_exists('vendor/autoload.php')) {
 	// load via composer
 	require_once('vendor/autoload.php');
-	// loaf Google connection for Google Sheets
-        //require '/home/antoniodiazduran/vendor/autoload.php';
 	$f3 = \Base::instance();
 } elseif (!file_exists('lib/base.php')) {
 	die('fatfree-core not found. Run `git submodule init` and `git submodule update` or install via composer with `composer install`.');
@@ -22,6 +20,8 @@ if ((float)PCRE_VERSION<8.0)
 
 // Load configuration
 $f3->config('config.ini');
+// Catching errors
+$f3->set('ONERROR','Errors->msgs');
 
 //WIP
 $f3->route('POST /wip/create','Wip->insertRow'); 
@@ -48,7 +48,10 @@ $f3->route('GET /shortagelist','Shortage->all');
 // ENC engineering shop floor support
 $f3->route('POST /esfs/create','Esfs->insertRow'); 
 $f3->route('GET /esfs','Esfs->form'); 
-$f3->route('GET /esfslist','Esfs->all'); 
+//$f3->route('GET /esfslist','Esfs->all'); 
+//
+$f3->route('GET /esfslist','Shopfloor->sf'); 
+//
 $f3->route('GET /rdgd','Esfs->form'); 
 $f3->route('GET /rdgdaody','Esfs->all'); 
 
