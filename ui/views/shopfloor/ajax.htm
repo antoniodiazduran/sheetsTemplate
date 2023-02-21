@@ -16,7 +16,7 @@ function ajax(){
 
 function createTable(data) {
 
- var headers = ['Line','Description','UnitNumber','Customer','DueDate','Urgency'];
+ var headers = ['Line','Description','UnitNumber','Customer','DueDate','Urgency','Requestor'];
  var  tbl = document.createElement('table'),
      tbdy = document.createElement('tbody');
      thd = document.createElement('thead');
@@ -38,6 +38,7 @@ function createTable(data) {
      var tr = document.createElement('tr');
      var ih = Math.trunc(window.innerHeight/10);
      var attr1 = `height: ${ih}px; vertical-align:middle;`;
+     const today = new Date().toJSON().slice(0,10);
      tr.setAttribute('style',attr1);
     Object.keys(rows).forEach(cols => {
        	Object.values(headers).forEach(key => {
@@ -66,6 +67,11 @@ function createTable(data) {
 		if(rows[cols].toLowerCase() == 'as available') {
                         td.setAttribute('class','bg-white fontSize');
                 }
+                if(key == 'DueDate') {
+			if(rows[cols] < today) {
+				td.setAttribute('class','textblinker');
+			}
+		}
     	    tr.appendChild(td);
 	  }
 	});
@@ -83,9 +89,9 @@ function createTable(data) {
    f.setHours(d.getHours());
    let time = f.toLocaleString();
    div6.innerHTML='<p class=text-muted><i>Last updated:'+time+'</i></p>';
-   console.log(time);
-   console.log(window.innerWidth);
-   console.log(window.innerHeight);
+   //console.log(time);
+   //console.log(window.innerWidth);
+   //console.log(window.innerHeight);
 }
 setInterval(function(){
   ajax()

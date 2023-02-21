@@ -14,3 +14,7 @@
      opacity: 1;
    }
 }
+/*Text blinker for past due*/
+
+.textblinker { animation: tblinker 2s ease-in-out infinite alternate; }
+@keyframes tblinker { to { opacity: 0; }} 

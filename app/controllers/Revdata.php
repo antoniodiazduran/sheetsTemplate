@@ -17,5 +17,15 @@ class Revdata extends Controller {
 		$this->f3->set('layout','flat.htm');
                 $this->f3->set('content','revdata/table.htm');
     }
+    public function myip() {
+	echo "ip:".$_SERVER['REMOTE_ADDR'];
+	exit;
+    }
+    public function ipaddr() {
+	$ipaddr = $this->f3->get('PARAMS.addr');
+        $tstamp = time();
+        $this->db->exec('insert into ipaddress (timestamp,ipaddress) values (?,?)',array($tstamp,$ipaddr));
+	exit;
+    }
 }
 ?>
