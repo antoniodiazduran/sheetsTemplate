@@ -18,8 +18,8 @@ class Esfs extends Controller {
                 $this->f3->set('content','esfs/list.htm');
     }
     public function form() {
-	 	$eng[] = $this->GSheetsRead('enc.eng','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
-		$this->f3->set('engineers',$eng[0]);
+	 	//$eng[] = $this->GSheetsRead('enc.eng','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
+		//$this->f3->set('engineers',$eng[0]);
                 $this->f3->set('breadcrumbs','esfs');
 	        $this->f3->set('navs','yes');
                 $this->f3->set('layout','layout.htm');
@@ -33,7 +33,7 @@ class Esfs extends Controller {
 		$sorts = "";
 		if($fields[0]['urgency'] == 'Line Stopper') { $sorts = 1; }
 		if($fields[0]['urgency'] == 'See due date') { $sorts = 2; }
-		if($fields[0]['urgency'] == 'As availble') { $sorts = 3; }
+		if($fields[0]['urgency'] == 'As available') { $sorts = 3; }
 		// Creating array to insert into Google Sheets
 		$row = array(
                         'DateTime'=>date('m/d/Y H:i:s'),
@@ -50,8 +50,28 @@ class Esfs extends Controller {
                         'Display'=>'y',
 			'Sort'=>$sorts
                 	);
+		$rowv = array(
+			time(),
+                        date('m/d/Y H:i:s'),
+                        $fields[0]['line'],
+                        $fields[0]['description'],
+                        $fields[0]['customer'],
+                        $fields[0]['unitnumber'],
+                        $fields[0]['urgency'],
+                        $fields[0]['ecn'],
+                        $fields[0]['requestor'],
+                        'TBD',
+                        $fields[0]['notes'],
+			'y',
+			$sorts,
+                	);
 		// Inserting data into Google Sheets
-		$data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
+		//$data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
+		// Inserting into sqlite database
+		$sql_insert  = "insert into enc_log ";
+                $sql_insert .= "(Epoch,DateTime, Line, Description, Customer, UnitNumber, DueDate, Urgency, Requestor, Owner, Notes, Display, Sort) ";
+                $sql_insert .= "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$this->db->exec($sql_insert,$rowv);
 		// Displaying new data
 		$this->f3->reroute('/esfs');
     }

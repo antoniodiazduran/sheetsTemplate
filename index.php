@@ -21,7 +21,7 @@ if ((float)PCRE_VERSION<8.0)
 // Load configuration
 $f3->config('config.ini');
 // Catching errors
-$f3->set('ONERROR','Errors->msgs');
+//$f3->set('ONERROR','Errors->msgs');
 
 //WIP
 $f3->route('POST /wip/create','Wip->insertRow'); 
@@ -65,6 +65,12 @@ $f3->route('GET /maintapi','Maintenance->apiall');
 // ENC shopfloor screen using AJAX
 $f3->route('GET /sf','Shopfloor->sf'); 
 $f3->route('GET /sfapi','Shopfloor->apiall'); 
+
+// ENC admin page for engineering support
+$f3->route('GET /sfdbs','Admin->apidbs');
+$f3->route('GET /sfadm','Admin->sf');
+$f3->route('GET /sfowr/@id','Admin->ownr');
+$f3->route('POST /admin/sfownrupd','Admin->ownrupd');
 
 // ENC BOM screen
 $f3->route('POST /bom/create','BOM->insertTable');

@@ -1,0 +1,11 @@
+<tr>
+	<td align="center"><a href="/sfrec/{{ @cols.Epoch }}">^</a></td>
+	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
+	<td align="left">{{ @cols.Line }} </td>
+	<td align="left">{{ (strlen(@cols.Description)>45)?substr(@cols.Description,0,47)."...":@cols.Description }} </td>
+	<td align="left">{{ substr(@cols.Customer,0,3) }} </a></td>
+	<td align="left">{{ (strlen(@cols.UnitNumber)>10)?substr(@cols.UnitNumber,0,10)."..":@cols.UnitNumber }} </td>
+	<td align="left">{{ @cols.DueDate }} </td>
+	<td align="left"><a href="/sfowr/{{ @cols.Epoch }}">{{ @cols.Owner }}</a> </td>
+	<td align="left">{{ @cols.Urgency }}</td>
+</tr>

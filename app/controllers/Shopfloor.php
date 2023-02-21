@@ -27,6 +27,12 @@ class Shopfloor extends Controller {
 		$this->f3->set('layout','kiosk.htm');
                 $this->f3->set('content','shopfloor/ajax.htm');
     }
+    public function apidbs() {
+		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY epoch desc');
+		$json_data = json_encode($data);
+var_dump($json_data);
+exit;
+    }
     public function apiall() {
 		$data[] = $this->GSheetsRead('enc.sort','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		$json_data = json_encode($data);
