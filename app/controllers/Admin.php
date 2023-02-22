@@ -19,7 +19,7 @@ class Admin extends Controller {
 		$name =  $ownr['owner'];
 		$epoch = time();
 		$datet = date('y-m-d h:i',time());
-		// Logging changes 
+		// Logging changes
 		$this->db->exec('INSERT INTO owner_log (timestamp,datetime,enc_log,names)VALUES(?,?,?,?)',array($epoch,$datet,$id,$name));
 		// Changing the enc_log for engineering support
 		$this->db->exec('UPDATE enc_log SET owner = ? WHERE Epoch = ?', array($name,$id));
