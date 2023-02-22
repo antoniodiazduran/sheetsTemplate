@@ -1,44 +1,43 @@
 <?php
 
-class Owner extends Controller {
+class Urgency extends Controller {
 
-    public function ownrlist() {
-                $this->f3->set('breadcrumbs','owr');
+    public function urgelist() {
+                $this->f3->set('breadcrumbs','urg');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-		$owners = $this->db->exec('SELECT epoch,names,area FROM owners ORDER BY names');
+		$urgency = $this->db->exec('SELECT epoch,names FROM urgency ORDER BY names');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','create');
-		$this->f3->set('owners',$owners);
+		$this->f3->set('urgency',$urgency);
 		$this->f3->set('layout','layout.htm');
-                $this->f3->set('content','owner/edit.htm');
+                $this->f3->set('content','urgency/edit.htm');
     }
-    public function ownrdel() {
+    public function urgedel() {
 		$id = $this->f3->get('PARAMS.id');
-		$del = $this->db->exec('DELETE FROM owners WHERE epoch = ?',$id);
-		$this->f3->reroute('owr/list');
+		$del = $this->db->exec('DELETE FROM urgency WHERE epoch = ?',$id);
+		$this->f3->reroute('urg/list');
 
     }
-    public function ownradd() {
+    public function urgeadd() {
 		$data = $this->f3->get('POST');
 		$epoch = time();
 		$name = $data['names'];
-		$area = $data['area'];
-		$this->db->exec('INSERT INTO owners (epoch, names, area) VALUES (?,?,?)',array($epoch,$name,$area));
-		$this->f3->reroute('owr/list');
+		$this->db->exec('INSERT INTO urgency (epoch, names) VALUES (?,?)',array($epoch,$name));
+		$this->f3->reroute('urg/list');
     }
-    public function ownrupd() {
+    public function urgeupd() {
 		// Getting POST variables, epoch and datetime for logs
-		$ownr = $this->f3->get('POST');
-		$id = $ownr['epoch'];
-		$name =  $ownr['owner'];
+		$record = $this->f3->get('POST');
+		$id = $record['epoch'];
+		$name =  $record['urgency'];
 		$epoch = time();
 		$datet = date('y-m-d h:i',time());
 		// Logging changes 
-		$this->db->exec('INSERT INTO owner_log (timestamp,datetime,enc_log,names)VALUES(?,?,?,?)',array($epoch,$datet,$id,$name));
+		$this->db->exec('INSERT INTO urgency_log (timestamp,datetime,enc_log,names)VALUES(?,?,?,?)',array($epoch,$datet,$id,$name));
 		// Changing the enc_log for engineering support
-		$this->db->exec('UPDATE enc_log SET owner = ? WHERE Epoch = ?', array($name,$id));
-		$this->f3->reroute('/owr/main');
+		$this->db->exec('UPDATE enc_log SET urgency = ? WHERE Epoch = ?', array($name,$id));
+		$this->f3->reroute('/urg/main');
     }
     public function sf() {
 		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY epoch desc');

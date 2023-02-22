@@ -1,5 +1,5 @@
 <check if="{{ @navs == 'yes' }}">
-  <include href="{{ @nav_menu }}">
+ <include href="{{ @nav_menu }}">
 </check>
 <div style="padding:1px; background-color:red; opacity:0.8;">
 	<h3>&nbsp; &nbsp; Engineering Support</h3>
@@ -12,21 +12,38 @@
     </div>
     <div class="row">
       <div class="col-45">
-        <label for="owner">Owner:</label>
+        <label for="owner">Owners:</label>
       </div>
       <div class="col-55">
-	<repeat group="{{ @owners }}" value="{{ @cols }}">
-		<input type="radio" id="owner" name="owner" value="{{ @cols.names}}">
-		<label for="owner">{{ @cols.names}}</label><br>
+	<repeat group="{{ @urgency }}" value="{{ @cols }}">
+		<label for="owner">{{ @cols.names}}</label>
+		<a href="/urg/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 0.7em" role="img" aria-label="Trash"></i></a><br>
 	</repeat>
       </div>
     </div>
-	<p>
+<p>
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="owner">Create a new entry</label>
+      </div>
+      <div class="col-55">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="name">Name:</label>
+      </div>
+      <div class="col-55">
+	<input type="text" id="names" name="names" value="" placeholder="Urgency title">
+      </div>
+    </div>
+<p>
     <div class="row">
 	<dic class="col-45">
 	</div>
 	<div class="col-55">
-		<input type="hidden" value="{{ @epoch }}" id="epoch" name="epoch">
+		<input type="hidden" value="" id="epoch" name="epoch">
       		<input type="reset" value="Clear">
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>

@@ -24,19 +24,28 @@ $f3->config('config.ini');
 //$f3->set('ONERROR','Errors->msgs');
 
 // ENC admin page for engineering support
-$f3->route('GET /sfdbs','Admin->apidbs');
-$f3->route('GET /sfadm','Admin->sf');
-$f3->route('GET /sfowr/@id','Admin->ownr');
-$f3->route('POST /admin/sfownrupd','Admin->ownrupd');
-$f3->route('GET /owr/list','Owner->ownrlist');
+$f3->route('GET  /sfdbs','Admin->apidbs');
+$f3->route('GET  /sfadm','Admin->sf');
+$f3->route('POST /owr/upd','Admin->ownrupd');
+$f3->route('GET  /owr/edit/@id','Admin->ownr');
+$f3->route('POST /urg/upd','Admin->urgeupd');
+$f3->route('GET  /urg/edit/@id','Admin->urge');
+$f3->route('GET  /owr/main','Admin->sf');
+$f3->route('GET  /owr/list','Owner->ownrlist');
 $f3->route('POST /owr/create','Owner->ownradd');
-$f3->route('GET /owr/del/@id','Owner->ownrdel');
+$f3->route('GET  /owr/del/@id','Owner->ownrdel');
+$f3->route('GET  /urg/main','Admin->sf');
+$f3->route('GET  /urg/list','Urgency->urgelist');
+$f3->route('POST /urg/create','Urgency->urgeadd');
+$f3->route('GET  /urg/del/@id','Urgency->urgedel');
+$f3->route('POST /req/upd','Request->upd');
+$f3->route('GET  /req/edit/@id','Request->edit');
 
 // ENC engineering shop floor support
 $f3->route('POST /esfs/create','Esfs->insertRow'); 
-$f3->route('GET /esfs','Esfs->form'); 
+$f3->route('GET  /esfs','Esfs->form'); 
+$f3->route('GET  /esfslist','Shopfloor->sf'); 
 //$f3->route('GET /esfslist','Esfs->all'); 
-$f3->route('GET /esfslist','Shopfloor->sf'); 
 
 // ENC shopfloor screen using AJAX
 $f3->route('GET /sf','Shopfloor->sf'); 

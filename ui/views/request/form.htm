@@ -1,4 +1,4 @@
-<include href="{{ @nav_menu }}">
+<include href="nav.htm">
 
 <div style="padding:1px; background-color:red; opacity:0.8;">
 	<h3>&nbsp; &nbsp; Engineering Support</h3>
@@ -15,17 +15,17 @@
       </div>
       <div class="col-75">
         <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld">
+	<input type="radio" id="line" name="line" value="Weld" <check if="{{ @record.Line=='Weld' }}">checked</check>>
 	<label for="html">Weld</label><br>
-	<input type="radio" id="line" name="line" value="Line 5">
+	<input type="radio" id="line" name="line" value="Line 5" <check if="{{ @record.Line=='Line 5' }}">checked</check>>
         <label for="html">Line 5</label><br>
-	<input type="radio" id="line" name="line" value="Paint">
+	<input type="radio" id="line" name="line" value="Paint" <check if="{{ @record.Line=='Print' }}">checked</check>>
         <label for="html">Paint</label><br>
-	<input type="radio" id="line" name="line" value="Line 1">
+	<input type="radio" id="line" name="line" value="Line 1" <check if="{{ @record.Line=='Line 1' }}">checked</check>>
         <label for="html">Line 1</label><br>
-	<input type="radio" id="line" name="line" value="Line 3">
+	<input type="radio" id="line" name="line" value="Line 3" <check if="{{ @record.Line=='Line 3' }}">checked</check>>
         <label for="html">Line 3</label><br>
-	<input type="radio" id="line" name="line" value="Final">
+	<input type="radio" id="line" name="line" value="Final" <check if="{{ @record.Line=='Final' }}">checked</check>>
         <label for="html">Final</label><br>
       </div>
     </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Describe the problem...">
+        <input type="text" id="description" name="description" placeholder="Describe the problem..." value="{{ @record.Description }}">
       </div>
     </div>
     <div class="row">
@@ -43,7 +43,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="customer">Customer</label><p>
-        <input type="text" id="customer" name="customer" placeholder="Customer Name">
+        <input type="text" id="customer" name="customer" placeholder="Customer Name" value="{{ @record.Customer }}">
       </div>
     </div>
     <div class="row">
@@ -51,7 +51,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="unitnumber">Unit</label><p>
-        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID">
+        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID" value="{{ @record.UnitNumber }}">
       </div>
     </div>
     <div class="row">
@@ -59,7 +59,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy">
+        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
       </div>
     </div>
     <div class="row">
@@ -67,11 +67,11 @@
       </div>
       <div class="col-75">
         <label class="titles" for="urgency">Urgency</label><p>
-        <input type="radio" id="urgency" name="urgency" value="Line Stopper">
+        <input type="radio" id="urgency" name="urgency" value="Line Stopper" <check if="{{ @record.Urgency=='Line Stopper' }}">checked</check>>
         <label for="html">Line Stopper</label><br>
-        <input type="radio" id="urgency" name="urgency" value="See due date">
+        <input type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See Due Date' }}">checked</check>>
         <label for="html">See due date</label><br>
-        <input type="radio" id="urgency" name="urgency" value="As available">
+        <input type="radio" id="urgency" name="urgency" value="As available" <check if="{{ @record.Urgency=='As available' }}">checked</check>>
         <label for="html">As available</label><br>
       </div>
     </div>
@@ -80,15 +80,15 @@
       </div>
       <div class="col-75">
         <label class="titles" for="ecn">ECN #</label><p>
-        <input type="text" id="ecn" name="ecn" placeholder="ECN number/none">
+        <input type="text" id="ecn" name="ecn" placeholder="ECN number/none" value="{{ @record.ECN }}">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
       </div>
       <div class="col-75">
-        <label class="titles" for="ecn">Requestor</label><p>
-        <input type="text" id="requestor" name="requestor" placeholder="Type your name">
+        <label class="titles" for="requestor">Requestor</label><p>
+        <input type="text" id="requestor" name="requestor" placeholder="Type your name" value="{{ @record.Requestor }}">
       </div>
     </div>
     <div class="row">
@@ -100,12 +100,15 @@
       </div>
       <div class="col-75">
         <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
+        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
       </div>
     </div>
 	<p>
     <div class="row">
 	<div class="col-75">
+		<input type="hidden" name="epoch" id="epoch" value="{{ @record.Epoch }}">
+		<input type="hidden" name="display" id="display" value="{{ @record.Display }}">
+		<input type="hidden" name="sort" id="sort" value="{{ @record.Sort }}">
       		<input type="reset" value="Clear">
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>

@@ -57,6 +57,7 @@ class Esfs extends Controller {
                         $fields[0]['description'],
                         $fields[0]['customer'],
                         $fields[0]['unitnumber'],
+                        $fields[0]['duedate'],
                         $fields[0]['urgency'],
                         $fields[0]['ecn'],
                         $fields[0]['requestor'],
@@ -69,8 +70,8 @@ class Esfs extends Controller {
 		$data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		// Inserting into sqlite database
 		$sql_insert  = "insert into enc_log ";
-                $sql_insert .= "(Epoch,DateTime, Line, Description, Customer, UnitNumber, DueDate, Urgency, Requestor, Owner, Notes, Display, Sort) ";
-                $sql_insert .= "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql_insert .= "(Epoch,DateTime, Line, Description, Customer, UnitNumber, DueDate, Urgency, ECN, Requestor, Owner, Notes, Display, Sort) ";
+                $sql_insert .= "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->db->exec($sql_insert,$rowv);
 		// Displaying new data
 		$this->f3->reroute('/esfs');

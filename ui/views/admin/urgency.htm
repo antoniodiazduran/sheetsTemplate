@@ -12,12 +12,12 @@
     </div>
     <div class="row">
       <div class="col-45">
-        <label for="owner">Owner:</label>
+        <label for="urgency">Owner:</label>
       </div>
       <div class="col-55">
-	<repeat group="{{ @owners }}" value="{{ @cols }}">
-		<input type="radio" id="owner" name="owner" value="{{ @cols.names}}">
-		<label for="owner">{{ @cols.names}}</label><br>
+	<repeat group="{{ @urgency }}" value="{{ @cols }}">
+		<input type="radio" id="urgency" name="urgency" value="{{ @cols.names }}">
+		<label for="urgency">{{ @cols.names }}</label><br>
 	</repeat>
       </div>
     </div>
