@@ -23,7 +23,26 @@ $f3->config('config.ini');
 // Catching errors
 //$f3->set('ONERROR','Errors->msgs');
 
-//WIP
+// ENC admin page for engineering support
+$f3->route('GET /sfdbs','Admin->apidbs');
+$f3->route('GET /sfadm','Admin->sf');
+$f3->route('GET /sfowr/@id','Admin->ownr');
+$f3->route('POST /admin/sfownrupd','Admin->ownrupd');
+$f3->route('GET /owr/list','Owner->ownrlist');
+$f3->route('POST /owr/create','Owner->ownradd');
+$f3->route('GET /owr/del/@id','Owner->ownrdel');
+
+// ENC engineering shop floor support
+$f3->route('POST /esfs/create','Esfs->insertRow'); 
+$f3->route('GET /esfs','Esfs->form'); 
+//$f3->route('GET /esfslist','Esfs->all'); 
+$f3->route('GET /esfslist','Shopfloor->sf'); 
+
+// ENC shopfloor screen using AJAX
+$f3->route('GET /sf','Shopfloor->sf'); 
+$f3->route('GET /sfapi','Shopfloor->apiall'); 
+
+// WIP
 $f3->route('POST /wip/create','Wip->insertRow'); 
 $f3->route('GET /rdp','Wip->form'); 
 $f3->route('GET /wip','Wip->form'); 
@@ -34,7 +53,7 @@ $f3->route('GET /traveler/@traveler','Wip->tlist');
 $f3->route('GET /customers/@customer','Wip->clist'); 
 $f3->route('GET /partnumber/@partnumber','Wip->plist'); 
 
-//Cageout
+// Cageout
 $f3->route('POST /cageout/create','Cage->insertRow'); 
 $f3->route('GET /cagelist','Cage->form'); 
 $f3->route('GET /cageout','Cage->form'); 
@@ -45,13 +64,7 @@ $f3->route('POST /shortage/create','Shortage->insertRow');
 $f3->route('GET /shortage','Shortage->form'); 
 $f3->route('GET /shortagelist','Shortage->all'); 
 
-// ENC engineering shop floor support
-$f3->route('POST /esfs/create','Esfs->insertRow'); 
-$f3->route('GET /esfs','Esfs->form'); 
-//$f3->route('GET /esfslist','Esfs->all'); 
-//
-$f3->route('GET /esfslist','Shopfloor->sf'); 
-//
+// Not in use
 $f3->route('GET /rdgd','Esfs->form'); 
 $f3->route('GET /rdgdaody','Esfs->all'); 
 
@@ -62,15 +75,6 @@ $f3->route('GET /mrflist','Maintenance->maint');
 $f3->route('GET /maint','Maintenance->maint'); 
 $f3->route('GET /maintapi','Maintenance->apiall'); 
 
-// ENC shopfloor screen using AJAX
-$f3->route('GET /sf','Shopfloor->sf'); 
-$f3->route('GET /sfapi','Shopfloor->apiall'); 
-
-// ENC admin page for engineering support
-$f3->route('GET /sfdbs','Admin->apidbs');
-$f3->route('GET /sfadm','Admin->sf');
-$f3->route('GET /sfowr/@id','Admin->ownr');
-$f3->route('POST /admin/sfownrupd','Admin->ownrupd');
 
 // ENC BOM screen
 $f3->route('POST /bom/create','BOM->insertTable');
