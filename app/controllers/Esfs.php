@@ -66,7 +66,7 @@ class Esfs extends Controller {
 			$sorts,
                 	);
 		// Inserting data into Google Sheets
-		//$data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
+		$data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		// Inserting into sqlite database
 		$sql_insert  = "insert into enc_log ";
                 $sql_insert .= "(Epoch,DateTime, Line, Description, Customer, UnitNumber, DueDate, Urgency, Requestor, Owner, Notes, Display, Sort) ";
