@@ -12,6 +12,7 @@ h2 {	color:#e88;
 }
 
 h3 {	color:#999;
+	font-size:0.8em;
 }
 
 h4 {	color:#944;
@@ -94,7 +95,7 @@ pre {
 
 ul,p {
 	color:#666;
-	line-height:1.5em;
+	line-height:1.2em;
 }
 
 p code,ul code {

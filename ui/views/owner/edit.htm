@@ -17,7 +17,7 @@
       <div class="col-55">
 	<repeat group="{{ @owners }}" value="{{ @cols }}">
 		<label for="owner">{{ @cols.names}} / {{@cols.area}}</label>
-		<a href="/owr/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 0.7em" role="img" aria-label="Trash"></i></a><br>
+		<a href="/owr/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 1em" role="img" aria-label="Trash"></i></a><br>
 	</repeat>
       </div>
     </div>
@@ -47,12 +47,12 @@
       </div>
     </div>
 	<p>
+	<input type="hidden" value="" id="epoch" name="epoch">
     <div class="row">
-	<dic class="col-45">
+	<div class="col-45">
+      		<input type="reset" value="Clear">
 	</div>
 	<div class="col-55">
-		<input type="hidden" value="" id="epoch" name="epoch">
-      		<input type="reset" value="Clear">
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>
     </div>

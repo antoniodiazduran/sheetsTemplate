@@ -10,7 +10,7 @@ class Urgency extends Controller {
 	        $this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','create');
 		$this->f3->set('urgency',$urgency);
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('layout','admin.htm');
                 $this->f3->set('content','urgency/edit.htm');
     }
     public function urgedel() {
@@ -50,7 +50,7 @@ class Urgency extends Controller {
 	        $this->f3->set('customer','yes');
                 $this->f3->set('headers','admin/headers.htm');
                 $this->f3->set('fields','admin/fields.htm');
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('layout','admin.htm');
                 $this->f3->set('content','admin/list.htm');
     }
 }

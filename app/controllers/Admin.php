@@ -59,6 +59,7 @@ class Admin extends Controller {
 		$this->f3->set('t1',count($data[0])-50);
 		$this->f3->set('nav_menu','navadmin.htm');
 	        $this->f3->set('navs','yes');
+	        $this->f3->set('nav_menu','navadmin.htm');
 	        $this->f3->set('customer','yes');
                 $this->f3->set('headers','admin/headers.htm');
                 $this->f3->set('fields','admin/fields.htm');

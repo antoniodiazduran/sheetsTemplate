@@ -40,6 +40,11 @@ $f3->route('POST /urg/create','Urgency->urgeadd');
 $f3->route('GET  /urg/del/@id','Urgency->urgedel');
 $f3->route('POST /req/upd','Request->upd');
 $f3->route('GET  /req/edit/@id','Request->edit');
+$f3->route('GET  /nts/edit/@id','Notes->edit');
+$f3->route('POST /nts/upd','Notes->upd');
+$f3->route('GET  /nts/del/@id','Notes->delete');
+$f3->route('GET  /sta/edit/@id','Status->edit');
+$f3->route('POST /sta/upd','Status->upd');
 
 // ENC engineering shop floor support
 $f3->route('POST /esfs/create','Esfs->insertRow'); 
