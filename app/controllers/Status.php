@@ -18,9 +18,11 @@ class Status extends Controller {
 		$data = $this->f3->get('POST');
 		$epoch = time();
 		$relation = $data['epoch'];
-		$status = $data['status'];
+		$status = $data['display'];
+		$openclose = 'closed';
+		if ($status == 'y') { $openclose = 'opened'; }
 		$completedate = $data['completedate'];
-		$record = $this->db->exec('INSERT INTO complete_log (epoch, enc_log, completedate) VALUES (?,?,?)',array($epoch,$relation,$completedate) );
+		$record = $this->db->exec('INSERT INTO complete_log (epoch, enc_log, completedate, status) VALUES (?,?,?,?)',array($epoch,$relation,$completedate,$openclose) );
 		$record = $this->db->exec('UPDATE enc_log SET completedate = ?, Display = ?  WHERE epoch = ?',array($completedate, $status, $relation) );
 	        $this->f3->set('navs','yes');
 		$this->f3->set('nav_menu','navadmin.htm');

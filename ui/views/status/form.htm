@@ -16,8 +16,9 @@
 	<div class="col-55">
 		<label for="radio">Select from options</label><p>
 	<repeat group="{{ @record }}" value="{{ @cols }}">
-		<input type="radio" name="completedate" id="completedate" value="y" <check if="{{ @cols.Display == 'y' }}">checked</check>> Open <br>
-		<input type="radio" name="completedate" id="completedate" value="n"> Complete
+		<input type="radio" name="display" id="display" value="y" <check if="{{ @cols.Display == 'y' }}">checked</check>> Open <br>
+		<input type="radio" name="display" id="display" value="n" <check if="{{ @cols.Display == 'n' }}">checked</check>> Complete 
+			<check if="{{ @cols.Display == 'n' }}">on {{ @cols.completedate }} </check>
 		<p>
 	</repeat>
 	</div>
@@ -33,7 +34,6 @@
     </div>
 	<p>
 	<input type="hidden" name="epoch" id="epoch" value="{{ @cols.Epoch }}">
-	<input type="hidden" name="display" id="display" value="{{ @cols.Display }}">
     <div class="row">
 	<div class="col-45">
       		<input type="reset" value="Clear">
@@ -49,23 +49,9 @@
 function validateForm() {
  const alerts = document.getElementById("alertnotes");
  alerts.innerHTML='';
- let lin = document.forms["wipform"]["line"].value;
- let des = document.forms["wipform"]["description"].value;
- let cus = document.forms["wipform"]["customer"].value;
- let uni = document.forms["wipform"]["unitnumber"].value;
  let due = document.forms["wipform"]["duedate"].value;
- let urg = document.forms["wipform"]["urgency"].value;
- let ecn = document.forms["wipform"]["ecn"].value;
- let req = document.forms["wipform"]["requestor"].value;
  let ale = "";
- if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
- if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
- if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
- if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
  if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
- if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
- if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
- if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";
