@@ -1,4 +1,4 @@
-<include href="nav.htm">
+<include href="{{ @nav_menu }}">
 
 <div style="padding:1px; background-color:red; opacity:0.8;">
 	<h3>&nbsp; &nbsp; Engineering Support</h3>
@@ -69,7 +69,7 @@
         <label class="titles" for="urgency">Urgency</label><p>
         <input type="radio" id="urgency" name="urgency" value="Line Stopper" <check if="{{ @record.Urgency=='Line Stopper' }}">checked</check>>
         <label for="html">Line Stopper</label><br>
-        <input type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See Due Date' }}">checked</check>>
+        <input type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See due date' }}">checked</check>>
         <label for="html">See due date</label><br>
         <input type="radio" id="urgency" name="urgency" value="As available" <check if="{{ @record.Urgency=='As available' }}">checked</check>>
         <label for="html">As available</label><br>
