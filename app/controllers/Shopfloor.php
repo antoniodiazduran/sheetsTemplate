@@ -28,7 +28,7 @@ class Shopfloor extends Controller {
                 $this->f3->set('content','shopfloor/ajax.htm');
     }
     public function apidbs() {
-		$data[] = $this->db->exec('SELECT * FROM enc_log WHERE display = "y" ORDER BY epoch desc');
+		$data[] = $this->db->exec('SELECT Line, Description, substr(UnitNumber,1,15) UnitNumber, substr(Customer,1,10) Customer, DueDate, Urgency, Requestor FROM enc_log WHERE display = "y" ORDER BY sort ASC, DueDate ASC');
 		$json_data = json_encode($data);
 		echo $json_data;
 		exit;
