@@ -28,10 +28,10 @@ class Shopfloor extends Controller {
                 $this->f3->set('content','shopfloor/ajax.htm');
     }
     public function apidbs() {
-		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY epoch desc');
+		$data[] = $this->db->exec('SELECT * FROM enc_log WHERE display = "y" ORDER BY epoch desc');
 		$json_data = json_encode($data);
-var_dump($json_data);
-exit;
+		echo $json_data;
+		exit;
     }
     public function apiall() {
 		$data[] = $this->GSheetsRead('enc.sort','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
@@ -39,11 +39,6 @@ exit;
 		$epoch = time();
 		$this->db->exec('insert into eng_support (timestamp, jsondata) values (?,?)', array($epoch,$json_data));
 		echo $json_data;
-//		echo "<p>";
-//		$array_data = json_decode($json_data);
-//		var_dump($data);
-//		echo "<p>";
-//		var_dump($array_data);
 		exit;
 
     }

@@ -55,6 +55,7 @@ $f3->route('GET  /esfslist','Shopfloor->sf');
 // ENC shopfloor screen using AJAX
 $f3->route('GET /sf','Shopfloor->sf'); 
 $f3->route('GET /sfapi','Shopfloor->apiall'); 
+$f3->route('GET /sfapidb','Shopfloor->apidbs'); 
 
 // WIP
 $f3->route('POST /wip/create','Wip->insertRow'); 

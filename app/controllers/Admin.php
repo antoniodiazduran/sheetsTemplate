@@ -51,13 +51,12 @@ class Admin extends Controller {
 		$this->f3->reroute('/sfadm');
     }
     public function sf() {
-		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY epoch desc');
+		$data[] = $this->db->exec("SELECT * FROM enc_log ORDER BY display DESC, datetime ASC");
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
 		$this->f3->set('c1',0);
-		$this->f3->set('t1',count($data[0])-50);
-		$this->f3->set('nav_menu','navadmin.htm');
+		$this->f3->set('t1',count($data[0])-250);
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navadmin.htm');
 	        $this->f3->set('customer','yes');

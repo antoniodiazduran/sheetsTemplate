@@ -1,7 +1,7 @@
 <script>
 function ajax(){
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "/sfapi", true);
+  xhttp.open("GET", "/sfapidb", true);
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -36,7 +36,7 @@ function createTable(data) {
   
   Object.values(data).forEach(rows => {
      var tr = document.createElement('tr');
-     var ih = Math.trunc(window.innerHeight/10);
+     var ih = Math.trunc(window.innerHeight/16);
      var attr1 = `height: ${ih}px; vertical-align:middle;`;
      const today = new Date().toJSON().slice(0,10);
      tr.setAttribute('style',attr1);
