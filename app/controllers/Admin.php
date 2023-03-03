@@ -2,6 +2,10 @@
 
 class Admin extends Controller {
 
+    public function index() {
+		$this->f3->set('layout','layout.htm');
+                $this->f3->set('content','welcome.htm');  
+    }
     public function ownr() {
                 $this->f3->set('breadcrumbs','owr');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
