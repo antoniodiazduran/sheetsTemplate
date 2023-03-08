@@ -11,6 +11,7 @@ class Cage extends Controller {
 	        $this->f3->set('customer','yes');
 		$this->f3->set('t1',count($data[0])-50);
                 $this->f3->set('layout','layout.htm');
+		$this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','cageout/headers.htm');
                 $this->f3->set('fields','cageout/fields.htm');
                 $this->f3->set('content','cageout/list.htm');
@@ -19,6 +20,7 @@ class Cage extends Controller {
                 $this->f3->set('breadcrumbs','cageout');
                 $this->f3->set('mode','create');
                 $this->f3->set('layout','layout.htm');
+		$this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('content','cageout/form.htm');
     }
     public function insertRow() {

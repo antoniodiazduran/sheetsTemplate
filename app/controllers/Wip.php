@@ -8,6 +8,7 @@ class Wip extends Controller {
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('traveler',$this->f3->get('PARAMS.traveler'));
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','traveler');
@@ -20,6 +21,7 @@ class Wip extends Controller {
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('partnumber',$this->f3->get('PARAMS.partnumber'));
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','partnumber');
@@ -32,6 +34,7 @@ class Wip extends Controller {
                 $this->f3->set('breadcrumbs','wip');
                 $this->f3->set('customer',$this->f3->get('PARAMS.customer'));
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('field','customer');
@@ -44,6 +47,7 @@ class Wip extends Controller {
                 $this->f3->set('area',$this->f3->get('PARAMS.area'));
                 $this->f3->set('details',$data);
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('field','area');
                 $this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
@@ -58,6 +62,7 @@ class Wip extends Controller {
 	        $this->f3->set('customer','yes');
 		$this->f3->set('t1',count($data[0])-350);
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('content','wip/list.htm');
@@ -71,6 +76,7 @@ class Wip extends Controller {
 	        $this->f3->set('customer','no');
 		$this->f3->set('t1',count($data[0])-50);
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('headers','wip/headers.htm');
                 $this->f3->set('fields','wip/fields.htm');
                 $this->f3->set('content','wip/list.htm');
@@ -79,6 +85,7 @@ class Wip extends Controller {
                 $this->f3->set('breadcrumbs','wip','1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w');
                 $this->f3->set('mode','create');
                 $this->f3->set('layout','layout.htm');
+                $this->f3->set('menu','nav_pw.htm');
 		$this->f3->set('content','wip/form.htm');
     }
     public function insertRow() {
