@@ -1,0 +1,10 @@
+<check if="{{ @navs == 'yes' }}">
+	<include href="{{ @nav_menu }}">
+</check>
+
+<table>
+<include href="{{ @headers }}"/>
+<repeat group="{{ @details[0] }}" key="{{ @ikey }}" value="{{ @cols }}" >
+	<include href="{{ @fields }}"/>
+</repeat>
+</table>

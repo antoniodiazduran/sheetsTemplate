@@ -5,7 +5,7 @@ class Owner extends Controller {
     public function ownrlist() {
                 $this->f3->set('breadcrumbs','owr');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-		$owners = $this->db->exec('SELECT epoch,names,area FROM owners ORDER BY names');
+		$owners = $this->db->exec('SELECT epoch,names,area,email FROM owners ORDER BY names');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','create');
@@ -24,7 +24,8 @@ class Owner extends Controller {
 		$epoch = time();
 		$name = $data['names'];
 		$area = $data['area'];
-		$this->db->exec('INSERT INTO owners (epoch, names, area) VALUES (?,?,?)',array($epoch,$name,$area));
+		$email = $data['email'];
+		$this->db->exec('INSERT INTO owners (epoch, names, area, email) VALUES (?,?,?,?)',array($epoch,$name,$area,$email));
 		$this->f3->reroute('owr/list');
     }
     public function ownrupd() {

@@ -1,0 +1,29 @@
+
+<check if="{{ @navs=='yes' }}">
+  <include href="nav.htm">
+</check>
+
+<div class="table-responsive-x1">
+<center>
+<h2>Saving data to Scheduling log</h2>
+<p>
+Session ID: <b>{{ @epoch }}</b>
+<br>
+Username: <b>{{ @username }}</b>
+<br>
+Schedule Week: <b>{{ @weekdate }}</b>
+<br>
+Unit Number: <b>{{ @unitnumber }}</b>
+<p>
+<br>
+<a href="/aev/session">Session</a>
+</center>
+</div>
+
+<script language="javascript">
+setTimeout( function() {
+  window.close();	
+},4000);
+
+
+</script

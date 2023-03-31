@@ -16,20 +16,20 @@
       </div>
       <div class="col-55">
 	<repeat group="{{ @owners }}" value="{{ @cols }}">
-		<label for="owner">{{ @cols.names}} / {{@cols.area}}</label>
+		<label for="owner">{{ @cols.names}} / {{@cols.area}} :: {{ @cols.email }}</label>
 		<a href="/owr/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 1em" role="img" aria-label="Trash"></i></a><br>
 	</repeat>
       </div>
     </div>
 <p>
     <div class="row">
-      <div class="col-45" style="color:gray;">
+      <div class="col-45" style="color:black;">
         <label for="owner">Create a new entry</label>
       </div>
       <div class="col-55">
       </div>
     </div>
-
+<p>
     <div class="row">
       <div class="col-45" style="color:gray;">
         <label for="name">Name:</label>
@@ -44,6 +44,14 @@
       </div>
       <div class="col-55">
 	<input type="text" id="area" name="area" value="" placeholder="Area of expertise">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="area">Email:</label>
+      </div>
+      <div class="col-55">
+	<input type="text" id="email" name="email" value="" placeholder="user@domain.com">
       </div>
     </div>
 	<p>

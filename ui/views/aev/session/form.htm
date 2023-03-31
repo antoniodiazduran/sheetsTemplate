@@ -1,0 +1,70 @@
+<check if="{{ @navs == 'yes' }}">
+	<include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:blue; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Session variables</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="username">Username</label><p>
+        <input type="text" id="username" name="username" placeholder="Username..." value="{{ @username }}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="weekdate">Due Date</label><p>
+        <input type="date" id="weekdate" name="weekdate" placeholder="mm/dd/yyy" value="{{ @weekdate }}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="weekdate" style="color:silver;">Session ID: {{ @epoch }}</label>
+      </div>
+    </div>
+    <p>
+    <div class="row">
+	<div class="col-75">
+      		<input type="reset" value="Clear">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let uni = document.forms["wipform"]["username"].value;
+ let due = document.forms["wipform"]["weekdate"].value;
+ let ale = "";
+ if ( des.length=== 0) { ale = ale + "Type a username<br>"; }
+ if ( due.length=== 0  { ale = ale + "Add Due Date<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

@@ -1,7 +1,7 @@
 <script>
 function ajax(){
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "/sfapidb", true);
+  xhttp.open("GET", "/aev/sfapidb", true);
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -46,25 +46,27 @@ function createTable(data) {
 	    var td = document.createElement('td');	
 	    td.appendChild(document.createTextNode(rows[cols].substr(0,60)));
 		if(rows[cols] == 'Weld') {
+                        tr.setAttribute('style','background-color:gray; color:#000000');
                         tr.setAttribute('class','bg-info text-dark fontSize');
                 }
-		if(rows[cols] == 'Line 1') {
-                        tr.setAttribute('style','background-color:#fc5bfe; color:#fffff');
+		if(rows[cols] == 'Mod 1') {
+                        tr.setAttribute('style','background-color:silver; color:#000000');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
-		if(rows[cols] == 'Line 3') {
-                        tr.setAttribute('style','background-color:#fa84e0; color:#fffff');
+		if(rows[cols] == 'Mod 2') {
+                        tr.setAttribute('style','background-color:blue; color:#000000');
+                        tr.setAttribute('class','fontSize text-nowrap');
+                }
+		if(rows[cols] == 'Vans') {
+                        tr.setAttribute('style','background-color:red; color:#000000');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Paint') {
-                        tr.setAttribute('style','background-color:lightgreen; color:#fffff');
+                        tr.setAttribute('style','background-color:lightgreen; color:#000000');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Final') {
                         tr.setAttribute('class','bg-warning text-dark fontSize text-nowrap');
-                }
-		if(rows[cols] == 'Line 5') {
-                        tr.setAttribute('class','bg-dark text-white fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line Stopper') {
                         td.setAttribute('class','bg-danger blink fontSize');
