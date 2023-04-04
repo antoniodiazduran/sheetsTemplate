@@ -38,6 +38,17 @@ class Controller {
                 return $sheet->items;
     }
 
+    public function sendMail($to,$msg) {
+      // In case any of our lines are larger than 70 characters, we should use wordwrap()
+      // Always set content-type when sending HTML email
+      $headers = "MIME-Version: 1.0" . "\r\n";
+      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+      $to = 'antonio.diazduranborja@revgroup.com,'.$to;
+      $msg = wordwrap($msg, 100, "<br/>");
+      // Send - to, subject, message
+      $bool = mail($to,'Engineering owner/priority change', $msg, $headers);
+    }
+
     function __construct() {
         $f3=Base::instance();
 

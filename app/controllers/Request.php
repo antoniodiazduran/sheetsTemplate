@@ -16,6 +16,9 @@ class Request extends Controller {
     public function upd() {
 		// Getting POST variables, epoch and datetime for logs
 		$reqs = $this->f3->get('POST');
+		if ($reqs['urgency'] == 'Line Stopper') { $reqs['sort'] = 1; }
+		if ($reqs['urgency'] == 'See due date') { $reqs['sort'] = 2; }
+		if ($reqs['urgency'] == 'As available') { $reqs['sort'] = 3; }
 		$rowv = array(
                         $reqs['line'],
                         $reqs['description'],
