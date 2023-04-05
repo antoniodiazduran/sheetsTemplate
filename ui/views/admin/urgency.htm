@@ -16,7 +16,7 @@
       </div>
       <div class="col-55">
 	<repeat group="{{ @urgency }}" value="{{ @cols }}">
-		<input type="radio" id="urgency" name="urgency" value="{{ @cols.names }}">
+		<input type="radio" id="urgency" name="urgency" value="{{ @cols.names }}" <check if="{{ @actual[0]['Urgency'] == @cols.names }}"> checked </check> >
 		<label for="urgency">{{ @cols.names }}</label><br>
 	</repeat>
       </div>
