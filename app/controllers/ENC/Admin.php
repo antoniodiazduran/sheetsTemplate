@@ -1,6 +1,8 @@
 <?php
 
-class Admin extends Controller {
+namespace ENC;
+
+class Admin extends \Controller {
 
     public function index() {
 		$this->f3->set('layout','layout.htm');

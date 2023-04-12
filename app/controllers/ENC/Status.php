@@ -1,6 +1,8 @@
 <?php
 
-class Status extends Controller {
+namespace ENC;
+
+class Status extends \Controller {
 
     public function edit() {
                 $this->f3->set('breadcrumbs','sta');
@@ -27,7 +29,7 @@ class Status extends Controller {
 	        $this->f3->set('navs','yes');
 		$this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','upd');
-		$this->f3->reroute('/sfadm');		
+		$this->f3->reroute('/sfadm');
     }
 
 }

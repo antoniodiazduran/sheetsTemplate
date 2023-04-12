@@ -44,7 +44,7 @@ class Controller {
       $headers = "MIME-Version: 1.0" . "\r\n";
       $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
       $to = 'antonio.diazduranborja@revgroup.com,'.$to;
-      $msg = wordwrap($msg, 200, "<br/>");
+      $msg = wordwrap($msg, 300, "<br/>");
       // Send - to, subject, message
       $bool = mail($to,'Engineering owner/priority change', $msg, $headers);
     }

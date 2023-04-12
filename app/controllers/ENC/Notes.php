@@ -1,6 +1,8 @@
 <?php
 
-class Notes extends Controller {
+namespace ENC;
+
+class Notes extends \Controller {
 
     public function edit() {
                 $this->f3->set('breadcrumbs','nts');

@@ -1,6 +1,8 @@
 <?php
 
-class Request extends Controller {
+namespace ENC;
+
+class Request extends \Controller {
 
     public function edit() {
                 $this->f3->set('breadcrumbs','req');

@@ -1,6 +1,8 @@
 <?php
 
-class Owner extends Controller {
+namespace ENC;
+
+class Owner extends \Controller {
 
     public function ownrlist() {
                 $this->f3->set('breadcrumbs','owr');

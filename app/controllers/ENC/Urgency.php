@@ -1,6 +1,8 @@
 <?php
 
-class Urgency extends Controller {
+namespace ENC;
+
+class Urgency extends \Controller {
 
     public function urgelist() {
                 $this->f3->set('breadcrumbs','urg');
