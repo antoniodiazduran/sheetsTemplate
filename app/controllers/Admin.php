@@ -6,6 +6,21 @@ class Admin extends Controller {
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','welcome.htm');  
     }
+
+    public function sch() {
+		$e = $this->f3->get('PARAMS.e');
+		$j = $this->f3->get('PARAMS.j');
+		$s = $this->f3->get('PARAMS.s');
+		$l = $this->f3->get('PARAMS.l');
+		$d = $this->f3->get('PARAMS.d');
+		$c = $this->f3->get('PARAMS.c');
+		$v = $this->f3->get('PARAMS.v');
+		$str = "INSERT INTO sch_board (Epoch, Jobnumber, Startdate, Line, Dealername, Customername, Vin) VALUES (?,?,?,?,?,?,?)";
+	echo $str;
+		$this->aev->exec($str,array($e,$j,$s,$l,$d,$c,$v) );
+	exit;
+    }
+
     public function ownr() {
                 $this->f3->set('breadcrumbs','owr');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));

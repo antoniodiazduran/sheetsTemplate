@@ -8,7 +8,7 @@ class Schedule extends \Controller {
                 $this->f3->set('breadcrumbs','aev/schedule');
 	        $this->f3->set('navs','yes');
 		$this->f3->set('nav_menu','aev/nav_aev.htm');
-		$details[] = $this->aev->exec('SELECT Epoch, Username, SessionID, Weekdate, Unitnumber FROM sch_log ORDER BY weekdate');
+		$details[] = $this->aev->exec('SELECT Jobnumber, Startdate, Line, Dealername, Customername, Vin FROM sch_board ORDER BY Startdate, Line');
 		$this->f3->set('details',$details);
 		$this->f3->set('headers','aev/schedule/headers.htm');
 		$this->f3->set('fields','aev/schedule/fields.htm');

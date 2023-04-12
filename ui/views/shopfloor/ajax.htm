@@ -46,28 +46,32 @@ function createTable(data) {
 	    var td = document.createElement('td');	
 	    td.appendChild(document.createTextNode(rows[cols].substr(0,60)));
 		if(rows[cols] == 'Weld') {
-                        tr.setAttribute('class','bg-info text-dark fontSize');
+                        tr.setAttribute('style','background-color:#434343; color:#ffffff');
+                        tr.setAttribute('class','text-white fontSize');
+                }
+		if(rows[cols] == 'Paint') {
+                        tr.setAttribute('style','background-color:#92c47d; color:#ffffff');
+                        tr.setAttribute('class','fontSize text-nowrap');
+                }
+		if(rows[cols] == 'Line 5') {
+                        tr.setAttribute('style','background-color:#4a86e8; color:#fffff');
+                        tr.setAttribute('class','text-white fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line 1') {
-                        tr.setAttribute('style','background-color:#fc5bfe; color:#fffff');
+                        tr.setAttribute('style','background-color:#ffd966; color:#000000');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line 3') {
-                        tr.setAttribute('style','background-color:#fa84e0; color:#fffff');
-                        tr.setAttribute('class','fontSize text-nowrap');
-                }
-		if(rows[cols] == 'Paint') {
-                        tr.setAttribute('style','background-color:lightgreen; color:#fffff');
+                        tr.setAttribute('style','background-color:#e69138; color:#ffffff');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Final') {
-                        tr.setAttribute('class','bg-warning text-dark fontSize text-nowrap');
-                }
-		if(rows[cols] == 'Line 5') {
-                        tr.setAttribute('class','bg-dark text-white fontSize text-nowrap');
+                        tr.setAttribute('style','background-color:#e06666; color:#ffffff');
+                        tr.setAttribute('class','text-dark fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Office') {
-                        tr.setAttribute('class','bg-success text-white fontSize text-nowrap');
+                        tr.setAttribute('style','background-color:#ff92ff; color:#000000');
+                        tr.setAttribute('class','text-dark fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line Stopper') {
                         td.setAttribute('class','bg-danger blink fontSize');
