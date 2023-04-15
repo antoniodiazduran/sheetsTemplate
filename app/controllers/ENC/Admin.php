@@ -48,8 +48,6 @@ class Admin extends \Controller {
                 $this->f3->set('content','admin/urgency.htm');
     }
     public function ownrupd() {
-		// Creating variable to send emails from controller class
-		$main = New Controller;
 		// Getting POST variables, epoch and datetime for logs
 		$ownr = $this->f3->get('POST');
 		$id = $ownr['epoch'];
@@ -66,8 +64,8 @@ class Admin extends \Controller {
 		$msg .= 'This is just for your information, but you can update the record as needed. <br/> ';
 		$msg .= 'Sorry, you cannot delete the task!<p>';
 		$msg .= 'If you wish to add notes to the record, you can click <a href="http://35.225.79.133/nts/edit/'.$id.'">here</a><p>Joey<br/>The admin<p>';
-		// Sending the email
-		$main->sendMail($to,$name.$msg);
+		// Sending the email using parent function in Controller
+		parent::sendMail($to,$name.$msg);
 		// Logging changes
 		$this->db->exec('INSERT INTO owner_log (timestamp,datetime,enc_log,names)VALUES(?,?,?,?)',array($epoch,$datet,$id,$name));
 		// Changing the enc_log for engineering support
@@ -75,8 +73,6 @@ class Admin extends \Controller {
 		$this->f3->reroute('/sfadm');
     }
     public function urgeupd() {
-		// Creating variable to send emails from controller class
-		$main = New Controller;
 		// Getting POST variables, epoch and datetime for logs
 		$record = $this->f3->get('POST');
 		$id = $record['epoch'];
@@ -96,7 +92,8 @@ class Admin extends \Controller {
 		$email = $this->db->exec('SELECT email FROM owners WHERE names = (SELECT Owner from enc_log WHERE Epoch = ?)', $id);
 		$msg  = $owner[0]['Owner'].'<p>Your prioirty has change, click on the <a href="http://35.225.79.133/req/edit/'.$id.'">link</a> to see the changes.<br/> ';
 		$msg .= 'This is just for your information, but you can update the record as needed.<p>Joey<br/>The admin<p>';
-		$main->sendMail('casey.kackman@eldorado-ca.com,'.$email[0]['email'],$msg);
+		// using parent function in Controller
+		parent::sendMail('casey.kackman@eldorado-ca.com,'.$email[0]['email'],$msg);
 		$this->f3->reroute('/sfadm');
     }
     public function sf() {

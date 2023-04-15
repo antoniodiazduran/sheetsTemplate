@@ -1,0 +1,12 @@
+<tr>
+	<td align="left"><a href="/mat/edit/{{ @cols.Epoch }}"><i class="bi-pencil"></a></td>
+	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
+	<td align="left">{{ @cols.Line }} </td>
+	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
+	<td align="left">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }} </td>
+	<td align="left">{{ @cols.DueDate }} </td>
+	<td align="left">{{ @cols.Buyer }}</td>
+	<td align="left">{{ @cols.ArrivedDate }}</td>
+	<td align="left"><a href="/mat/status/{{ @cols.Epoch }}"><check if="{{ @cols.Display == 'n' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></a></td>
+	<td align="left"><button style="border:0;background-color:white;color:blue;" onclick="checkremove({{@cols.Epoch}});"><i class="bi-trash"></button></td>
+</tr>
