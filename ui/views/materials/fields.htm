@@ -2,8 +2,10 @@
 	<td align="left"><a href="/mat/edit/{{ @cols.Epoch }}"><i class="bi-pencil"></a></td>
 	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
 	<td align="left">{{ @cols.Line }} </td>
+	<td align="left">{{ @cols.UnitID }} </td>
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }} </td>
+	<td align="left">{{ @cols.Qty }} </td>
 	<td align="left">{{ @cols.DueDate }} </td>
 	<td align="left">{{ @cols.Buyer }}</td>
 	<td align="left">{{ @cols.ArrivedDate }}</td>

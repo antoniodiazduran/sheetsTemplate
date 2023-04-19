@@ -17,13 +17,13 @@ class Admin extends \Controller {
 		$p = $this->f3->get('PARAMS.p');
 		$b = $this->f3->get('PARAMS.b');
 		$u = $this->f3->get('PARAMS.u');
-		$str = "INSERT INTO enc_mlog (Epoch, DateTime, Description, Line, PartNumber, Buyer, DueDate) VALUES (?,?,?,?,?,?,?)";
+		$str = "INSERT INTO enc_matlog (Epoch, DateTime, Description, Line, PartNumber, Buyer, DueDate) VALUES (?,?,?,?,?,?,?)";
 	echo $str;
 		$this->aev->exec($str,array($e,$t,$d,$l,$p,$b,$u) );
 	exit;
     }
     public function mat_remove() {
-                $this->db->exec('DELETE FROM enc_mlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+                $this->db->exec('DELETE FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->reroute('/mat/admin');
@@ -32,7 +32,7 @@ class Admin extends \Controller {
     public function status_edit() {
                 $this->f3->set('breadcrumbs','mat/sta');
                 $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-                $record = $this->db->exec('SELECT Epoch,DueDate,ArrivedDate,Display FROM enc_mlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+                $record = $this->db->exec('SELECT Epoch,DueDate,ArrivedDate,Display FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->set('mode','upd');
@@ -49,7 +49,7 @@ class Admin extends \Controller {
                         $reqs['epoch']
                         );
                 // Inserting into sqlite database
-                $sql_update  = "UPDATE enc_mlog ";
+                $sql_update  = "UPDATE enc_matlog ";
                 $sql_update .= "SET ArrivedDate=?, Display=? ";
                 $sql_update .= "WHERE Epoch = ?";
                 $this->db->exec($sql_update,$rowv);
@@ -60,16 +60,18 @@ class Admin extends \Controller {
                 $reqs = $this->f3->get('POST');
                 $rowv = array(
                         $reqs['line'],
+                        $reqs['unitid'],
                         $reqs['description'],
                         $reqs['partnumber'],
+                        $reqs['qty'],
                         $reqs['duedate'],
                         $reqs['buyer'],
                         $reqs['notes'],
                         $reqs['epoch']
                         );
                 // Inserting into sqlite database
-                $sql_update  = "UPDATE enc_mlog ";
-                $sql_update .= "SET Line=?, Description=?, PartNumber=?,";
+                $sql_update  = "UPDATE enc_matlog ";
+                $sql_update .= "SET Line=?, UnitID=?, Description=?, PartNumber=?, Qty=?";
                 $sql_update .= "DueDate=?, Buyer=?, Notes=? ";
                 $sql_update .= "WHERE Epoch = ?";
                 $this->db->exec($sql_update,$rowv);
@@ -78,7 +80,7 @@ class Admin extends \Controller {
     public function mat_edit() {
                 $this->f3->set('breadcrumbs','mat');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-		$record = $this->db->exec('SELECT Epoch,DateTime,Line,Description,PartNumber,DueDate,Buyer,Notes FROM enc_mlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+		$record = $this->db->exec('SELECT Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
 		$this->f3->set('record', $record[0]);
 	        $this->f3->set('navs','no');
 		$this->f3->set('nav_menu','navmaterial.htm');
@@ -106,8 +108,10 @@ class Admin extends \Controller {
 		// Getting POST variables, epoch and datetime for logs
 		$record = $this->f3->get('POST');
 		$line =  $record['line'];
+		$unit =  $record['unitid'];
 		$desc =  $record['description'];
 		$part =  $record['partnumber'];
+		$qty  =  $record['qty'];
 		$dued =  $record['duedate'];
 		$buye =  $record['buyer'];
 		$note =  $record['notes'];
@@ -115,11 +119,11 @@ class Admin extends \Controller {
 		$epoch = time();
 		$datet = date('y-m-d h:i',time());
 		// Logging changes
-		$this->db->exec('INSERT INTO enc_mlog (Epoch,DateTime,Line,Description,PartNumber,DueDate,Buyer,Notes,Display) VALUES(?,?,?,?,?,?,?,?,?)',array($epoch,$datet,$line,$desc,$part,$dued,$buye,$note,$disp));
+		$this->db->exec('INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,Display) VALUES(?,?,?,?,?,?,?,?,?,?,?)',array($epoch,$datet,$line,$unit,$desc,$part,$qty,$dued,$buye,$note,$disp));
 		$this->f3->reroute('/mat/admin');
     }
     public function list() {
-		$data[] = $this->db->exec("SELECT * FROM enc_mlog ORDER BY Epoch DESC");
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY Epoch DESC");
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
@@ -132,7 +136,11 @@ class Admin extends \Controller {
                 $this->f3->set('content','materials/list.htm');
     }
     public function apidbs() {
-		$data[] = $this->db->exec('SELECT Line, Description, PartNumber, Buyer, DueDate FROM enc_mlog ORDER BY epoch desc');
+		$sqlstr  = "SELECT rid,Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Days ";
+		$sqlstr .= "FROM enc_matlog ";
+		$sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours')";
+		$sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
+		$data[] = $this->db->exec($sqlstr);
 		$json_data = json_encode($data);
 		echo $json_data;
 		exit;

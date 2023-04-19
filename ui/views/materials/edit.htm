@@ -35,6 +35,14 @@
       <div class="col-25">
       </div>
       <div class="col-75">
+        <label class="titles" for="customer">Unit</label><p>
+        <input type="text" id="unitid" name="unitid" placeholder="Unit number" value="{{ @record.UnitID }}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
         <label class="titles" for="description">Description</label><p>
         <input type="text" id="description" name="description" placeholder="Material description..." value="{{ @record.Description }}">
       </div>
@@ -45,6 +53,14 @@
       <div class="col-75">
         <label class="titles" for="customer">Part Number</label><p>
         <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP" value="{{ @record.Line }}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Qty</label><p>
+        <input type="text" id="qty" name="qty" placeholder="Qty in units" value="{{ @record.Qty }}">
       </div>
     </div>
     <div class="row">

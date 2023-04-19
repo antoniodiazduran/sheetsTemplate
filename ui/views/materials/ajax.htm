@@ -16,7 +16,7 @@ function ajax(){
 
 function createTable(data) {
 
- var headers = ['Line','Description','PartNumber','Buyer', 'DueDate'];
+ var headers = ['Line','UnitID','Description','PartNumber','Qty','Buyer', 'DueDate','Days'];
  var  tbl = document.createElement('table'),
      tbdy = document.createElement('tbody');
      thd = document.createElement('thead');
@@ -45,6 +45,10 @@ function createTable(data) {
 	  if (cols == key){
 	    var td = document.createElement('td');	
 	    td.appendChild(document.createTextNode(rows[cols].substr(0,60)));
+		if(rows[cols] == '-') {
+                        tr.setAttribute('style','background-color:#dedede; color:#ffffff');
+                        tr.setAttribute('class','text-white fontSize');
+                }
 		if(rows[cols] == 'Weld') {
                         tr.setAttribute('style','background-color:#434343; color:#ffffff');
                         tr.setAttribute('class','text-white fontSize');
