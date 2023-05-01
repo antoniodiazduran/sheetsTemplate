@@ -23,7 +23,7 @@ if ((float)PCRE_VERSION<8.0)
 $f3->config('config/config.ini');
 $f3->config('config/routes.ini');
 // Catching errors
-//$f3->set('ONERROR','Errors->msgs');
+$f3->set('ONERROR','Errors->msgs');
 
 new Session();
 

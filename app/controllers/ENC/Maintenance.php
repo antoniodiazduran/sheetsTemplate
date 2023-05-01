@@ -1,6 +1,8 @@
 <?php
 
-class Maintenance extends Controller {
+namespace ENC;
+
+class Maintenance extends \Controller {
 
     public function maint() {
                 $this->f3->set('breadcrumbs','maint');
@@ -14,8 +16,8 @@ class Maintenance extends Controller {
     }
     public function form() {
                 $eng[] = $this->GSheetsRead('enc.form','15pDtT-vN8NSOPXNz0ZqWI73tHAxSf2S3KS5zRWuYpj0');
-                $this->f3->set('breadcrumbs','mrf');
-                $this->f3->set('navs','yes');
+                $this->f3->set('breadcrumbs','enc/mrf');
+                $this->f3->set('navs','no');
                 $this->f3->set('layout','layout.htm');
                 $this->f3->set('mode','create');
                 $this->f3->set('content','maint/form.htm');
@@ -41,7 +43,7 @@ class Maintenance extends Controller {
                 $sorts = "";
                 if($fields[0]['urgency'] == 'Line Stopper') { $sorts = 1; }
                 if($fields[0]['urgency'] == 'See due date') { $sorts = 2; }
-                if($fields[0]['urgency'] == 'As availble') { $sorts = 3; }
+                if($fields[0]['urgency'] == 'As available') { $sorts = 3; }
                 // Creating array to insert into Google Sheets
                 $row = array(
                         'DateTime'=>date('m/d/Y H:i:s'),
@@ -58,7 +60,7 @@ class Maintenance extends Controller {
                 // Inserting data into Google Sheets
                 $data[] = $this->GSheetsInsert('enc.form',$row,'15pDtT-vN8NSOPXNz0ZqWI73tHAxSf2S3KS5zRWuYpj0');
                 // Displaying new data
-                $this->f3->reroute('/maint');
+                $this->f3->reroute('/enc/mrf');
     }
 }
 ?>

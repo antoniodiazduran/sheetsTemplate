@@ -97,7 +97,7 @@ class Admin extends \Controller {
 		$this->f3->reroute('/sfadm');
     }
     public function sf() {
-		$data[] = $this->db->exec("SELECT * FROM enc_log ORDER BY display DESC, datetime ASC");
+		$data[] = $this->db->exec("SELECT * FROM enc_log ORDER BY display DESC, sort ASC, DueDate ASC");
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
@@ -112,7 +112,7 @@ class Admin extends \Controller {
                 $this->f3->set('content','admin/list.htm');
     }
     public function apidbs() {
-		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY epoch desc');
+		$data[] = $this->db->exec('SELECT * FROM enc_log ORDER BY sort ASC, DueDate ASC');
 		$json_data = json_encode($data);
 		//var_dump($json_data);
 		exit;
