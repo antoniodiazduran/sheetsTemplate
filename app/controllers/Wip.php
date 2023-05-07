@@ -2,6 +2,16 @@
 
 class Wip extends Controller {
 
+    public function headerList() {
+		$field = $this->f3->get('POST');
+		$param = $this->f3->get('PARAMS');
+                  foreach (getallheaders() as $name => $value) {
+                           echo "$name: $value\n";
+                  }
+		var_dump($field);
+		var_dump($param);
+		exit;
+    }
     public function tlist() 
     {
                 $data[] = $this->GSheetsRead('pw.wip','1UtOYZWXSB53MdP_0Nyil2sCbuDrJvh7TJ7z4duMLp_w');

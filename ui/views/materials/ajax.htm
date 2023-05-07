@@ -49,11 +49,11 @@ function createTable(data) {
                         tr.setAttribute('style','background-color:#dedede; color:#ffffff');
                         tr.setAttribute('class','text-white fontSize');
                 }
-		if(rows[cols] == 'Weld') {
+		if(rows[cols].toLowerCase() == 'weld') {
                         tr.setAttribute('style','background-color:#434343; color:#ffffff');
                         tr.setAttribute('class','text-white fontSize');
                 }
-		if(rows[cols] == 'Paint') {
+		if(rows[cols].toLowerCase() == 'paint') {
                         tr.setAttribute('style','background-color:#92c47d; color:#ffffff');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
@@ -69,11 +69,11 @@ function createTable(data) {
                         tr.setAttribute('style','background-color:#e69138; color:#ffffff');
                         tr.setAttribute('class','fontSize text-nowrap');
                 }
-		if(rows[cols] == 'Final') {
+		if(rows[cols].toLowerCase() == 'final') {
                         tr.setAttribute('style','background-color:#e06666; color:#ffffff');
                         tr.setAttribute('class','text-dark fontSize text-nowrap');
                 }
-		if(rows[cols] == 'Office') {
+		if(rows[cols].toLowerCase() == 'office') {
                         tr.setAttribute('style','background-color:#ff92ff; color:#000000');
                         tr.setAttribute('class','text-dark fontSize text-nowrap');
                 }
