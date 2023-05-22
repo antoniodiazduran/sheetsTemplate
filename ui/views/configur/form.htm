@@ -1,0 +1,151 @@
+<include href="{{ @nav_menu }}">
+
+<div style="padding:1px; background-color:red; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Engineering Support</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <!--<label for="line">Line</label>//-->
+      </div>
+      <div class="col-75">
+        <label class="titles" for="line">Line</label><p>
+	<input type="radio" id="line" name="line" value="Weld">
+	<label for="html">Weld</label><br>
+	<input type="radio" id="line" name="line" value="Line 5">
+        <label for="html">Line 5</label><br>
+	<input type="radio" id="line" name="line" value="Paint">
+        <label for="html">Paint</label><br>
+	<input type="radio" id="line" name="line" value="Line 1">
+        <label for="html">Line 1</label><br>
+	<input type="radio" id="line" name="line" value="Line 3">
+        <label for="html">Line 3</label><br>
+	<input type="radio" id="line" name="line" value="Final">
+        <label for="html">Final</label><br>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="description">Description</label><p>
+        <input type="text" id="description" name="description" placeholder="Describe the problem...">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Customer</label><p>
+        <input type="text" id="customer" name="customer" placeholder="Customer Name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="unitnumber">Unit</label><p>
+        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="duedate">Due Date</label><p>
+        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="urgency">Urgency</label><p>
+        <input type="radio" id="urgency" name="urgency" value="Line Stopper">
+        <label for="html">Line Stopper</label><br>
+        <input type="radio" id="urgency" name="urgency" value="See due date">
+        <label for="html">See due date</label><br>
+        <input type="radio" id="urgency" name="urgency" value="As available">
+        <label for="html">As available</label><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ecn">ECN #</label><p>
+        <input type="text" id="ecn" name="ecn" placeholder="ECN number/none">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ecn">Requestor</label><p>
+        <input type="text" id="requestor" name="requestor" placeholder="Type your name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="notes">Notes</label><p>
+        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
+      </div>
+    </div>
+	<p>
+    <div class="row">
+	<div class="col-75">
+      		<input type="reset" value="Clear">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let lin = document.forms["wipform"]["line"].value;
+ let des = document.forms["wipform"]["description"].value;
+ let cus = document.forms["wipform"]["customer"].value;
+ let uni = document.forms["wipform"]["unitnumber"].value;
+ let due = document.forms["wipform"]["duedate"].value;
+ let urg = document.forms["wipform"]["urgency"].value;
+ let ecn = document.forms["wipform"]["ecn"].value;
+ let req = document.forms["wipform"]["requestor"].value;
+ let ale = "";
+ if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
+ if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
+ if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
+ if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
+ if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
+ if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
+ if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
+ if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

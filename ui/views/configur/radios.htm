@@ -1,0 +1,24 @@
+   <div class="row">
+      <div class="col-45">
+        <label for="line">
+		<b>{{ @cols.CategoryNumber}} {{ @cols.Category }}</b><br>
+		<i>{{ @cols.SubCategory }}</i><br>
+		{{ @cols.IndependentDependent }}<br>
+		{{ @cols.Models }}<br>
+		<font color="gray">{{ ucwords(strtolower(@cols.Dependency)) }}</font><br>
+	</label>
+      </div>
+      <div class="col-55">
+        <!--<label class="titles" for="line">{{ @cols.CategoryNumber }}</label><p>//-->
+        <input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Defaults }}" checked >{{@cols.Defaults}}<br>
+	<check if="{{ @cols.NumberOfOptions > 1 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description1 }}">{{@cols.Description1}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 2 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description2 }}">{{@cols.Description2}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 3 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description3 }}">{{@cols.Description3}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 4 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description4 }}">{{@cols.Description4}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 5 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description5 }}">{{@cols.Description5}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 6 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}"value="{{ @cols.Description6 }}">{{@cols.Description6}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 7 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description7 }}">{{@cols.Description7}} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 8 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description8 }}">{{@cols.Description8}} <br></check>
+      </div>
+    </div>
+<hr>

@@ -6,6 +6,7 @@ class Controller {
     protected $db;
     protected $rev;
     protected $aev;
+    protected $sales;
 
     function beforeRoute() {
     }
@@ -56,6 +57,7 @@ class Controller {
 	$db = new DB\SQL('sqlite:data/enc.sqlite');
 	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 	$aev = new DB\SQL('sqlite:data/aev.sqlite');
+	$sales = new DB\SQL('sqlite:data/sales.sqlite');
 
 //        $db=new DB\SQL(
 //            $f3->get('db_dns') . $f3->get('db_name'),
@@ -67,6 +69,7 @@ class Controller {
 	$this->db=$db;
 	$this->rev=$rev;
 	$this->aev=$aev;
+	$this->sales=$sales;
 
     }
 }

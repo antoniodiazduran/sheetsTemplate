@@ -1,0 +1,19 @@
+   <div class="row">
+      <div class="col-45">
+        <label for="line"><b>{{ @cols.Category }}</b> <br><i>{{@cols.SubCategory}}</i></label>
+      </div>
+      <div class="col-55">
+        <label class="titles" for="line">{{ @cols.CategoryNumber }}</label><p>
+	<select id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}">
+        <option value="{{ @cols.Defaults }}">{{@cols.Defaults}}
+	<check if="{{ @cols.NumberOfOptions > 1 }}"><option value="{{ @cols.Description1 }}">{{@cols.Description1}} </check>
+        <check if="{{ @cols.NumberOfOptions > 2 }}"><option value="{{ @cols.Description2 }}">{{@cols.Description2}} </check>
+        <check if="{{ @cols.NumberOfOptions > 3 }}"><option value="{{ @cols.Description3 }}">{{@cols.Description3}} </check>
+        <check if="{{ @cols.NumberOfOptions > 4 }}"><option value="{{ @cols.Description4 }}">{{@cols.Description4}} </check>
+        <check if="{{ @cols.NumberOfOptions > 5 }}"><option value="{{ @cols.Description5 }}">{{@cols.Description5}} </check>
+        <check if="{{ @cols.NumberOfOptions > 6 }}"><option value="{{ @cols.Description6 }}">{{@cols.Description6}} </check>
+        <check if="{{ @cols.NumberOfOptions > 7 }}"><option value="{{ @cols.Description7 }}">{{@cols.Description7}} </check>
+        <check if="{{ @cols.NumberOfOptions > 8 }}"><option value="{{ @cols.Description8 }}">{{@cols.Description8}} </check>
+	</select>
+      </div>
+    </div>
