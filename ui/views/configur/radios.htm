@@ -1,25 +1,36 @@
    <div class="row">
-      <div class="col-45">
+      <div style="width:35%;">
         <label for="line">
 		<b>{{ @cols.CategoryNumber}} {{ @cols.Category }}</b><br>
+		{{ @cols.Models }}<br>
 		<i>{{ @cols.SubCategory }}</i><br>
 		{{ @cols.IndependentDependent }}<br>
-		{{ @cols.Models }}<br>
-		Option Price: $ {{ @cols.optionPrice }}<br>
 		<font color="gray">{{ ucwords(strtolower(@cols.Dependency)) }}</font><br>
 	</label>
       </div>
-      <div class="col-55">
+      <div style="width:35%;">
         <!--<label class="titles" for="line">{{ @cols.CategoryNumber }}</label><p>//-->
-        <input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Defaults }}" checked >{{@cols.Defaults}}<br>
-	<check if="{{ @cols.NumberOfOptions > 1 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description1 }}">{{@cols.Description1}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 2 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description2 }}">{{@cols.Description2}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 3 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description3 }}">{{@cols.Description3}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 4 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description4 }}">{{@cols.Description4}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 5 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description5 }}">{{@cols.Description5}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 6 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}"value="{{ @cols.Description6 }}">{{@cols.Description6}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 7 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description7 }}">{{@cols.Description7}} <br></check>
-        <check if="{{ @cols.NumberOfOptions > 8 }}"><input type="radio" id="{{@cols.FieldsNameID}}" name="{{@cols.FieldsNameID}}" value="{{ @cols.Description8 }}">{{@cols.Description8}} <br></check>
+        <input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Defaults,strpos(@cols.Defaults,";;",0)+2,5 )) }}" CHECKED >{{ substr(@cols.Defaults,strpos(@cols.Defaults,"::",0)+2,30) }}<br>
+	<check if="{{ @cols.NumberOfOptions > 1 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description1,strpos(@cols.Description1,";;",0)+2,5 )) }}">{{ substr(@cols.Description1,strpos(@cols.Description1,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 2 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description2,strpos(@cols.Description2,";;",0)+2,5 )) }}">{{ substr(@cols.Description2,strpos(@cols.Description2,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 3 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description3,strpos(@cols.Description3,";;",0)+2,5 )) }}">{{ substr(@cols.Description3,strpos(@cols.Description3,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 4 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description4,strpos(@cols.Description4,";;",0)+2,5 )) }}">{{ substr(@cols.Description4,strpos(@cols.Description4,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 5 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description5,strpos(@cols.Description5,";;",0)+2,5 )) }}">{{ substr(@cols.Description5,strpos(@cols.Description5,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 6 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description6,strpos(@cols.Description6,";;",0)+2,5 )) }}">{{ substr(@cols.Description6,strpos(@cols.Description6,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 7 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description7,strpos(@cols.Description7,";;",0)+2,5 )) }}">{{ substr(@cols.Description7,strpos(@cols.Description7,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 8 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description8,strpos(@cols.Description8,";;",0)+2,5 )) }}">{{ substr(@cols.Description8,strpos(@cols.Description8,"::",0)+2,30) }} <br></check>
+        <check if="{{ @cols.NumberOfOptions > 9 }}"><input type="radio" id="{{@cols.FieldsNameId}}" name="{{@cols.FieldsNameId}}" value="{{ str_replace(":","",substr(@cols.Description9,strpos(@cols.Description9,";;",0)+2,5 )) }}">{{ substr(@cols.Description9,strpos(@cols.Description9,"::",0)+2,30) }} <br></check>
+      </div>
+      <div style="width=30%">
+        {{ str_replace(":","",substr(@cols.Defaults,strpos(@cols.Defaults,";;",0)+2,5 )) }}<br>
+	<check if="{{ @cols.NumberOfOptions > 1 }}">{{ str_replace(":","",substr(@cols.Description1,strpos(@cols.Description1,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 2 }}">{{ str_replace(":","",substr(@cols.Description2,strpos(@cols.Description2,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 3 }}">{{ str_replace(":","",substr(@cols.Description3,strpos(@cols.Description3,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 4 }}">{{ str_replace(":","",substr(@cols.Description4,strpos(@cols.Description4,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 5 }}">{{ str_replace(":","",substr(@cols.Description5,strpos(@cols.Description5,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 6 }}">{{ str_replace(":","",substr(@cols.Description6,strpos(@cols.Description6,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 7 }}">{{ str_replace(":","",substr(@cols.Description7,strpos(@cols.Description7,";;",0)+2,5 )) }} <br></check>
+	<check if="{{ @cols.NumberOfOptions > 8 }}">{{ str_replace(":","",substr(@cols.Description8,strpos(@cols.Description8,";;",0)+2,5 )) }} <br></check>
       </div>
     </div>
 <hr>

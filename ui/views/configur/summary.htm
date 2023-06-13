@@ -8,24 +8,14 @@
 <form name="busconfig">
 <div>
 <div class="col-45">
+<p>
+<label for="contract">Contract number:</label>
+<input type="text" name="contract" id="contract"> <p>
 <repeat group="{{ @buses }}" value="{{ @mcols }}">
  <check if="{{ @mcols.Models == @details.0.Models }}">
 	<true><input type="radio" name="models" id="models" checked="checked" value="{{ @mcols.Models }}" onClick="busType(this.value);">{{ @mcols.Models }}</true>
 	<false><input type="radio" name="models" id="models" value="{{ @mcols.Models }}" onClick="busType(this.value);">{{ @mcols.Models }}</false>
  </check>
-</repeat>
-<select name="category" onChange="loadPage(this.value);">
-<repeat group="{{ @category }}" value="{{ @number }}">
-   <check if="{{ @number.CategoryNumber <> '' }}">
-	<check if="{{ @number.CategoryNumber == @details.0.CategoryNumber }}">
-	<true>
-		<option value="{{ @number.CategoryNumber }}" selected>{{ @number.CategoryNumber }}
-	</true>
-	<false>
-		<option value="{{ @number.CategoryNumber }}">{{ @number.CategoryNumber }}
-	</false>
-	</check>
-   </check>
 </repeat>
 </select>
 </div>
@@ -33,7 +23,7 @@
 
 
 <div class="container">
-	<repeat group="{{ @details }}" key="{{ @ikey }}" value="{{ @cols }}" >
+	<repeat group="{{ @summary }}" key="{{ @ikey }}" value="{{ @cols }}" >
 		<include href="{{ @fields }}"/>
 	</repeat>
 </div>
@@ -41,15 +31,6 @@
 </form>
 
 <script language="javascript">
-
- function loadPage(category) {
-    if (typeof urlb === 'undefined') {
-	//urlb = document.querySelector('input[name="models"]:checked').value;
-	urlb = document.forms.busconfig.elements.models.value;
-    } 
-    urlc="/cfg/question/"+urlb+"/"+category;
-    location.href="https://info.diaz.works"+urlc;
- }
 
  function busType(bus) {
 	urlb=bus;

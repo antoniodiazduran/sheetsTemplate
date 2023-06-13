@@ -23,16 +23,16 @@ class Admin extends \Controller {
 	exit;
     }
     public function mat_remove() {
-                $this->db->exec('DELETE FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+                $this->db->exec('DELETE FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->reroute('/mat/admin');
 
     }
-    public function status_edit() {
-                $this->f3->set('breadcrumbs','mat/sta');
+    public function receive_edit() {
+                $this->f3->set('breadcrumbs','mat/rec');
                 $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-                $record = $this->db->exec('SELECT Epoch,DueDate,ArrivedDate,Display FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+                $record = $this->db->exec('SELECT rid,Epoch,DueDate,ArrivedDate,Display FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->set('mode','upd');
@@ -40,7 +40,18 @@ class Admin extends \Controller {
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/status.htm');
     }
-    public function status_upd() {
+    public function buyer_edit() {
+                $this->f3->set('breadcrumbs','mat/buyer');
+                $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
+                $record = $this->db->exec('SELECT rid,Epoch,PartNumber,Description,DueDate,Buyer FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
+                $this->f3->set('navs','yes');
+                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('mode','upd');
+                $this->f3->set('record',$record[0]);
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/buyer.htm');
+    }
+    public function receive_upd() {
                 // Getting POST variables, epoch and datetime for logs
                 $reqs = $this->f3->get('POST');
                 $rowv = array(
@@ -51,7 +62,22 @@ class Admin extends \Controller {
                 // Inserting into sqlite database
                 $sql_update  = "UPDATE enc_matlog ";
                 $sql_update .= "SET ArrivedDate=?, Display=? ";
-                $sql_update .= "WHERE Epoch = ?";
+                $sql_update .= "WHERE rid = ?";
+                $this->db->exec($sql_update,$rowv);
+                $this->f3->reroute('/mat/admin');
+    }
+    public function buyer_upd() {
+                // Getting POST variables, epoch and datetime for logs
+                $reqs = $this->f3->get('POST');
+                $rowv = array(
+                        $reqs['duedate'],
+                        $reqs['buyer'],
+                        $reqs['epoch']
+                        );
+                // Inserting into sqlite database
+                $sql_update  = "UPDATE enc_matlog ";
+                $sql_update .= "SET DueDate=?, Buyer=? ";
+                $sql_update .= "WHERE rid = ?";
                 $this->db->exec($sql_update,$rowv);
                 $this->f3->reroute('/mat/admin');
     }
@@ -71,16 +97,17 @@ class Admin extends \Controller {
                         );
                 // Inserting into sqlite database
                 $sql_update  = "UPDATE enc_matlog ";
-                $sql_update .= "SET Line=?, UnitID=?, Description=?, PartNumber=?, Qty=?";
+                $sql_update .= "SET Line=?, UnitID=?, Description=?, PartNumber=?, Qty=?,";
                 $sql_update .= "DueDate=?, Buyer=?, Notes=? ";
-                $sql_update .= "WHERE Epoch = ?";
+                $sql_update .= "WHERE rid = ?";
+
                 $this->db->exec($sql_update,$rowv);
                 $this->f3->reroute('/mat/admin');
     }
     public function mat_edit() {
                 $this->f3->set('breadcrumbs','mat');
 		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-		$record = $this->db->exec('SELECT Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes FROM enc_matlog WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
+		$record = $this->db->exec('SELECT Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
 		$this->f3->set('record', $record[0]);
 	        $this->f3->set('navs','no');
 		$this->f3->set('nav_menu','navmaterial.htm');
@@ -112,18 +139,18 @@ class Admin extends \Controller {
 		$desc =  $record['description'];
 		$part =  $record['partnumber'];
 		$qty  =  $record['qty'];
-		$dued =  $record['duedate'];
-		$buye =  $record['buyer'];
+		$dued =  "";
+		$buye =  "";
 		$note =  $record['notes'];
 		$disp =  "y";
 		$epoch = time();
-		$datet = date('y-m-d h:i',time());
+		$datet = date('Y-m-d',time());
 		// Logging changes
 		$this->db->exec('INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,Display) VALUES(?,?,?,?,?,?,?,?,?,?,?)',array($epoch,$datet,$line,$unit,$desc,$part,$qty,$dued,$buye,$note,$disp));
 		$this->f3->reroute('/mat/admin');
     }
     public function list() {
-		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY Epoch DESC");
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY rid DESC");
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
@@ -136,7 +163,7 @@ class Admin extends \Controller {
                 $this->f3->set('content','materials/list.htm');
     }
     public function apidbs() {
-		$sqlstr  = "SELECT rid,Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Days ";
+		$sqlstr  = "SELECT rid,Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Rows ";
 		$sqlstr .= "FROM enc_matlog ";
 		$sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours')";
 		$sqlstr .= "GROUP BY partnumber ORDER BY DueDate";

@@ -8,7 +8,7 @@ class Options extends DB\SQL\Mapper {
 
     public function all($model,$category) {
         // Selecting data
-        $sql  = "SELECT * FROM salesconfig WHERE models = ? AND substr(CategoryNumber,1,2) = ?";
+        $sql  = "SELECT * FROM salesconfig WHERE models = ? AND CategoryNumber = ?";
 	    $result = $this->db->exec($sql,array($model,$category));
         return $result;
     }
@@ -20,7 +20,13 @@ class Options extends DB\SQL\Mapper {
     }
 
     public function category () {
-	    $sql = "SELECT DISTINCT(SUBSTR(CategoryNumber,1,2)) as CategoryNumber FROM salesconfig";
+	    $sql = "SELECT DISTINCT(CategoryNumber) as CategoryNumber FROM salesconfig";
+	    $result = $this->db->exec($sql);
+	    return $result;
+    }
+
+    public function summary () {
+	    $sql = "SELECT DISTINCT(categorynumber) as CategoryNumber FROM salesconfig WHERE categoryNumber <> ''";
 	    $result = $this->db->exec($sql);
 	    return $result;
     }

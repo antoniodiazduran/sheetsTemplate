@@ -16,7 +16,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld" <check if="{{ @record.Line == 'Weld'}}"> checked </check>>
+	<input type="radio" id="line" name="line" value="Weld" <check if="{{ strtolower(@record.Line) == 'weld'}}"> checked </check>>
 	<label for="html">Weld</label><br>
 	<input type="radio" id="line" name="line" value="Line 5" <check if="{{ @record.Line == 'Line 5'}}"> checked </check>>
         <label for="html">Line 5</label><br>
@@ -52,7 +52,7 @@
       </div>
       <div class="col-75">
         <label class="titles" for="customer">Part Number</label><p>
-        <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP" value="{{ @record.Line }}">
+        <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP" value="{{ @record.PartNumber }}">
       </div>
     </div>
     <div class="row">

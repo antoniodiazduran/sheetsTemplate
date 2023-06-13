@@ -2,7 +2,7 @@
 <include href="{{ @nav_menu }}">
 </check>
 <div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Receiving Support</h3>
+	<h3>&nbsp; &nbsp; Buyer Update</h3>
 </div>
 <div class="container">
   <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
@@ -12,73 +12,37 @@
     </div>
     <div class="row">
       <div class="col-25">
-        <!--<label for="line">Line</label>//-->
       </div>
       <div class="col-75">
-        <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld">
-	<label for="html">Weld</label><br>
-	<input type="radio" id="line" name="line" value="Line 5">
-        <label for="html">Line 5</label><br>
-	<input type="radio" id="line" name="line" value="Paint">
-        <label for="html">Paint</label><br>
-	<input type="radio" id="line" name="line" value="Line 1">
-        <label for="html">Line 1</label><br>
-	<input type="radio" id="line" name="line" value="Line 3">
-        <label for="html">Line 3</label><br>
-	<input type="radio" id="line" name="line" value="Final">
-        <label for="html">Final</label><br>
+	<label class="titles">{{ @record.PartNumber}}<br>{{@record.Description}}</label><p>
       </div>
     </div>
-	<p>
+
     <div class="row">
       <div class="col-25">
       </div>
       <div class="col-75">
-        <label class="titles" for="customer">Unit ID</label><p>
-        <input type="text" id="unitid" name="unitid" placeholder="Unit number">
+        <label class="titles" for="unitnumber">Buyer</label><p>
+        <input type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @record.Buyer }}">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
       </div>
       <div class="col-75">
-        <label class="titles" for="customer">Part Number</label><p>
-        <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Material description...">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Qty</label><p>
-        <input type="text" id="qty" name="qty" placeholder="Qty in units">
+        <label class="titles" for="duedate">Due Date</label><p>
+        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
       </div>
     </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
-      </div>
-    </div>
-	<p>
+    <p>
     <div class="row">
 	<div class="col-75">
-      		<input type="reset" value="Clear">
+		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+ 		<input type="reset" value="Clear">
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>
     </div>
