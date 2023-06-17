@@ -79,7 +79,11 @@ class Admin extends \Controller {
                 $sql_update .= "SET DueDate=?, Buyer=? ";
                 $sql_update .= "WHERE rid = ?";
                 $this->db->exec($sql_update,$rowv);
-                $this->f3->reroute('/mat/admin');
+	        $this->f3->set('nav_menu','navbuyers.htm');
+
+		$this->f3->set('result','Record Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
     }
     public function mat_upd() {
                 // Getting POST variables, epoch and datetime for logs
@@ -147,10 +151,23 @@ class Admin extends \Controller {
 		$datet = date('Y-m-d',time());
 		// Logging changes
 		$this->db->exec('INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,Display) VALUES(?,?,?,?,?,?,?,?,?,?,?)',array($epoch,$datet,$line,$unit,$desc,$part,$qty,$dued,$buye,$note,$disp));
-		$this->f3->reroute('/mat/admin');
+		// Returning to empty form
+		$this->f3->set('res','Information sent...');
+                $this->f3->set('breadcrumbs','mat');
+	        $this->f3->set('navs','no');
+		$this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('mode','create');
+		$this->f3->set('layout','layout.htm');
+                $this->f3->set('content','materials/form.htm');
     }
     public function list() {
+		$fld = $this->f3->get('PARAMS.field');
+		$val = $this->f3->get('PARAMS.value');
+		if ($fld == '') {
 		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY rid DESC");
+		} else {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog WHERE $fld = ? ORDER BY rid DESC",$val);
+		}
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
@@ -159,6 +176,63 @@ class Admin extends \Controller {
 	        $this->f3->set('customer','yes');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/fields.htm');
+		$this->f3->set('layout','layout.htm');
+                $this->f3->set('content','materials/list.htm');
+    }
+    public function sort() {
+		$fld = $this->f3->get('PARAMS.field');
+		$val = $this->f3->get('PARAMS.value');
+		if ($fld == '') {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY rid DESC");
+		} else {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog WHERE $fld = ? ORDER BY rid DESC",$val);
+		}
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('field','all');
+	        $this->f3->set('navs','yes');
+	        $this->f3->set('nav_menu','navsort.htm');
+	        $this->f3->set('customer','yes');
+                $this->f3->set('headers','materials/headers.htm');
+                $this->f3->set('fields','materials/sortfields.htm');
+		$this->f3->set('layout','layout.htm');
+                $this->f3->set('content','materials/list.htm');
+    }
+    public function listbuyers() {
+		$fld = $this->f3->get('PARAMS.field');
+		$val = $this->f3->get('PARAMS.value');
+		if ($fld == '') {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY rid DESC");
+		} else {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog WHERE $fld = ? ORDER BY rid DESC",$val);
+		}
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('field','all');
+	        $this->f3->set('navs','yes');
+	        $this->f3->set('nav_menu','navbuyers.htm');
+	        $this->f3->set('customer','yes');
+                $this->f3->set('headers','materials/headers.htm');
+                $this->f3->set('fields','materials/buyersfields.htm');
+		$this->f3->set('layout','layout.htm');
+                $this->f3->set('content','materials/list.htm');
+    }
+    public function listleaders() {
+		$fld = $this->f3->get('PARAMS.field');
+		$val = $this->f3->get('PARAMS.value');
+		if ($fld == '') {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog ORDER BY rid DESC");
+		} else {
+		$data[] = $this->db->exec("SELECT * FROM enc_matlog WHERE $fld = ? ORDER BY rid DESC",$val);
+		}
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('field','all');
+	        $this->f3->set('navs','yes');
+	        $this->f3->set('nav_menu','navmaterial.htm');
+	        $this->f3->set('customer','yes');
+                $this->f3->set('headers','materials/headers.htm');
+                $this->f3->set('fields','materials/leadersfields.htm');
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','materials/list.htm');
     }

@@ -74,7 +74,7 @@ function createTable(data) {
                         tr.setAttribute('class','text-dark fontSize text-nowrap');
                 }
 		if(rows[cols] == 'Line Stopper') {
-                        td.setAttribute('class','bg-danger blink fontSize');
+                        td.setAttribute('class','bg-danger fontSize');
                 }
 		if(rows[cols] == 'See due date') {
                         td.setAttribute('class','bg-warning fontSize');
@@ -84,7 +84,7 @@ function createTable(data) {
                 }
                 if(key == 'DueDate') {
 			if(rows[cols] < today) {
-				td.setAttribute('class','textblinker');
+				//td.setAttribute('class','textblinker');
 			}
 		}
     	    tr.appendChild(td);

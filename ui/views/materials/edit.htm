@@ -109,14 +109,14 @@ function validateForm() {
  let lin = document.forms["wipform"]["line"].value;
  let des = document.forms["wipform"]["description"].value;
  let par = document.forms["wipform"]["partnumber"].value;
- let buy = document.forms["wipform"]["buyer"].value;
- let due = document.forms["wipform"]["duedate"].value;
+// let buy = document.forms["wipform"]["buyer"].value;
+// let due = document.forms["wipform"]["duedate"].value;
  let ale = "";
  if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
  if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
  if ( par.length=== 0) { ale = ale + "Type Part number AX/SAP<br>"; }
- if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
- if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
+// if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
+// if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";

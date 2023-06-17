@@ -8,6 +8,13 @@
   <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
     <div class="row">
 	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	<check if="{{ strlen(@res)>0  }}">
+		<true>
+		<div style="background-color: lightgreen; border-radius: 15px; color: black; text-align: center; vertical-align: middle; height: 100px ">
+			<br><b>{{ @res }}</b>
+		</div>
+		</true>
+	</check>
 	</div>
     </div>
     <div class="row">
@@ -92,14 +99,14 @@ function validateForm() {
  let lin = document.forms["wipform"]["line"].value;
  let des = document.forms["wipform"]["description"].value;
  let par = document.forms["wipform"]["partnumber"].value;
- let buy = document.forms["wipform"]["buyer"].value;
- let due = document.forms["wipform"]["duedate"].value;
+// let buy = document.forms["wipform"]["buyer"].value;
+// let due = document.forms["wipform"]["duedate"].value;
  let ale = "";
  if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
  if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
  if ( par.length=== 0) { ale = ale + "Type Part number AX/SAP<br>"; }
- if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
- if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
+// if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
+// if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";

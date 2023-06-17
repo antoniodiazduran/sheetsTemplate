@@ -1,67 +1,13 @@
-<include href="{{ @nav_menu }}">
-
-<div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Receiving Support</h3>
+<div class="header center" style="height:10vh;">
+<p></p>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
-	</div>
-    </div>
-    <div class="row">
-	<div class="col-45">
-		<label for="radio">Status</label>
-	</div>
-	<div class="col-55">
-		<label for="radio">Select from options</label><p>
-		<input type="radio" name="display" id="display" value="y" <check if="{{ @record.Display == 'y' }}">checked</check>> Open <br>
-		<input type="radio" name="display" id="display" value="n" <check if="{{ @record.Display == 'n' }}">checked</check>> Arrived 
-			<check if="{{ @record.Display == 'n' }}">on {{ @record.ArrivedDate }} </check>
-		<p>
-	</div>
-    </div>
-    <div class="row">
-      <div class="col-45">
-	<label for="">Arrival date</label>
-      </div>
-      <div class="col-55">
-        <label for="completedate">Select date of arrival</label><p>
-        <input type="date" id="arriveddate" name="arriveddate" placeholder="mm/dd/yyyy" value="{{ @record.ArrivedDate }}">
-      </div>
-    </div>
+
+
+<div class="content center" style="height:75vh;">
+<center>
+	<font style="font-family:courier; font-size:0.8em; font-weight:bold;">{{ @result }} </font>
 	<p>
-	<input type="hidden" name="epoch" id="epoch" value="{{ @record.rid }}">
-    <div class="row">
-	<div class="col-45">
-      		<input type="reset" value="Clear">
-	</div>
-	<div class="col-55">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
-  </form>
+	<button onclick="window.close();">Close</button>
+</center>
 </div>
 
-<script>
-function validateForm() {
- const alerts = document.getElementById("alertnotes");
- alerts.innerHTML='';
- let due = document.forms["wipform"]["arriveddate"].value;
- let ale = "";
- if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Arrival Date<br>"; }
- if ( ale.length > 0) { 
- 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
-	alerts.style.backgroundColor = "red";
-	alerts.style.color = "white";
-	alerts.style.textAlign = "center";
-	alerts.insertAdjacentHTML('beforeend',ale);
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
-	return false;
- } else {
-	return true;
- }
-  
-
-}
-</script>
