@@ -8,7 +8,7 @@
 </check>
 
 <div class="table-responsive">
-<table class="table">
+<table id="shorts" style="text-align: left; position:relative;">
 <include href="{{ @headers }}"/>
 <repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >
 	<set trcolor="white"/>
@@ -20,12 +20,36 @@
        		<include href="{{ @fields }}"/>
 	</check>
 </repeat>
-
+<input type="hidden" id="chkbox" name="chkbox">
 </table>
 
 </div>
 
 <script>
+ function getCheckboxValue(va) {
+	strw = window.document.getElementById('chkbox').value;
+	if (va.checked) { 
+	  console.log('checked');
+  	  if (!strw.includes(va.value)) {
+	    window.document.getElementById('chkbox').value += va.value +",";
+	    strw += va.value+",";
+          }
+	} else { 
+            console.log('unchecked');
+	    strw = strw.replace(va.value+',',''); 
+	    window.document.getElementById('chkbox').value = strw;		
+	}
+		
+    console.log('v:'+window.document.getElementById('chkbox').value);
+    console.log('f:'+strw);
+
+ }
+ function goCheckboxDate() {
+	val = window.document.getElementById('chkbox').value;
+	urltodate = "/mat/buyer/"+val;
+	console.log(urltodate)
+	window.open("https://info.diaz.works"+urltodate,"_blank");
+ }
  function questions() {
 	const question = [
 	"Are you sure?",

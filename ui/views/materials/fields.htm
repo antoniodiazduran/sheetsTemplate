@@ -3,13 +3,15 @@
 	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
 	<td align="left"><a href="/mat/filter/line/{{@cols.Line}}" style="color:black;">{{ @cols.Line }} </a></td>
 	<td align="left"><a href="/mat/filter/unitid/{{@cols.UnitID}}" style="color:black;"> {{ @cols.UnitID }} </a></td>
+	<td align="center"><a href="/mat/filter/customer/{{@cols.Customer}}" style="color:black;">{{ @cols.Customer }}</a></td>
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left"><a href="/mat/filter/partnumber/{{@cols.PartNumber}}" style="color:black;">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }}</a> </td>
 	<td align="left">{{ @cols.Qty }} </td>
-	<td align="left"><a href="/mat/buyer/{{@cols.rid}}">{{ @cols.DueDate }} </a></td>
+	<td align="left"><a href="/mat/filter/lowInventory/{{@cols.lowInventory}}" style="color:black;">{{ @cols.lowInventory }}</a> </td>
+	<td align="left"><a href="/mat/buyer/{{@cols.rid}}" target="_blank">{{ @cols.DueDate }} </a></td>
 	<td align="left"><a href="/mat/filter/buyer/{{@cols.Buyer}}" style="color:black;">{{ @cols.Buyer }}</a></td>
 	<td align="left">{{ @cols.ArrivedDate }}</td>
 	<td align="center"><a href="/mat/rec/{{ @cols.rid }}"><check if="{{ @cols.Display == 'n' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></a></td>
 	<td align="center"><button style="border:0;background-color:white;color:blue;" onclick="checkremove({{@cols.rid}});"><i class="bi-recycle" style="font-size:1.1em"></button></td>
-	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><a href="/mat/buyer/{{@cols.rid}}"><i class="bi-person" style="font-size:1.3em"></a></true></check></td>
+	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><a href="/mat/buyer/{{@cols.rid}}" target="_blank"><i class="bi-person" style="font-size:1.3em"></a></true></check></td>
 </tr>

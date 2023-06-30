@@ -1,0 +1,9 @@
+<table class="table" id="uniques">
+ <repeat group="{{ @details.0 }}" value="{{ @cols}}" >
+ 	<tr>
+	<td>{{ @cols.PartNumber }}</td>
+	<td>{{ @cols.rowid }} </td>
+	<td>{{ @cols.qty }}
+	</tr>
+ </repeat>
+</table>

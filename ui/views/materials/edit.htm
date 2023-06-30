@@ -2,7 +2,7 @@
 <include href="{{ @nav_menu }}">
 </check>
 <div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Receiving Support</h3>
+	<h3>&nbsp; &nbsp; Shortage Report</h3>
 </div>
 <div class="container">
   <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
@@ -28,6 +28,8 @@
         <label for="html">Line 3</label><br>
 	<input type="radio" id="line" name="line" value="Final" <check if="{{ @record.Line == 'Final'}}"> checked </check>>
         <label for="html">Final</label><br>
+	<input type="radio" id="line" name="line" value="Harness" <check if="{{ @record.Line == 'Harness'}}"> checked </check>>
+        <label for="html">Harness</label><br>
       </div>
     </div>
 	<p>
@@ -63,6 +65,14 @@
         <input type="text" id="qty" name="qty" placeholder="Qty in units" value="{{ @record.Qty }}">
       </div>
     </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        &nbsp; <input type="checkbox" id="lowinventory" name="lowinventory" value="y" <check if="{{ @record.lowInventory =='y' }}">checked</check>> &nbsp; Low Inventory
+      </div>
+    </div>
+    <br>
     <div class="row">
       <div class="col-25">
       </div>

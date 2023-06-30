@@ -1,0 +1,48 @@
+<check if="{{ @nav == 'yes' }}">
+<include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:green; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Shortage Report [Notes}</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+	<label class="titles" for="notes">
+	Part Number: <i>{{ @rwhead.PartNumber }}</i> <br>
+	Description: <i>{{ @rwhead.Description }}</i> <br>
+	Unit: <i>{{ @rwhead.UnitID }}</i> - Line: <i>{{ @rwhead.Line }}</i> <p>
+        Notes
+	</label><p>
+        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
+      </div>
+    </div>
+    <div class="row">
+	<div class="col-75">
+		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+ 		<input type="reset" value="Clear">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+	<br>
+    <div class="row"> 
+	<div class="col-25">
+	</div>
+	<div class="col-75">
+	<b>Notes log...</b><br>
+	<repeat group="{{ @record.0 }}" value="{{ @cols }}">
+	   <li><font style="color:gray; font-size:0.6em;">{{ @cols.datetime }}</font>: {{ @cols.notes }}
+	<br>
+	</repeat>
+	</div>
+    </div>
+
+  </form>
+</div>
+

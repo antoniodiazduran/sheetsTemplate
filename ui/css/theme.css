@@ -40,13 +40,18 @@ img {	max-width:100%
 table {
 	font-size:.8em;
 	color:#666 !important;
-	background:#fefefe;
+	background:#fefefe; 
 	width:98%;
 	border-radius:.5em;
 /*	table-layout: fixed;
 	word-wrap: break-word; */
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.tableFixHead {
+        overflow-y: auto;
+        height: 100px;
 }
 
 table code {
@@ -73,8 +78,8 @@ th {
 	text-align:left;
 	text-transform:uppercase;
 	color:#fff;
-	background:#555;
-	/*width:50%;*/
+	/*background:#555;
+	width:50%;*/
 }
 
 th a {	color:#fff;

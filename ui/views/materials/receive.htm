@@ -2,10 +2,10 @@
 <include href="{{ @nav_menu }}">
 </check>
 <div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Buyer Update</h3>
+	<h3>&nbsp; &nbsp; Receiving Update</h3>
 </div>
 <div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm();">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
     <div class="row">
 	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
 	</div>
@@ -14,35 +14,21 @@
       <div class="col-25">
       </div>
       <div class="col-75">
-	<repeat group="{{ @record }}" value="{{ @vals }}">
-	<label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}}</label><p>
-	</repeat>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="unitnumber">Buyer</label><p>
-        <input type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @vals.Buyer }}">
+	<label class="titles">Part Number:{{ @record.PartNumber}}</label><p>
+        <label class="titles">Description:{{@record.Description}}</label><p>
+        <label class="titles">Due Date:{{ @record.DueDate}}</label><p>
       </div>
     </div>
     <div class="row">
       <div class="col-25">
       </div>
       <div class="col-75">
-        <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @vals.DueDate }}">
+        <label class="titles" for="duedate">Arrival Date</label><p>
+        <input type="date" id="arriveddate" name="arriveddate" placeholder="mm/dd/yyyy" value="{{ @record.ArrivedDate }}">
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-      </div>
-      <div class="col-75">
-	<repeat group="{{ @duedate }}" value="{{ @log }}">
-		<li><label>Change to {{ @log.DueDate }} on {{ @log.timeStamp }}</label><br>
-	</repeat>
       </div>
     </div>
     <p>
