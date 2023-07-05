@@ -233,7 +233,7 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog  m ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
 		} else {
 		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
 		}
@@ -254,9 +254,9 @@ class Admin extends \Controller {
                 $fld = $this->f3->get('PARAMS.field');
                 $val = $this->f3->get('PARAMS.value');
                 if ($fld == '') {
-                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC");
                 } else {
-                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
                 }
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
@@ -308,9 +308,9 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
 		}
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
@@ -363,6 +363,16 @@ class Admin extends \Controller {
 		$sqlstr .= "FROM enc_matlog ";
 		$sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours')";
 		$sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
+		$data[] = $this->db->exec($sqlstr);
+		$json_data = json_encode($data);
+		echo $json_data;
+		exit;
+    }
+    public function buyers_api() {
+		$sqlstr  = "SELECT * ";
+		$sqlstr .= "FROM enc_matlog ";
+		$sqlstr .= "WHERE arriveddate is null or arriveddate = '' ";
+		$sqlstr .= "ORDER BY DateTime ";
 		$data[] = $this->db->exec($sqlstr);
 		$json_data = json_encode($data);
 		echo $json_data;

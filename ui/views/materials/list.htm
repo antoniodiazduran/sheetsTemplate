@@ -46,9 +46,13 @@
  }
  function goCheckboxDate() {
 	val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
 	urltodate = "/mat/buyer/"+val;
 	console.log(urltodate)
 	window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+	alert('Select something... Please!');
+    }
  }
  function questions() {
 	const question = [

@@ -3,9 +3,14 @@
   box-sizing: border-box;
 }
 */
+.canvas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 input[type=text], select, textarea {
-  width: 50%;
+  width: 30%;
   padding: 2px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -25,13 +30,13 @@ label {
 }
 
 input[type=submit] {
-  background-color: blue;
-  color: white;
+  background-color: lightgreen;
+  color: gray;
   padding: 5px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  float: center;
 }
 
 input[type=reset] {
@@ -86,7 +91,7 @@ input[type="checkbox"]{
 }
 
 input[type=submit]:hover {
-  background-color: blue;
+  background-color: green;
 }
 
 .container {

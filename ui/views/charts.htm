@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="{{ @ENCODING }}" />
+		<title>Powered by {{ @TITLE }}</title>
+                <base href="{{ @SCHEME .'://'.@HOST.':'.@PORT.@BASE.'/' }}" />
+                <!--<base href="{{ @SCHEME .'://info.diaz.works:'.@PORT.@BASE.'/' }}" />
+		<link rel="stylesheet" href="lib/code.css" type="text/css" /> //-->
+		<link rel="stylesheet" href="/ui/css/base.css" type="text/css" />
+		<link rel="stylesheet" href="/ui/css/computer.css" type="text/css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+		<script src="/ui/js/Chart.min.js"></script>
+	</head>
+	<body>
+		<include href="{{ @content }}">
+	</body>
+</html>

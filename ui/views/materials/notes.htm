@@ -18,6 +18,13 @@
 	Part Number: <i>{{ @rwhead.PartNumber }}</i> <br>
 	Description: <i>{{ @rwhead.Description }}</i> <br>
 	Unit: <i>{{ @rwhead.UnitID }}</i> - Line: <i>{{ @rwhead.Line }}</i> <p>
+	<b>Log...</b>
+        <br>
+	<repeat group="{{ @record.0 }}" value="{{ @cols }}">
+	   <li><font style="color:gray; font-size:0.8em;">{{ @cols.datetime }}</font>: {{ @cols.notes }}
+	<br>
+	</repeat>
+	<br>
         Notes
 	</label><p>
         <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
@@ -30,19 +37,6 @@
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>
     </div>
-	<br>
-    <div class="row"> 
-	<div class="col-25">
-	</div>
-	<div class="col-75">
-	<b>Notes log...</b><br>
-	<repeat group="{{ @record.0 }}" value="{{ @cols }}">
-	   <li><font style="color:gray; font-size:0.8em;">{{ @cols.datetime }}</font>: {{ @cols.notes }}
-	<br>
-	</repeat>
-	</div>
-    </div>
-
   </form>
 </div>
 
