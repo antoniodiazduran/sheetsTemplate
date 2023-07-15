@@ -54,6 +54,16 @@
 	alert('Select something... Please!');
     }
  }
+ function goCheckboxNotes() {
+	val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+	urltodate = "/mat/notes/"+val;
+	console.log(urltodate)
+	window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+	alert('Select something... Please!');
+    }
+ }
  function questions() {
 	const question = [
 	"Are you sure?",

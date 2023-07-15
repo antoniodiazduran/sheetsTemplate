@@ -5,10 +5,13 @@ namespace ENC;
 class Admin extends \Controller {
 
     public function index() {
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','welcome.htm');  
     }
-
+    public function isMobile()  {
+         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+    }
     public function sch() {
 		$e = $this->f3->get('PARAMS.e');
 		$j = $this->f3->get('PARAMS.j');
