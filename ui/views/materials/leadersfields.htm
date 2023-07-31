@@ -4,6 +4,7 @@
 	<td align="left"><a href="/mat/sort/line/{{@cols.Line}}" style="color:black;">{{ @cols.Line }} </a></td>
 	<td align="left"><a href="/mat/sort/unitid/{{@cols.UnitID}}" style="color:black;"> {{ @cols.UnitID }} </a></td>
 	<td align="center"><a href="/mat/sort/customer/{{@cols.Customer}}" style="color:black;">{{ @cols.Customer }}</a></td>
+	<td align="center"><a href="/mat/sort/customer/{{@cols.ship}}" style="color:black;">{{ @cols.ship }}</a></td>
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left"><a href="/mat/sort/partnumber/{{@cols.PartNumber}}" style="color:black;">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }}</a> </td>
 	<td align="left">{{ @cols.Qty }} </td>
