@@ -14,13 +14,22 @@
       <div class="col-25">
       </div>
       <div class="col-75">
+        <repeat group="{{ @record }}" value="{{ @vals }}">
+          <label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}} - {{@vals.UnitID}} / {{@vals.Line}}</label><p>
+        </repeat>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
 	<label class="titles" for="notes">
-	Part Number: <i>{{ @rwhead.PartNumber }}</i> <br>
+<!--	Part Number: <i>{{ @rwhead.PartNumber }}</i> <br>
 	Description: <i>{{ @rwhead.Description }}</i> <br>
-	Unit: <i>{{ @rwhead.UnitID }}</i> - Line: <i>{{ @rwhead.Line }}</i> <p>
+	Unit: <i>{{ @rwhead.UnitID }}</i> - Line: <i>{{ @rwhead.Line }}</i> <p>//-->
 	<b>Log...</b>
         <br>
-	<repeat group="{{ @record.0 }}" value="{{ @cols }}">
+	<repeat group="{{ @notes.0 }}" value="{{ @cols }}">
 	   <li><font style="color:gray; font-size:0.8em;">{{ @cols.datetime }}</font>: {{ @cols.notes }}
 	<br>
 	</repeat>

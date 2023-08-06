@@ -44,6 +44,79 @@ class Admin extends \Controller {
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/receive.htm');
     }
+    public function receive_upd() {
+                // Getting POST variables, epoch and datetime for logs
+                $reqs = $this->f3->get('POST');
+                $rowv = array(
+                        $reqs['arriveddate'],
+                        $reqs['display'],
+                        $reqs['epoch']
+                        );
+                // Inserting into sqlite database
+                $sql_update  = "UPDATE enc_matlog ";
+                $sql_update .= "SET ArrivedDate=?, Display=? ";
+                $sql_update .= "WHERE rid = ?";
+                $this->db->exec($sql_update,$rowv);
+		$this->f3->set('result','Record Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
+    }
+    public function shipdate_edit() {
+                $this->f3->set('breadcrumbs','mat/ship');
+                $rids = $this->f3->get('PARAMS.id');
+                if (strpos($rids,",")>0) {
+                        $rids = rtrim($rids,",");
+                        $sqlstr = 'SELECT rid,Epoch,PartNumber,Description,shipDate, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE rid in ('.$rids.')';
+                        $record  = $this->db->exec($sqlstr);
+                        //$duedate[] = $this->db->exec('SELECT rid, relation, DueDate, timeStamp FROM enc_duedatelog WHERE relation = ?',$this->f3->get('PARAMS.id'));
+                } else {
+                        $record  = $this->db->exec('SELECT rid,Epoch,PartNumber,Description,shipDate,Buyer FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
+                        $shipdate[] = $this->db->exec('SELECT rid, relation, shipDate, timeStamp FROM enc_shipdatelog WHERE relation = ?',$this->f3->get('PARAMS.id'));
+                }
+                $this->f3->set('navs','yes');
+                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('mode','upd');
+                $this->f3->set('epoch',$rids);
+//                $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
+                $this->f3->set('record',$record);
+                $this->f3->set('shipdate',$shipdate[0]);
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/ship.htm');
+    }
+    public function shipdate_upd() {
+                // Getting POST variables, epoch and datetime for logs
+                $reqs = $this->f3->get('POST');
+                date_default_timezone_set('America/Los_Angeles');
+                $datet = date('Y-m-d H:i:s',time());
+                $rowv = array(
+                        $reqs['shipdate'],
+//                        $reqs['buyer']
+//                        $reqs['epoch']
+                        );
+                $logv = array(
+                        //$reqs['epoch'],
+                        $reqs['shipdate'],
+                        $datet
+                        );
+                // Updating duedate material shortage
+                $sql_update  = "UPDATE enc_matlog ";
+                $sql_update .= "SET shipDate=? ";
+                $sql_update .= "WHERE rid in (".$reqs['epoch'].")";
+                $this->db->exec($sql_update,$rowv);
+
+                // Inserting into duedate log
+                $rows = explode(",",$reqs['epoch']);
+                foreach ($rows as $rw) {
+                        $sql_log  = "INSERT INTO enc_shipdatelog ";
+                        $sql_log .= "( relation, shipDate, timeStamp ) VALUES (".$rw.",?,?)";
+                        $this->db->exec($sql_log, $logv);
+                }
+                // Setting up variables for the display
+                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('result','Record Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
+    }
     public function buyer_edit() {
                 $this->f3->set('breadcrumbs','mat/buyer');
 		$rids = $this->f3->get('PARAMS.id');
@@ -65,21 +138,6 @@ class Admin extends \Controller {
                 $this->f3->set('duedate',$duedate[0]);
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/buyer.htm');
-    }
-    public function receive_upd() {
-                // Getting POST variables, epoch and datetime for logs
-                $reqs = $this->f3->get('POST');
-                $rowv = array(
-                        $reqs['arriveddate'],
-                        $reqs['display'],
-                        $reqs['epoch']
-                        );
-                // Inserting into sqlite database
-                $sql_update  = "UPDATE enc_matlog ";
-                $sql_update .= "SET ArrivedDate=?, Display=? ";
-                $sql_update .= "WHERE rid = ?";
-                $this->db->exec($sql_update,$rowv);
-                $this->f3->reroute('/mat/admin');
     }
     public function buyer_upd() {
                 // Getting POST variables, epoch and datetime for logs
@@ -152,14 +210,23 @@ class Admin extends \Controller {
     }
     public function notes_edit() {
                 $this->f3->set('breadcrumbs','mat/notes');
-		$this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-		$rwhead = $this->db->exec('SELECT PartNumber, Description, UnitID, Line FROM enc_matlog WHERE rid = ?', $this->f3->get('PARAMS.id'));
-		$record[] = $this->db->exec('SELECT rid,relation,datetime,notes FROM enc_matnotes WHERE relation = ?',$this->f3->get('PARAMS.id'));
-		$this->f3->set('rwhead',$rwhead[0]);
+		$rids = $this->f3->get('PARAMS.id');
+		if (strpos($rids,",")>0) {
+                        $rids = rtrim($rids,",");
+                        $sqlstrh = 'SELECT rid,PartNumber,Description,UnitID,Line FROM enc_matlog WHERE rid in ('.$rids.')';
+                        $record  = $this->db->exec($sqlstrh);
+                        $sqlstrn = 'SELECT rid,relation,datetime,notes FROM enc_matnotes WHERE relation in ('.$rids.')';
+			$notes[] = $this->db->exec($sqlstrn);
+		} else {
+			$record = $this->db->exec('SELECT rid,PartNumber, Description, UnitID, Line FROM enc_matlog WHERE rid = ?', $this->f3->get('PARAMS.id'));
+			$notes[] = $this->db->exec('SELECT rid,relation,datetime,notes FROM enc_matnotes WHERE relation = ?',$this->f3->get('PARAMS.id'));
+		}
 		$this->f3->set('record', $record);
+		$this->f3->set('notes',$notes);
 	        $this->f3->set('navs','no');
 		$this->f3->set('nav_menu','navbuyers.htm');
 		$this->f3->set('mode','upd');
+		$this->f3->set('epoch',$rids);
 		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','materials/notes.htm');
@@ -170,14 +237,23 @@ class Admin extends \Controller {
 		date_default_timezone_set('America/Los_Angeles');
 		$datet = date('Y-m-d H:i:s',time());
 		$logv = array(
-			$reqs['epoch'],
+			//$reqs['epoch'],
 			$reqs['notes'],
 			$datet
 			);
 		// Inserting into duedate log
-		$sql_log  = "INSERT INTO enc_matnotes ";
-		$sql_log .= "( relation, notes, datetime ) VALUES (?,?,?)";
-		$this->db->exec($sql_log, $logv);
+                $rows = explode(",",$reqs['epoch']);
+                foreach ($rows as $rw) {
+                        $sql_log  = "INSERT INTO enc_matnotes ";
+                        $sql_log .= "( relation, notes, datetime ) VALUES (".$rw.",?,?)";
+                        $this->db->exec($sql_log, $logv);
+                }
+		// ***********************************************************
+		// Inserting into duedate log - Old single update mat notes
+		//$sql_log  = "INSERT INTO enc_matnotes ";
+		//$sql_log .= "( relation, notes, datetime ) VALUES (?,?,?)";
+		//$this->db->exec($sql_log, $logv);
+		// ***********************************************************
 		// Setting up variables for the display
 	        $this->f3->set('nav_menu','navbuyers.htm');
 		$this->f3->set('result','Record Updated !');
@@ -233,13 +309,13 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
 		}
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navmaterial.htm');
@@ -254,12 +330,12 @@ class Admin extends \Controller {
                 $fld = $this->f3->get('PARAMS.field');
                 $val = $this->f3->get('PARAMS.value');
                 if ($fld == '') {
-                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC");
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE (arriveddate = '' or arriveddate is null) ORDER BY rid DESC");
                 } else {
-                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? AND (arriveddate = '' or arriveddate is null) ORDER BY rid DESC",$val);
                 }
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navbuyers.htm');
@@ -274,15 +350,15 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
 		}
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
-	        $this->f3->set('nav_menu','navsort.htm');
+	        $this->f3->set('nav_menu','navleaders.htm');
 	        $this->f3->set('customer','yes');
 		$this->f3->set('bgcolor','green');
                 $this->f3->set('headers','materials/headers.htm');
@@ -290,10 +366,25 @@ class Admin extends \Controller {
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','materials/list.htm');
     }
+    public function shipmonth() {
+		$datet = date('m',time());
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE strftime('%m',shipDate) = ? ORDER BY rid DESC",$datet);
+                $this->f3->set('details',$data);
+                $this->f3->set('breadcrumbs','mat');
+                $this->f3->set('field','all');
+                $this->f3->set('navs','yes');
+                $this->f3->set('nav_menu','navleaders.htm');
+                $this->f3->set('customer','yes');
+                $this->f3->set('bgcolor','maroon');
+                $this->f3->set('headers','materials/headers.htm');
+                $this->f3->set('fields','materials/sortfields.htm');
+                $this->f3->set('layout','layout.htm');
+                $this->f3->set('content','materials/list.htm');
+    }
     public function unique() {
 		$data[] = $this->db->exec("SELECT PartNumber FROM enc_matlog GROUP BY PartNumber");
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navbuyers.htm');
@@ -308,13 +399,13 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
 		}
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navbuyers.htm');
@@ -329,15 +420,15 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m ORDER BY rid DESC");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
 		}
                 $this->f3->set('details',$data);
-                $this->f3->set('breadcrumbs','owr');
+                $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
-	        $this->f3->set('nav_menu','navsort.htm');
+	        $this->f3->set('nav_menu','navleaders.htm');
 	        $this->f3->set('customer','yes');
 		$this->f3->set('bgcolor','green');
                 $this->f3->set('headers','materials/headers.htm');
@@ -369,14 +460,17 @@ class Admin extends \Controller {
 		exit;
     }
     public function buyers_api() {
-		$sqlstr  = "SELECT * ";
-		$sqlstr .= "FROM enc_matlog ";
-		$sqlstr .= "WHERE arriveddate is null or arriveddate = '' ";
+		$sqlstr  = "SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship ";
+		$sqlstr .= "FROM enc_matlog m ";
+//		$sqlstr .= "WHERE arriveddate is null or arriveddate = '' ";
 		$sqlstr .= "ORDER BY DateTime ";
 		$data[] = $this->db->exec($sqlstr);
-		$json_data = json_encode($data);
-		echo $json_data;
-		exit;
+//		$json_data = json_encode($data);
+//		echo $json_data;
+                $this->f3->set('details',$data);
+		$this->f3->set('layout','plain.htm');
+                $this->f3->set('content','materials/api.htm');
+//		exit;
     }
 
 }
