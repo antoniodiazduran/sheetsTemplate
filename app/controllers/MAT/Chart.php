@@ -12,7 +12,7 @@ class Chart extends \Controller {
                 $this->f3->set('content','materials/tableajax.htm');
     }
     public function duedate() {
-                $this->f3->set('breadcrumbs','/mat/chart/deudate');
+                $this->f3->set('breadcrumbs','/mat/chart/duedate');
 	        $this->f3->set('navs','yes');
 		$this->f3->set('isMobile',$this->isMobile());
 	        $this->f3->set('nav_menu','navmaterial.htm');
@@ -20,7 +20,37 @@ class Chart extends \Controller {
                 $this->f3->set('content','materials/duedate.htm');
     }
     public function chartdata01() {
-	$sqlstr  = "SELECT ";
+		$sqlstr  = "SELECT SUBSTR(s.customer,1,3) AS custx ";
+		$sqlstr .= "FROM enc_so s ";
+		$sqlstr .= "WHERE s.ax IN (SELECT m.unitid FROM enc_matlog m) ";
+		$sqlstr .= "GROUP BY custx";
+		$data[] = $this->db->exec($sqlstr);
+		$sqlsty  = "SELECT * ";
+		$sqlsty .= "FROM enc_veventweeks  ";
+		$sqlsty .= "WHERE customer IS NOT NULL ";
+		$sqlsty .= "GROUP BY customer, weekx ORDER BY customer, weekx";
+		$event[] = $this->db->exec($sqlsty);
+		$ctx = $event[0][0]['customer'];
+		$cht = array();
+		foreach ($event[0] as $ikey => $ival) {
+		 if ($ctx == $ival['customer']) {
+			$wkx = $wkx.$ival['weekx'].",";
+			$vlx = $vlx.$ival['events'].",";
+		 } else {
+			$cht += [$ctx=>$wkx."::".$vlx];
+			$wkx="";
+			$vlx="";
+			$ctx = $ival['customer'];
+		 }
+		}
+		$this->f3->set('custx',$data[0]);
+		$this->f3->set('chart',$cht);
+                $this->f3->set('breadcrumbs','/mat/chart/duedate');
+	        $this->f3->set('navs','yes');
+		$this->f3->set('isMobile',$this->isMobile());
+	        $this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('layout','charts.htm');
+                $this->f3->set('content','materials/duedate.htm');
     }
     public function apimatuni() {
 		$sqlstr  = "SELECT PartNumber, COUNT(rid) as rowid, SUM(qty) as qty ";
