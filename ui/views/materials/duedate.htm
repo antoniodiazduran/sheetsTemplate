@@ -1,52 +1,73 @@
 <div class="container">
- <label>From:<input type="date" id="startdate">&nbsp; To:<input type="date" id="enddate" placeholder="yyyy/mm/dd"></label>
- <input type="submit" value="Search">
-
+<!-- <label>From:<input type="date" id="startdate">&nbsp; To:<input type="date" id="enddate" placeholder="yyyy/mm/dd"></label>
+ <input type="submit" value="Search">//-->
 <p>
-<div class="canvas">
- <canvas  id="canvas1" width="400" height="240" ></canvas>
- <canvas  id="canvas2" width="400" height="240" ></canvas>
-</div>	
+ <div class="canvas">
+   <repeat group="{{ @custx }}" value="{{ @names }}">
+    <canvas  id="{{ @names.custx }}" width="400" height="240" ></canvas>
+   </repeat>
+ </div>	
 </div>
 
 <script>
-		var config1 = {
+function ajax(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/mat/apidb", true);
+  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      // Response
+      var response = JSON.parse(this.responseText);
+	console.log(response[0]);
+   }
+  };
+  xhttp.send();
+}
+
+	<repeat group="{{ @custx }}" value="{{ @names }}">
+		//{{@names.custx}}_{{ @chart[@names.custx] }}	  
+		var config_{{@names.custx}} = {
 			type: 'bar',
 			data: {
-				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+				labels: [{{ strstr(@chart[@names.custx],'::',true) }}],
 				datasets: [{
-					label: 'DueDate',
-					data: [10,23,14,21,2,13,14,11,23],
+					label: 'Event(s)',
+					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}],
 					borderColor: 'black',
-					backgroundColor: 'red',
+					backgroundColor: 'pink',
+					borderColor: 'red',
+					borderWidth: 0.5,
 					fill: false,
 				}, {
 					label: 'Revised',
 					fill: false,
 					borderColor: 'black',
-					backgroundColor: 'pink',
-					data: [1,2,0,0,2,1,3,2,1,0],
+					backgroundColor: 'silver',
+					data: [,],
 				}]
 			},
 			options: {
 				responsive: false,
-				title: {
-					display: true,
-					text: 'DueDate'
-				},
-				legend: {
-					display: false,
-					position: 'bottom',
+				plugins: {
+					title: {
+					  display: true,
+					  text: '{{@names.custx}}',
+					},
+					legend: {
+					  display: false,
+					  position: 'bottom',
+					},
 				},
 				scales: {
 					x: {
 						display: true,
 						title: {
 							display: true,
-							text: 'Days'
+							text: 'Week#'
 						},
 					},
 					y: {
+						max: 50,
 						display: true,
 						title: {
 							display: true,
@@ -56,58 +77,16 @@
 				}
 			}
 		};
-		var config2 = {
-			type: 'line',
-			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				datasets: [{
-					label: 'DueDate',
-					data: [15,3,24,1,22,3,4,1,3],
-					borderColor: '#36A2EB',
-					backgroundColor: 'white',
-					fill: false,
-				}, {
-					label: 'Arrived',
-					fill: false,
-					borderColor: 'orange',
-					backgroundColor: 'white',
-					data: [1,2,0,0,2,1,3,2,1,0],
-				}]
-			},
-			options: {
-				responsive: false,
-				title: {
-					display: true,
-					text: 'Arrived'
-				},
-				legend: {
-					display: false,
-					position: 'bottom',
-				},
-				scales: {
-					x: {
-						display: true,
-						title: {
-							display: true,
-							text: 'Days'
-						},
-					},
-					y: {
-						display: true,
-						title: {
-							display: true,
-							text: 'Events'
-						},
-					},
-				}
-			}
-		};
+	</repeat>
+	</repeat>
 
-		window.onload = function() {
-			var ctx1 = document.getElementById('canvas1').getContext('2d');
-			var ctx2 = document.getElementById('canvas2').getContext('2d');
-			window.myLine = new Chart(ctx1, config1);
-			window.myLine = new Chart(ctx2, config2);
-		};
+window.onload = function() {
+<repeat group="{{ @custx }}" value="{{ @names }}">
+	var ctx_{{@names.custx}} = document.getElementById('{{ @names.custx }}').getContext('2d');
+</repeat>
+<repeat group="{{ @custx }}" value="{{ @names }}">
+	window.myLine = new Chart(ctx_{{@names.custx}}, config_{{ @names.custx }});
+</repeat>
+};
 
 </script>

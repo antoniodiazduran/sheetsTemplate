@@ -1,0 +1,19 @@
+<tr>
+	<td align="left"></td>
+	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
+	<td align="left">{{ @cols.Line }} </td>
+	<td align="left">{{ @cols.UnitID }} </td>
+	<td align="center">{{ @cols.Customer }} </td>
+	<td align="center">{{ @cols.ship }} </td>
+	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
+	<td align="left">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }} </td>
+	<td align="left">{{ @cols.Qty }} </td>
+	<td align="left">{{ @cols.lowInventory }} </td>
+	<td align="left">{{ @cols.DueDate }} </td>
+	<td></td>
+	<td align="left">{{ @cols.Buyer }} </td>
+	<td align="left">{{ @cols.ArrivedDate }}</td>
+	<td align="center"><check if="{{ @cols.Display == 'n' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></td>
+	<td align="center"></td>
+	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><i class="bi-person" style="font-size:1.3em"></true></check></td>
+</tr>

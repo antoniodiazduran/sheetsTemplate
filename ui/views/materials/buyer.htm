@@ -40,8 +40,9 @@
       <div class="col-25">
       </div>
       <div class="col-75">
+	<label class="titles">Changes...</label><br>
 	<repeat group="{{ @duedate }}" value="{{ @log }}">
-		<li><label>Change to {{ @log.DueDate }} on {{ @log.timeStamp }}</label><br>
+		<li><label>{{ @log.PartNumber }} {{ @log.Description }} was Change to {{ @log.DueDate }} on {{ @log.timeStamp }}</label><br>
 	</repeat>
       </div>
     </div>
