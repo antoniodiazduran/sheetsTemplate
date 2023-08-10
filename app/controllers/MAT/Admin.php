@@ -29,7 +29,8 @@ class Admin extends \Controller {
     public function mat_remove() {
                 $this->db->exec('DELETE FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
-                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->reroute('/mat/admin');
 
     }
@@ -39,7 +40,8 @@ class Admin extends \Controller {
                 $record = $this->db->exec('SELECT rid,Epoch,PartNumber,Description,DueDate,ArrivedDate,Display FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
-                $this->f3->set('mode','upd');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('mode','upd');
                 $this->f3->set('record',$record[0]);
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/receive.htm');
@@ -57,6 +59,7 @@ class Admin extends \Controller {
                 $sql_update .= "SET ArrivedDate=?, Display=? ";
                 $sql_update .= "WHERE rid = ?";
                 $this->db->exec($sql_update,$rowv);
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('result','Record Updated !');
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/status.htm');
@@ -75,7 +78,8 @@ class Admin extends \Controller {
                 }
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
-                $this->f3->set('mode','upd');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('mode','upd');
                 $this->f3->set('epoch',$rids);
 //                $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
                 $this->f3->set('record',$record);
@@ -113,7 +117,8 @@ class Admin extends \Controller {
                 }
                 // Setting up variables for the display
                 $this->f3->set('nav_menu','navmaterial.htm');
-                $this->f3->set('result','Record Updated !');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('result','Record Updated !');
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/status.htm');
     }
@@ -131,7 +136,8 @@ class Admin extends \Controller {
 		}
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navmaterial.htm');
-                $this->f3->set('mode','upd');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('mode','upd');
                 $this->f3->set('epoch',$rids);
 //                $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
                 $this->f3->set('record',$record);
@@ -169,6 +175,7 @@ class Admin extends \Controller {
 		}
 		// Setting up variables for the display
 	        $this->f3->set('nav_menu','navbuyers.htm');
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('result','Record Updated !');
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/status.htm');
@@ -256,6 +263,7 @@ class Admin extends \Controller {
 		// ***********************************************************
 		// Setting up variables for the display
 	        $this->f3->set('nav_menu','navbuyers.htm');
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('result','Record Updated !');
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/status.htm');
@@ -265,6 +273,7 @@ class Admin extends \Controller {
 	        $this->f3->set('navs','no');
 		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('mode','create');
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','materials/form.htm');
@@ -273,6 +282,7 @@ class Admin extends \Controller {
                 $this->f3->set('breadcrumbs','mat');
 	        $this->f3->set('navs','no');
 		$this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('mode','display');
 		$this->f3->set('layout','kiosk.htm');
                 $this->f3->set('content','materials/ajax.htm');
@@ -300,6 +310,7 @@ class Admin extends \Controller {
                 $this->f3->set('breadcrumbs','mat');
 	        $this->f3->set('navs','no');
 		$this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('mode','create');
 		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('layout','layout.htm');
@@ -319,6 +330,7 @@ class Admin extends \Controller {
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('isMobile',$this->isMobile());
 	        $this->f3->set('customer','yes');
 		$this->f3->set('bgcolor','navy');
                 $this->f3->set('headers','materials/headers.htm');
@@ -339,7 +351,8 @@ class Admin extends \Controller {
                 $this->f3->set('field','all');
                 $this->f3->set('navs','yes');
                 $this->f3->set('nav_menu','navbuyers.htm');
-                $this->f3->set('customer','yes');
+                $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('customer','yes');
                 $this->f3->set('bgcolor','red');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/buyersfields.htm');
@@ -359,7 +372,8 @@ class Admin extends \Controller {
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navleaders.htm');
-	        $this->f3->set('customer','yes');
+	        $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('customer','yes');
 		$this->f3->set('bgcolor','green');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/sortfields.htm');
@@ -406,6 +420,7 @@ class Admin extends \Controller {
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','mat');
+		$this->f3->set('isMobile',$this->isMobile());
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navbuyers.htm');
@@ -429,7 +444,8 @@ class Admin extends \Controller {
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','navleaders.htm');
-	        $this->f3->set('customer','yes');
+	        $this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('customer','yes');
 		$this->f3->set('bgcolor','green');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/leadersfields.htm');
