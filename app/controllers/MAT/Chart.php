@@ -19,6 +19,9 @@ class Chart extends \Controller {
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');
     }
+    public function chartdata01() {
+	$sqlstr  = "SELECT ";
+    }
     public function apimatuni() {
 		$sqlstr  = "SELECT PartNumber, COUNT(rid) as rowid, SUM(qty) as qty ";
 		$sqlstr .= "FROM enc_matlog ";
@@ -26,11 +29,11 @@ class Chart extends \Controller {
 		$sqlstr .= "GROUP BY PartNumber ";
                 $data[] = $this->db->exec($sqlstr);
 		$json_data = json_encode($data[0]);
-		echo $json_data;
-		exit;
-//                $this->f3->set('details',$data);
-//		  $this->f3->set('layout','plain.htm');
-//                $this->f3->set('content','materials/api.htm');
+//		echo $json_data;
+//		exit;
+                $this->f3->set('details',$data);
+		$this->f3->set('layout','plain.htm');
+                $this->f3->set('content','materials/api.htm');
     }
     public function apidbs() {
 		$sqlstr  = "SELECT rid,Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Rows ";

@@ -1,5 +1,5 @@
 <tr>
-	<td align="left"></td>
+	<td align="left"><a href="/mat/notes/{{ @cols.rid }}" target="_blank"><i class="bi-journals"></i></a></td>
 	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
 	<td align="left"><a href="/mat/sort/line/{{@cols.Line}}" style="color:black;">{{ @cols.Line }} </a></td>
 	<td align="left"><a href="/mat/sort/unitid/{{@cols.UnitID}}" style="color:black;"> {{ @cols.UnitID }} </a></td>
@@ -10,6 +10,7 @@
 	<td align="left">{{ @cols.Qty }} </td>
 	<td align="left"><a href="/mat/sort/lowInventory/{{@cols.lowInventory}}" style="color:black;">{{ @cols.lowInventory }}</a> </td>
 	<td align="left">{{ @cols.DueDate }} </td>
+	<td></td>
 	<td align="left"><a href="/mat/sort/buyer/{{@cols.Buyer}}" style="color:black;">{{ @cols.Buyer }}</a></td>
 	<td align="left">{{ @cols.ArrivedDate }}</td>
 	<td align="center"><check if="{{ @cols.Display == 'n' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></td>

@@ -351,9 +351,9 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC LIMIT 150");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE arrivedDate IS NUL ORDER BY rid DESC LIMIT 150");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? AND arrivedDate IS NULL ORDER BY rid DESC",$val);
 		}
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','mat');
@@ -441,17 +441,18 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		 $sqlstr  = "SELECT rid,DateTime, Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as arrivedDate, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship  ";
+		 $sqlstr  = "SELECT rid,DateTime, Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, arrivedDate, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship  ";
 		 $sqlstr .= "FROM enc_matlog m ";
-		 $sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours')";
+		 $sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours') ";
+//		 $sqlstr .= "AND arrivedDate IS NULL ";
 		 $sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
 		 $data[] = $this->db->exec($sqlstr);
-		} else {
-		 $sqlstr  = "SELECT rid,DateTime, Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as arrivedDate, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship  ";
-		 $sqlstr .= "FROM enc_matlog m ";
-		 $sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours') and $fld = ? ";
-		 $sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
-		 $data[] = $this->db->exec($sqlstr,$val);
+//		} else {
+//		 $sqlstr  = "SELECT rid,DateTime, Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as arrivedDate, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship  ";
+//		 $sqlstr .= "FROM enc_matlog m ";
+//		 $sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours') and $fld = ? ";
+//		 $sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
+//		 $data[] = $this->db->exec($sqlstr,$val);
 		}
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','mat');
