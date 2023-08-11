@@ -32,12 +32,17 @@ class Chart extends \Controller {
 		$event[] = $this->db->exec($sqlsty);
 		$ctx = $event[0][0]['customer'];
 		$cht = array();
+		foreach ($data[0] as $ikey => $ival) {
+		  $cht += [ $ival['custx'] => ''];
+		}
+		$wkx = "";
+		$vlx = "";
 		foreach ($event[0] as $ikey => $ival) {
-		 if ($ctx == $ival['customer']) {
+	         if ($ctx == $ival['customer']) {
 			$wkx = $wkx.$ival['weekx'].",";
 			$vlx = $vlx.$ival['events'].",";
 		 } else {
-			$cht += [$ctx=>$wkx."::".$vlx];
+		  	$cht[$ctx] = $wkx."::".$vlx;
 			$wkx="";
 			$vlx="";
 			$ctx = $ival['customer'];

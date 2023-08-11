@@ -32,7 +32,7 @@ function ajax(){
 				labels: [{{ strstr(@chart[@names.custx],'::',true) }}],
 				datasets: [{
 					label: 'Event(s)',
-					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}],
+					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}0,],
 					borderColor: 'black',
 					backgroundColor: 'pink',
 					borderColor: 'red',
