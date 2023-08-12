@@ -274,7 +274,6 @@ class Admin extends \Controller {
 	        $this->f3->set('navs','no');
 		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('nav_menu','navmaterial.htm');
-		$this->f3->set('isMobile',$this->isMobile());
 		$this->f3->set('mode','create');
 		$this->f3->set('layout','layout.htm');
                 $this->f3->set('content','materials/form.htm');
