@@ -39,6 +39,10 @@ class Controller {
                 return $sheet->items;
     }
 
+    public function isMobile()  {
+         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+    }
+
     public function sendMail($to,$msg) {
       // In case any of our lines are larger than 70 characters, we should use wordwrap()
       // Always set content-type when sending HTML email

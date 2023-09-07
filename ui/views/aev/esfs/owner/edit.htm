@@ -1,0 +1,91 @@
+<check if="{{ @navs == 'yes' }}">
+ <include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:blue; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Engineering Support</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-45">
+        <label for="owner">Owners:</label>
+      </div>
+      <div class="col-55">
+	<repeat group="{{ @owners }}" value="{{ @cols }}">
+		<label for="owner">{{ @cols.names}} / {{@cols.area}} :: {{ @cols.email }}</label>
+		<a href="/aev/owr/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 1em" role="img" aria-label="Trash"></i></a><br>
+	</repeat>
+      </div>
+    </div>
+<p>
+    <div class="row">
+      <div class="col-45" style="color:black;">
+        <label for="owner">Create a new entry</label>
+      </div>
+      <div class="col-55">
+      </div>
+    </div>
+<p>
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="name">Name:</label>
+      </div>
+      <div class="col-55">
+	<input type="text" id="names" name="names" value="" placeholder="First and Last name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="area">Area:</label>
+      </div>
+      <div class="col-55">
+	<input type="text" id="area" name="area" value="" placeholder="Area of expertise">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-45" style="color:gray;">
+        <label for="area">Email:</label>
+      </div>
+      <div class="col-55">
+	<input type="text" id="email" name="email" value="" placeholder="user@domain.com">
+      </div>
+    </div>
+	<p>
+	<input type="hidden" value="" id="epoch" name="epoch">
+    <div class="row">
+	<div class="col-45">
+      		<input type="reset" value="Clear">
+	</div>
+	<div class="col-55">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let own = document.forms["wipform"]["owner"].value;
+ let ale = "";
+ if ( own.length=== 0) { ale = ale + "Select owner<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

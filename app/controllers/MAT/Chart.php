@@ -4,9 +4,6 @@ namespace MAT;
 
 class Chart extends \Controller {
 
-    public function isMobile()  {
-	 return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-    }
     public function ajax() {
 		$this->f3->set('layout','flat.htm');
                 $this->f3->set('content','materials/tableajax.htm');
@@ -14,7 +11,7 @@ class Chart extends \Controller {
     public function duedate() {
                 $this->f3->set('breadcrumbs','/mat/chart/duedate');
 	        $this->f3->set('navs','yes');
-		$this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('isMobile',parent::isMobile());
 	        $this->f3->set('nav_menu','navmaterial.htm');
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');
@@ -52,7 +49,7 @@ class Chart extends \Controller {
 		$this->f3->set('chart',$cht);
                 $this->f3->set('breadcrumbs','/mat/chart/duedate');
 	        $this->f3->set('navs','yes');
-		$this->f3->set('isMobile',$this->isMobile());
+		$this->f3->set('isMobile',parent::isMobile());
 	        $this->f3->set('nav_menu','navmaterial.htm');
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');

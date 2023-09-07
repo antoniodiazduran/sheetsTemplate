@@ -9,8 +9,8 @@ class Shopfloor extends \Controller {
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','no');
 	        $this->f3->set('customer','no');
-                $this->f3->set('headers','aev/shopfloor/headers.htm');
-                $this->f3->set('fields','aev/shopfloor/fields.htm');
+//                $this->f3->set('headers','aev/shopfloor/headers.htm');
+ //               $this->f3->set('fields','aev/shopfloor/fields.htm');
 		$this->f3->set('layout','kiosk.htm');
                 $this->f3->set('content','aev/shopfloor/ajax.htm');
     }

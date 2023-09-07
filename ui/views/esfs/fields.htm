@@ -1,16 +1,16 @@
 <tr style="background-color:{{ @trcolor }}; color:{{ @ftcolor}};">
-	<check if="{{ @tdate == 'yes'}}">
-		<td align="left" style="font-size:0.7em;">{{ substr(@cols.DateTime,0,11) }}</td>
-	</check>
-	<td align="left"><p class="h5">{{ @cols.Line }}</p></td>
-	<td align="left"><p class="h5">{{ (strlen(@cols.Description)>45)?substr(@cols.Description,0,47)."...":@cols.Description }}</p></td>
-	<check if="{{ @customer == 'yes'}}">
-		<td align="left"><p class="h5">{{ substr(@cols.Customer,0,3) }}</p></a></td>
-	</check>
-	<td align="left"><p class="h5">{{ (strlen(@cols.UnitNumber)>10)?substr(@cols.UnitNumber,0,10)."..":@cols.UnitNumber }}</p></td>
-	<td align="left"><p class="h5">{{ @cols.DueDate }}</p></td>
-	<td align="left"><p class="h5">{{ @cols.Owner }}</p></td>
-	<td align="left" style="border:2px solid white;background-color:{{ @tdcolor}};color:{{@urcolor}};" <check if="{{ @cols.Urgency == 'Line Stopper' or @dueblink==1 }}"> class="blink" </check>>
-		<p class="h5">{{ @cols.Urgency }}</p>
-	</td>
+        <check if="{{ @tdate == 'yes'}}">
+                <td align="left" style="font-size:0.7em;">{{ substr(@cols.DateTime,0,11) }}</td>
+        </check>
+        <td align="left"><p class="h5">{{ @cols.Line }}</p></td>
+        <td align="left"><p class="h5">{{ (strlen(@cols.Description)>45)?substr(@cols.Description,0,47)."...":@cols.Description }}</p></td>
+        <check if="{{ @customer == 'yes'}}">
+                <td align="left"><p class="h5">{{ substr(@cols.Customer,0,3) }}</p></a></td>
+        </check>
+        <td align="left"><p class="h5">{{ (strlen(@cols.UnitNumber)>10)?substr(@cols.UnitNumber,0,10)."..":@cols.UnitNumber }}</p></td>
+        <td align="left"><p class="h5">{{ @cols.DueDate }}</p></td>
+        <td align="left"><p class="h5">{{ @cols.Owner }}</p></td>
+        <td align="left" style="border:2px solid white;background-color:{{ @tdcolor}};color:{{@urcolor}};" <check if="{{ @cols.Urgency == 'Line Stopper' or @dueblink==1 }}"> class="blink" </check>>
+                <p class="h5">{{ @cols.Urgency }}</p>
+        </td>
 </tr>

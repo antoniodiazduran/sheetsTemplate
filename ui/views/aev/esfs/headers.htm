@@ -1,24 +1,19 @@
 <tr style="background:black; opacity:0.8;">
-	<check if="{{ @tdate == 'yes'}}">
-		<th>Date</th>
-	</check>
-<!--	<th style="width:90px">Line</th>
-	<th style="width:580px">Description</th>
-	<check if="{{ @customer == 'yes'}}">
-		<th>Customer</th>
-	</check>
-	<th style="width:90px">Unit ID</th>
-	<th style="width:110px">Due Date</th>
-	<th style="width:110px">Owner</th>
-	<th style="width:160px">Urgency &nbsp; &nbsp; <a href="/esfs"><i class="bi bi-arrow-return-left"></i></a></th>
-//-->
-	<th style="width:90px;">Line</th>
-	<th style="width:500px;">Description</th>
-	<check if="{{ @customer == 'yes'}}">
-		<th style="width:40px;">: : :</th>
-	</check>
-	<th >Unit ID</th>
-	<th >Due Date</th>
-	<th >Owner</th>
-	<th >Urgency &nbsp; &nbsp; <a href="/esfs"><i class="bi bi-arrow-return-left"></i></a></th>
+	<th></td>
+        <check if="{{ @tdate == 'yes'}}">
+                <th>Date</th>
+        </check>
+        <th >Unit ID</th>
+        <check if="{{ @customer == 'yes'}}">
+                <th style="width:40px;">: : :</th>
+        </check>
+        <th >Owner</th>
+        <th >Designer</th>
+        <th >Line</th>
+        <th >Issue</th>
+        <th >Solution</th>
+        <th >Cause</th>
+        <th >Origin</th>
+        <th >Due Date</th>
+        <th >Urgency</th>
 </tr>

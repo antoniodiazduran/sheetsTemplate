@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="30">
+<meta http-equiv="refresh" content="20">
 
 <!-- bootstrap code //-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -6,7 +6,7 @@
 
 
 <check if="{{ @navs=='yes' }}">
-  <include href="nav.htm">
+  <include href="{{ @navmenu }}">
 </check>
 
 <div class="table-responsive-xl">
@@ -14,66 +14,11 @@
 		<!-- {{ @t1++ }}//-->
 <include href="{{ @headers }}"/>
 <repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >
-<check if="{{ strtolower(@cols.Status) <> 'complete' }}">
-<check if="{{ @cols.Display == 'y' }}">
-<check if="{{ @c1 < @t1 }}">
-	<true>
-		<!-- {{ @c1++ }}//-->
-	</true>
-	<false>
 	<set trcolor="white"/>
 	<set ftcolor="black"/>
 	<set tdcolor="white"/>
 	<set urcolor="black"/>
-	<set dueblink="0"/>
-	<check if="{{ @cols.Line =='Weld' }}">
-	  <set trcolor='#4bc1fc'/>
-	</check>
-	<check if="{{ @cols.Line =='Line 5' }}">
-	  <set trcolor='#060606'/>
-	  <set ftcolor='#ffffff'/>
-	</check>
-	<check if="{{ @cols.Line =='Paint' }}">
-	  <set trcolor='#5cfe5b'/>
-	</check>
-	<check if="{{ @cols.Line =='Final' }}">
-	  <set trcolor='#fecc5b'/>
-	</check>
-	<check if="{{ @cols.Line =='Line 1' }}">
-	  <set trcolor='#fc5bfe'/>
-	</check>
-	<check if="{{ @cols.Line =='Line 3' }}">
-	  <set trcolor='#ff256f'/>
-	</check>
-
-	<check if="{{ @cols.Urgency =='Line Stopper' }}">
-	  <set tdcolor='#ff2548'/>
-	  <set urcolor='#ffffff'/>
-	</check>
-	<check if="{{ @cols.Urgency =='See due date' }}">
-	  <set tdcolor='yellow'/>
-	  <set urcolor='#f66e02'/>
-	</check>
-	<check if="{{ @cols.Urgency =='As available' }}">
-	  <set tdcolor='#ffffff'/>
-	  <set urcolor='#000000'/>
-	</check>
-	<check if="{{ date('Y-m-d',time()) > @cols.DueDate }}">
-		<set dueblink="1"/>
-	</check>
-
-	<check if="{{ @field == 'all' }}">
-        		<include href="{{ @fields }}"/>
-	</check>
-	<check if="{{ @field == 'customer' }}">
-		<check if="{{ strtolower(@customer) == strtolower(@cols.Customer) }}">
-        		<include href="{{ @fields }}"/>
-		</check>
-	</check>
-	</false>
-</check>
-</check>
-</check>
+	<include href="{{ @fields }}"/>
 </repeat>
 
 </table>

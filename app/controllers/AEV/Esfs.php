@@ -29,7 +29,7 @@ class Esfs extends \Controller {
                         $fields[0]['duedate'],
                         $fields[0]['urgency'],
                         $fields[0]['requestor'],
-                        'TBD',
+                        $fields[0]['owner'],
                         $fields[0]['notes'],
 			'y',
 			$sorts,

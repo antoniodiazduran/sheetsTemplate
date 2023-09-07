@@ -124,6 +124,16 @@
 	alert('Select something... Please!');
     }
  }
+ function goCheckboxSupplier() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/mat/supplier/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
  function goCheckboxNotes() {
 	val = window.document.getElementById('chkbox').value;
     if(val.length>0) {
@@ -138,6 +148,16 @@
         val = window.document.getElementById('chkbox').value;
     if(val.length>0) {
         urltodate = "/mat/ship/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
+ function goCheckboxReason() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/mat/reason/"+val;
         console.log(urltodate)
         window.open("https://info.diaz.works"+urltodate,"_blank");
     } else {

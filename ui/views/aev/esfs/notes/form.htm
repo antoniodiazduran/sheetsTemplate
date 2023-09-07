@@ -1,0 +1,71 @@
+<include href="{{ @nav_menu }}">
+
+<div style="padding:1px; background-color:blue; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Engineering Support</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs }}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+      <div class="col-25x">
+        <label for="owner">History...</label>
+      </div>
+      <div class="col-75x">
+	<check if="{{ count(@record) > 0 }}">
+	<true>
+        <repeat group="{{ @record }}" value="{{ @cols }}">
+                <label for="owner">{{ @cols.datetime }}<br>{{ @cols.notes }} </label>
+                <a href="/aev/nts/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 1em" role="img" aria-label="Trash"></i></a><br>
+		<p>
+        </repeat>
+	</true>
+	<false>
+		<label for="list">No History...</label>
+	</false>
+	</check>
+      </div>
+    </div>
+<p>
+    <div class="row">
+      <div class="col-25x">
+	<label for="notes">Notes</label>
+      </div>
+      <div class="col-75x">
+        <label for="notes">Add new note</label><p>
+        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
+      </div>
+    </div>
+	<p>
+	<input type="hidden" name="relation" id="relation" value="{{ @epoch }}">
+    <div class="row">
+	<div class="col-25x">
+		<input type="reset" value="Clear">
+	</div>
+	<div class="col-75x">
+		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let not = document.forms["wipform"]["notes"].value;
+ let ale = "";
+ if ( not.length=== 0) { ale = ale + "Select the line <br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

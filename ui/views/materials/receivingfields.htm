@@ -8,7 +8,7 @@
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }} </td>
 	<td align="left">{{ @cols.Qty }} </td>
-	<td align="left">{{ @cols.lowInventory }} </td>
+	<td align="left">{{ @cols.supplier }} </td>
 	<td align="left">{{ @cols.DueDate }} </td>
 	<td></td>
 	<td align="left">{{ @cols.Buyer }} </td>
