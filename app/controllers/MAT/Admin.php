@@ -41,6 +41,7 @@ class Admin extends \Controller {
 		}
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
+		$this->f3->set('rowcount',count($data[0]));
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');
@@ -62,6 +63,7 @@ class Admin extends \Controller {
                 $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? AND (arriveddate = '' or arriveddate is null) ORDER BY rid DESC",$val);
                 }
                 $this->f3->set('details',$data);
+		$this->f3->set('rowcount',count($data[0]));
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
                 $this->f3->set('navs','yes');
@@ -99,6 +101,7 @@ class Admin extends \Controller {
 		$datet = date('m',time());
                 $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE strftime('%m',shipDate) = ? ORDER BY rid DESC",$datet);
                 $this->f3->set('details',$data);
+		$this->f3->set('rowcount',count($data[0]));
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
                 $this->f3->set('navs','yes');
@@ -113,6 +116,7 @@ class Admin extends \Controller {
     public function unique() {
 		$data[] = $this->db->exec("SELECT PartNumber FROM enc_matlog GROUP BY PartNumber");
                 $this->f3->set('details',$data);
+		$this->f3->set('rowcount',count($data[0]));
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('field','all');
 	        $this->f3->set('navs','yes');

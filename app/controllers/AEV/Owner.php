@@ -29,7 +29,7 @@ class Owner extends \Controller {
                 $newowner = $this->aev->exec('SELECT email FROM owners WHERE names = ?', $name);
                 $description = $this->aev->exec('SELECT Description FROM eng_log WHERE Epoch = ?',$id);
                 //$to =  'antonio.diazduranborja@revgroup.com,'.$oldowner[0]['email'].','.$newowner[0]['email'];
-                $to =  'antonio.diazduranborja@revgroup.com,';
+                $to =  'antonio.diazduranborja@revgroup.com,brian.billings@aev.com,';
                 // Adding notes to the notification email to owner of the record
                 $msg  = ',<p>You are the new owner of <a href="http://info.diaz.works/aev/esfs/edit/'.$id.'"><b>'.$description[0]['Description'].'</b></a>, Lucky you!! </br>';
                 $msg .= 'This is just for your information, but you can update the record as needed. <br/> ';

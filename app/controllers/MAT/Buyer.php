@@ -27,6 +27,7 @@ class Buyer extends \Controller {
                 }
                 $this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
+		$this->f3->set('rowcount',count($data[0]));
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('isMobile',parent::isMobile());
                 $this->f3->set('field','all');

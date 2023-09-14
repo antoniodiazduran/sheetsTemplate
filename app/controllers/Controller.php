@@ -7,13 +7,60 @@ class Controller {
     protected $rev;
     protected $aev;
     protected $sales;
+    protected $dmz;
+
+//  *****************************
+//  Secure Before and After route
+//  *****************************
+
+     function new_beforeroute() {
+      if ($this->f3->get('SECURE')) {
+        if($this->f3->get('SESSION.user') === null ) {
+           $this->f3->reroute('/login');
+           exit;
+        }
+        if ( $this->f3->get('SESSION.timeout') < time() ) {
+           $this->f3->set('SESSION.user', null);
+           $this->f3->set('SESSION.bp_id', null);
+           $this->f3->reroute('/login');
+	   exit;
+        }
+        // Refresh timer on every click
+        date_default_timezone_set('America/New_York');
+        $this->f3->set('SESSION.timeout', time()+$this->f3->get('expire'));
+        $this->f3->set('SESSION.timeoutdate',date('Y.m.d h:i:s',time()+$this->f3->get('expire')) );
+      }
+    }
+
+    function new_afterroute() {
+      if ($this->f3->get('SECURE')) {
+        if($this->f3->get('SESSION.user') != null ) {
+          if ( $this->f3->get('SESSION.ip') === $this->f3->ip() ) {
+            echo Template::instance()->render('layout.htm');
+          } else {
+	          echo "Session Terminated..".$this->f3->get('SESSION.ip');
+	        }
+        }
+      } else {
+        echo Template::instance()->render('layout.htm');
+      }
+    }
+
+
+//  ****************************
 
     function beforeRoute() {
+
     }
 
     function afterRoute() {
-	 //echo \Template::instance()->render('layout.htm');
-	 echo \Template::instance()->render($this->f3->get('layout'));
+	// Testing array in config file
+	//echo "w".$this->f3->get('DMZ.2');
+	foreach ($this->dmz as $key=>$page) { 
+	  //echo "w".$page;
+	}
+	//echo \Template::instance()->render('layout.htm');
+	echo \Template::instance()->render($this->f3->get('layout'));
     }
 
     function GSheetsInsert($sheetid,$row,$fileid) {
@@ -69,6 +116,10 @@ class Controller {
 //            $f3->get('db_pass')
 //        );
 
+        // De-Militirizaed Zone for public pages
+	$dmz = array('/mat/screen','/mat/receiving','/sf');
+
+	$this->dmz=$dmz;
 	$this->f3=$f3;
 	$this->db=$db;
 	$this->rev=$rev;
