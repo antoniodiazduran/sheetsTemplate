@@ -13,7 +13,7 @@ class Receive extends \Controller {
                  $sqlstr .= "FROM enc_matlog m ";
                  $sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours') ";
 //               $sqlstr .= "AND arrivedDate IS NULL ";
-                 $sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
+                 $sqlstr .= "GROUP BY partnumber ORDER BY supplier desc";
                  $data[] = $this->db->exec($sqlstr);
 //              } else {
 //               $sqlstr  = "SELECT rid,DateTime, Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as arrivedDate, ";

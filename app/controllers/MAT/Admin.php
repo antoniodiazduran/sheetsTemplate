@@ -129,10 +129,10 @@ class Admin extends \Controller {
                 $this->f3->set('content','materials/list.htm');
     }
     public function apidbs() {
-		$sqlstr  = "SELECT rid,Line, UnitID,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Rows ";
+		$sqlstr  = "SELECT rid,Line,iif(supplier is not null, supplier, '-') as supplier,Description, PartNumber, Qty,Buyer, DueDate, count(rid) as Rows  ";
 		$sqlstr .= "FROM enc_matlog ";
 		$sqlstr .= "WHERE DueDate >= date('now','-7 hours') and DueDate <= date('now','+1 day','-7 hours')";
-		$sqlstr .= "GROUP BY partnumber ORDER BY DueDate";
+		$sqlstr .= "GROUP BY PartNumber ORDER BY supplier DESC";
 		$data[] = $this->db->exec($sqlstr);
 		$json_data = json_encode($data);
 		echo $json_data;
