@@ -48,6 +48,7 @@ class Admin extends \Controller {
 	        $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->set('isMobile',parent::isMobile());
 	        $this->f3->set('customer','yes');
+		$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
 		$this->f3->set('bgcolor','navy');
                 $this->f3->set('headers','materials/adminheaders.htm');
                 $this->f3->set('fields','materials/fields.htm');
@@ -70,6 +71,7 @@ class Admin extends \Controller {
                 $this->f3->set('nav_menu','navbuyers.htm');
                 $this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('customer','yes');
+		$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
                 $this->f3->set('bgcolor','red');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/buyersfields.htm');
@@ -91,6 +93,7 @@ class Admin extends \Controller {
 	        $this->f3->set('nav_menu','navleaders.htm');
 	        $this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('customer','yes');
+		$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
 		$this->f3->set('bgcolor','green');
                 $this->f3->set('headers','materials/headers.htm');
                 $this->f3->set('fields','materials/sortfields.htm');
