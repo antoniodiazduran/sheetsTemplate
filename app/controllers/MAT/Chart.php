@@ -17,11 +17,13 @@ class Chart extends \Controller {
                 $this->f3->set('content','materials/duedate.htm');
     }
     public function chartdata01() {
+		// Customer name's array
 		$sqlstr  = "SELECT SUBSTR(s.customer,1,3) AS custx ";
 		$sqlstr .= "FROM enc_so s ";
 		$sqlstr .= "WHERE s.ax IN (SELECT m.unitid FROM enc_matlog m) ";
 		$sqlstr .= "GROUP BY custx";
 		$data[] = $this->db->exec($sqlstr);
+		// Transactions by customer
 		$sqlsty  = "SELECT * ";
 		$sqlsty .= "FROM enc_veventweeks  ";
 		$sqlsty .= "WHERE customer IS NOT NULL ";
@@ -29,22 +31,26 @@ class Chart extends \Controller {
 		$event[] = $this->db->exec($sqlsty);
 		$ctx = $event[0][0]['customer'];
 		$cht = array();
+		// Gathering customer names
 		foreach ($data[0] as $ikey => $ival) {
 		  $cht += [ $ival['custx'] => ''];
 		}
 		$wkx = "";
 		$vlx = "";
+		// Creating the json variables
 		foreach ($event[0] as $ikey => $ival) {
-	         if ($ctx == $ival['customer']) {
-			$wkx = $wkx.$ival['weekx'].",";
-			$vlx = $vlx.$ival['events'].",";
-		 } else {
-		  	$cht[$ctx] = $wkx."::".$vlx;
-			$wkx="";
-			$vlx="";
-			$ctx = $ival['customer'];
-		 }
+ 			if ($ctx <> $ival['customer']) {
+		  		$cht[$ctx] = $wkx."::".$vlx;
+				$wkx="";
+				$vlx="";
+				$ctx = $ival['customer'];
+		 	}
+				$wkx = $wkx.$ival['weekx'].",";
+				$vlx = $vlx.$ival['events'].",";
 		}
+		// Adding last value
+	  	$cht[$ctx] = $wkx."::".$vlx;
+
 		$this->f3->set('custx',$data[0]);
 		$this->f3->set('chart',$cht);
                 $this->f3->set('breadcrumbs','/mat/chart/duedate');

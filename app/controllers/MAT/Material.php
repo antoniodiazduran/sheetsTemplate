@@ -26,12 +26,13 @@ class Material extends \Controller {
                         $reqs['buyer'],
                         $reqs['notes'],
                         $reqs['lowinventory'],
+                        $reqs['requestorname'],
                         $reqs['epoch']
                         );
                 // Updating the material shortage log
                 $sql_update  = "UPDATE enc_matlog ";
                 $sql_update .= "SET Line=?, UnitID=?, Description=?, PartNumber=?, Qty=?,";
-                $sql_update .= "DueDate=?, Buyer=?, Notes=?, lowInventory=? ";
+                $sql_update .= "DueDate=?, Buyer=?, Notes=?, lowInventory=?, requestorName=? ";
                 $sql_update .= "WHERE rid = ?";
                 $this->db->exec($sql_update,$rowv);
                 $this->f3->reroute('/mat/admin');
@@ -39,7 +40,7 @@ class Material extends \Controller {
     public function edit() {
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('epoch',$this->f3->get('PARAMS.id'));
-                $record = $this->db->exec('SELECT Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,lowInventory FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
+                $record = $this->db->exec('SELECT Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,lowInventory,requestorName FROM enc_matlog WHERE rid = ?',$this->f3->get('PARAMS.id'));
                 $this->f3->set('record', $record[0]);
                 $this->f3->set('navs','no');
                 $this->f3->set('nav_menu','navmaterial.htm');
@@ -66,6 +67,7 @@ class Material extends \Controller {
                 $part =  $record['partnumber'];
                 $qty  =  $record['qty'];
                 $low  =  $record['lowinventory'];
+		$reqn =  $record['requestorname'];
                 $dued =  "";
                 $buye =  "";
                 $note =  $record['notes'];
@@ -74,8 +76,8 @@ class Material extends \Controller {
                 $epoch = time();
                 $datet = date('Y-m-d',time());
                 // Logging changes
-                $sqlstr = 'INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,Display,lowInventory) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)';
-                $this->db->exec($sqlstr,array($epoch,$datet,$line,$unit,$desc,$part,$qty,$dued,$buye,$note,$disp,$low));
+                $sqlstr = 'INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,DueDate,Buyer,Notes,Display,lowInventory,requestorName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                $this->db->exec($sqlstr,array($epoch,$datet,$line,$unit,$desc,$part,$qty,$dued,$buye,$note,$disp,$low,$reqn));
                 $this->f3->set('res','Information sent...');
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('navs','no');
