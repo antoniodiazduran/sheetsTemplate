@@ -4,7 +4,7 @@
 <p>
  <div class="canvas">
    <repeat group="{{ @custx }}" value="{{ @names }}">
-    <canvas  id="{{ @names.custx }}" width="400" height="240" ></canvas>
+    <a href="{{ @customer_route}}/{{@names.custx}}"><canvas  id="{{ @names.custx }}" width="{{@canvas_width }}" height="{{ @canvas_height }}" ></canvas></a>
    </repeat>
  </div>	
 </div>
@@ -67,7 +67,7 @@ function ajax(){
 						},
 					},
 					y: {
-						max: 50,
+						max: {{ @maxbar }},
 						display: true,
 						title: {
 							display: true,

@@ -17,18 +17,14 @@ class Chart extends \Controller {
                 $this->f3->set('content','materials/duedate.htm');
     }
     public function chartdata01() {
+		// Creating object for database
+		$clist = new \Customer($this->db);
+
 		// Customer name's array
-		$sqlstr  = "SELECT SUBSTR(s.customer,1,3) AS custx ";
-		$sqlstr .= "FROM enc_so s ";
-		$sqlstr .= "WHERE s.ax IN (SELECT m.unitid FROM enc_matlog m) ";
-		$sqlstr .= "GROUP BY custx";
-		$data[] = $this->db->exec($sqlstr);
+		$data[] = $clist->customerlist();
 		// Transactions by customer
-		$sqlsty  = "SELECT * ";
-		$sqlsty .= "FROM enc_veventweeks  ";
-		$sqlsty .= "WHERE customer IS NOT NULL ";
-		$sqlsty .= "GROUP BY customer, weekx ORDER BY customer, weekx";
-		$event[] = $this->db->exec($sqlsty);
+		$event[] = $clist->eventlist();
+
 		$ctx = $event[0][0]['customer'];
 		$cht = array();
 		// Gathering customer names
@@ -53,6 +49,10 @@ class Chart extends \Controller {
 
 		$this->f3->set('custx',$data[0]);
 		$this->f3->set('chart',$cht);
+		$this->f3->set('maxbar',50);
+		$this->f3->set('canvas_width',400);
+		$this->f3->set('canvas_height',240);
+		$this->f3->set('customer_route','/mat/chart/cust');
                 $this->f3->set('breadcrumbs','/mat/chart/duedate');
 	        $this->f3->set('navs','yes');
 		$this->f3->set('isMobile',parent::isMobile());
@@ -60,6 +60,47 @@ class Chart extends \Controller {
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');
     }
+    public function chartdata02() {
+		$clist = new \Customer($this->db);
+		$data[] = array('custx'=>$this->f3->get('PARAMS.cus'));
+		$event[] = $clist->eventdaylist($this->f3->get('PARAMS.cus'));
+
+		$ctx = $event[0][0]['customer'];
+		$cht = array();
+		// Gathering customer names
+		foreach ($data as $ikey => $ival) {
+		  $cht += [ $ival['custx'] => ''];
+		}
+		$wkx = "";
+		$vlx = "";
+		// Creating the json variables
+		foreach ($event[0] as $ikey => $ival) {
+ 			if ($ctx <> $ival['customer']) {
+		  		$cht[$ctx] = $wkx."::".$vlx;
+				$wkx="";
+				$vlx="";
+				$ctx = $ival['customer'];
+		 	}
+				$wkx = $wkx."'".$ival['daysx']."',";
+				$vlx = $vlx.$ival['events'].",";
+		}
+		// Adding last value
+	  	$cht[$ctx] = $wkx."::".$vlx;
+
+		$this->f3->set('custx',$data);
+		$this->f3->set('chart',$cht);
+		$this->f3->set('maxbar',20);
+		$this->f3->set('canvas_width',800);
+		$this->f3->set('canvas_height',480);
+		$this->f3->set('customer_route','/mat/rank/customer');
+                $this->f3->set('breadcrumbs','/mat/chart/duedate');
+	        $this->f3->set('navs','yes');
+		$this->f3->set('isMobile',parent::isMobile());
+	        $this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('layout','charts.htm');
+                $this->f3->set('content','materials/duedate.htm');
+    }
+
     public function apimatuni() {
 		$sqlstr  = "SELECT PartNumber, COUNT(rid) as rowid, SUM(qty) as qty ";
 		$sqlstr .= "FROM enc_matlog ";
