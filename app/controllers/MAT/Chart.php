@@ -33,22 +33,30 @@ class Chart extends \Controller {
 		}
 		$wkx = "";
 		$vlx = "";
+		$evt = 0;
+		$tot = array();
+
 		// Creating the json variables
 		foreach ($event[0] as $ikey => $ival) {
  			if ($ctx <> $ival['customer']) {
-		  		$cht[$ctx] = $wkx."::".$vlx;
+		  		$cht[$ctx] = $wkx."::".$vlx.$evt;
+				$tot[$ctx] = $evt;
 				$wkx="";
 				$vlx="";
 				$ctx = $ival['customer'];
+				$evt = 0;
 		 	}
 				$wkx = $wkx.$ival['weekx'].",";
 				$vlx = $vlx.$ival['events'].",";
+				$evt = $evt + $ival['events'];
 		}
 		// Adding last value
-	  	$cht[$ctx] = $wkx."::".$vlx;
+	  	$cht[$ctx] = $wkx."::".$vlx.$evt;
+		$tot[$ctx] = $evt;
 
 		$this->f3->set('custx',$data[0]);
 		$this->f3->set('chart',$cht);
+		$this->f3->set('total',$tot);
 		$this->f3->set('maxbar',50);
 		$this->f3->set('canvas_width',400);
 		$this->f3->set('canvas_height',240);

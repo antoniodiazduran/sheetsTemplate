@@ -15,7 +15,8 @@
 			 &nbsp; <a href="/mat/supplier/{{@cols.rid}}" target="_blank"><i class="bi-bookmark"></i></a></td>
 	<td align="left"><a href="/mat/rank/buyer/{{@cols.Buyer}}" style="color:black;">{{ @cols.Buyer }}</a></td>
 	<td align="left">{{ strtolower(@cols.requestorName) }}</td>
-	<td align="center"><a href="/mat/rec/{{ @cols.rid }}" target="_blank"><check if="{{ @cols.ArrivedDate <> '' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></a></td>
+	<td align="left">{{ strtoupper(@cols.paretoReason) }}</td>
+<!--	<td align="center"><a href="/mat/rec/{{ @cols.rid }}" target="_blank"><check if="{{ @cols.ArrivedDate <> '' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></a></td>//-->
 	<td align="center"><input type="checkbox" name="choosedate" value="{{ @cols.rid }}" onClick="getCheckboxValue(this)"></td>
 	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><a href="/mat/buyer/{{@cols.rid}}" target="_blank"><i class="bi-person" style="font-size:1.3em"></a></true><false></false></check></td>
 </tr>

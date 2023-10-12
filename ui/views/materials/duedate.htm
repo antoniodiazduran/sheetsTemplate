@@ -25,14 +25,15 @@ function ajax(){
 }
 
 	<repeat group="{{ @custx }}" value="{{ @names }}">
-		//{{@names.custx}}_{{ @chart[@names.custx] }}	  
+		//{{ @names.custx}}_{{ @chart[@names.custx] }}	  
+		//{{ @total[@names.custx] }}
 		var config_{{@names.custx}} = {
 			type: 'bar',
 			data: {
 				labels: [{{ strstr(@chart[@names.custx],'::',true) }}],
 				datasets: [{
 					label: 'Event(s)',
-					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}0,],
+					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}],
 					borderColor: 'black',
 					backgroundColor: 'pink',
 					borderColor: 'red',
@@ -51,7 +52,7 @@ function ajax(){
 				plugins: {
 					title: {
 					  display: true,
-					  text: '{{@names.custx}}',
+					  text: '{{@names.custx}} ({{ @total[@names.custx]}})',
 					},
 					legend: {
 					  display: false,
