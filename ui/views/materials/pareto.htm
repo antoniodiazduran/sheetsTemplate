@@ -1,0 +1,92 @@
+<div class="container">
+<!-- <label>From:<input type="date" id="startdate">&nbsp; To:<input type="date" id="enddate" placeholder="yyyy/mm/dd"></label>
+ <input type="submit" value="Search">//-->
+<p>
+ <div class="canvas">
+   <repeat group="{{ @custx }}" value="{{ @names }}">
+    <a href="{{ @customer_route }}/{{ @names.custx }}"><canvas  id="{{ @names.custx }}" width="{{@canvas_width }}" height="{{ @canvas_height }}" ></canvas></a>
+   </repeat>
+ </div>	
+</div>
+
+<script>
+function ajax(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "/mat/apidb", true);
+  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      // Response
+      var response = JSON.parse(this.responseText);
+	console.log(response[0]);
+   }
+  };
+  xhttp.send();
+}
+
+	<repeat group="{{ @custx }}" value="{{ @names }}">
+		//{{ @names.custx}}_{{ @chart[@names.custx] }}	  
+		var config_{{@names.custx}} = {
+			type: 'bar',
+			data: {
+				labels: [{{ strstr(@chart[@names.custx],'::',true) }}],
+				datasets: [{
+					label: 'Event(s)',
+					data: [{{ str_replace('::','',strstr(@chart[@names.custx],'::')) }}],
+					borderColor: 'black',
+					backgroundColor: 'lightgreen',
+					borderColor: 'silver',
+					borderWidth: 0.5,
+					fill: false,
+				}, {
+					label: 'Revised',
+					fill: false,
+					borderColor: 'black',
+					backgroundColor: 'silver',
+					data: [,],
+				}]
+			},
+			options: {
+				responsive: false,
+				plugins: {
+					title: {
+					  display: true,
+					  text: '{{@names.custx}}',
+					},
+					legend: {
+					  display: false,
+					  position: 'bottom',
+					},
+				},
+				scales: {
+					x: {
+						display: true,
+						title: {
+							display: true,
+							text: 'Reasons'
+						},
+					},
+					y: {
+						max: {{ @maxbar }},
+						display: true,
+						title: {
+							display: true,
+							text: 'Shortages'
+						},
+					},
+				}
+			}
+		};
+	</repeat>
+	</repeat>
+
+window.onload = function() {
+<repeat group="{{ @custx }}" value="{{ @names }}">
+	var ctx_{{@names.custx}} = document.getElementById('{{ @names.custx }}').getContext('2d');
+</repeat>
+<repeat group="{{ @custx }}" value="{{ @names }}">
+	window.myLine = new Chart(ctx_{{@names.custx}}, config_{{ @names.custx }});
+</repeat>
+};
+
+</script>

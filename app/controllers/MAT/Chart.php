@@ -16,6 +16,47 @@ class Chart extends \Controller {
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');
     }
+    public function chartpareto01() {
+		// Creating objet for database
+		$plist = new \Pareto($this->db);
+		// Gathering data for the main pareto
+		$data[] = $plist->paretolist();
+
+		$cht = array();
+		$ctx = $data[0][0]['customer'];
+		$cht[$ctx] = "";
+		$rsn = "";
+		$vlx = "";
+		$cus = array();
+
+		// Creating the json variables
+		foreach ($data[0] as $ikey => $ival) {
+ 			if ($ctx <> $ival['customer']) {
+		  		$cht[$ctx] = $rsn."::".$vlx;
+				$rsn="";
+				$vlx="";
+				$ctx = $ival['customer'];
+				array_push($cus,array('custx'=>$ctx));
+		 	}
+				$iv = strlen(rtrim($ival['reason'])) > 0 ? str_replace(" ","_",rtrim($ival['reason'])):"y";
+				$rsn = $rsn."'".$iv."',";
+				$vlx = $vlx.$ival['total'].",";
+		}
+		// Adding last value
+	  	$cht[$ctx] = $rsn."::".$vlx;
+		$this->f3->set('custx',$cus);
+		$this->f3->set('chart',$cht);
+		$this->f3->set('maxbar',50);
+		$this->f3->set('canvas_width',600);
+		$this->f3->set('canvas_height',320);
+		$this->f3->set('customer_route','/mat/rank/customer');
+                $this->f3->set('breadcrumbs','/mat/chart/duedate');
+	        $this->f3->set('navs','yes');
+		$this->f3->set('isMobile',parent::isMobile());
+	        $this->f3->set('nav_menu','navmaterial.htm');
+		$this->f3->set('layout','charts.htm');
+                $this->f3->set('content','materials/pareto.htm');
+    }
     public function chartdata01() {
 		// Creating object for database
 		$clist = new \Customer($this->db);
