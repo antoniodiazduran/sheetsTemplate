@@ -16,11 +16,92 @@ class Chart extends \Controller {
 		$this->f3->set('layout','charts.htm');
                 $this->f3->set('content','materials/duedate.htm');
     }
+    public function chartpareto03() {
+                // Creating objet for database
+                $plist = new \Pareto($this->db);
+                // Gathering data for the main pareto
+                $data[] = $plist->paretoreason();
+
+                $cht = array();
+                $ctx = $data[0][0]['reason'];
+                $cht[$ctx] = "";
+                $lne = "";
+                $vlx = "";
+                $cus = array();
+                // Creating the json variables
+                foreach ($data[0] as $ikey => $ival) {
+                        if ($ctx <> $ival['reason']) {
+                                $cht[$ctx] = $lne."::".$vlx;
+                                $lne="";
+                                $vlx="";
+                                $ctx = $ival['reason'];
+                                array_push($cus,array('custx'=>$ctx));
+                        }
+                                $iv = strlen(rtrim($ival['line'])) > 0 ? str_replace(" ","_",rtrim($ival['line'])):"y";
+                                $lne = $lne."'".$iv."',";
+                                $vlx = $vlx.$ival['total'].",";
+                }
+                // Adding last value
+                $cht[$ctx] = $lne."::".$vlx;
+                $this->f3->set('custx',$cus);
+                $this->f3->set('chart',$cht);
+                $this->f3->set('maxbar','');
+                $this->f3->set('canvas_width',300);
+                $this->f3->set('canvas_height',220);
+                $this->f3->set('customer_route','/mat/rank/customer');
+                $this->f3->set('breadcrumbs','/mat/chart/cust');
+                $this->f3->set('navs','yes');
+                $this->f3->set('isMobile',parent::isMobile());
+                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('layout','charts.htm');
+                $this->f3->set('content','materials/pareto.htm');
+    }
+    public function chartpareto02() {
+                // Creating objet for database
+                $plist = new \Pareto($this->db);
+                // Gathering data for the main pareto
+                $data[] = $plist->paretoline();
+
+                $cht = array();
+                $ctx = $data[0][0]['line'];
+                $cht[$ctx] = "";
+                $rsn = "";
+                $vlx = "";
+                $cus = array();
+
+                // Creating the json variables
+                foreach ($data[0] as $ikey => $ival) {
+                        if ($ctx <> $ival['line']) {
+                                $cht[$ctx] = $rsn."::".$vlx;
+                                $rsn="";
+                                $vlx="";
+                                $ctx = $ival['line'];
+                                array_push($cus,array('custx'=>$ctx));
+                        }
+                                $iv = strlen(rtrim($ival['reason'])) > 0 ? str_replace(" ","_",rtrim($ival['reason'])):"y";
+                                $rsn = $rsn."'".$iv."',";
+                                $vlx = $vlx.$ival['total'].",";
+                }
+                // Adding last value
+                $cht[$ctx] = $rsn."::".$vlx;
+                $this->f3->set('custx',$cus);
+                $this->f3->set('chart',$cht);
+                $this->f3->set('maxbar','max:300,');
+                $this->f3->set('canvas_width',600);
+                $this->f3->set('canvas_height',320);
+                $this->f3->set('customer_route','/mat/rank/customer');
+                $this->f3->set('breadcrumbs','/mat/chart/cust');
+                $this->f3->set('navs','yes');
+                $this->f3->set('isMobile',parent::isMobile());
+                $this->f3->set('nav_menu','navmaterial.htm');
+                $this->f3->set('layout','charts.htm');
+                $this->f3->set('content','materials/pareto.htm');
+    }
     public function chartpareto01() {
 		// Creating objet for database
 		$plist = new \Pareto($this->db);
 		// Gathering data for the main pareto
-		$data[] = $plist->paretolist();
+		$data[] = $plist->paretocustomer();
 
 		$cht = array();
 		$ctx = $data[0][0]['customer'];
@@ -46,11 +127,11 @@ class Chart extends \Controller {
 	  	$cht[$ctx] = $rsn."::".$vlx;
 		$this->f3->set('custx',$cus);
 		$this->f3->set('chart',$cht);
-		$this->f3->set('maxbar',50);
+		$this->f3->set('maxbar','max:50,');
 		$this->f3->set('canvas_width',600);
 		$this->f3->set('canvas_height',320);
 		$this->f3->set('customer_route','/mat/rank/customer');
-                $this->f3->set('breadcrumbs','/mat/chart/duedate');
+                $this->f3->set('breadcrumbs','/mat/chart/cust');
 	        $this->f3->set('navs','yes');
 		$this->f3->set('isMobile',parent::isMobile());
 	        $this->f3->set('nav_menu','navmaterial.htm');
