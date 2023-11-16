@@ -1,0 +1,100 @@
+<check if="{{ @navs == 'yes' }}">
+<include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:green; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Shortage Report</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	<check if="{{ strlen(@res)>0  }}">
+		<true>
+		<div style="background-color: lightgreen; border-radius: 15px; color: black; text-align: center; vertical-align: middle; height: 100px ">
+			<br><b>{{ @res }}</b>
+		</div>
+		</true>
+	</check>
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Customer</label><p>
+        <input type="text" id="customer" name="customer" placeholder="Customer Name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="po">PO # </label><p>
+        <input type="text" id="po" name="po" placeholder="PO Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="sap">SAP</label><p>
+        <input type="text" id="sap" name="sap" placeholder="SAP Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ax">AX </label><p>
+        <input type="text" id="ax" name="ax" placeholder="AX Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ship">Ship Month </label><p>
+        <input type="text" id="ship" name="ship" placeholder="AX Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+	<div class="col-75">
+      		<input type="reset" value="Clear"> &nbsp; &nbsp; &nbsp;
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let lin = document.forms["wipform"]["line"].value;
+ let des = document.forms["wipform"]["description"].value;
+ let par = document.forms["wipform"]["partnumber"].value;
+// let buy = document.forms["wipform"]["buyer"].value;
+// let due = document.forms["wipform"]["duedate"].value;
+ let ale = "";
+ if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
+ if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
+ if ( par.length=== 0) { ale = ale + "Type Part number AX/SAP<br>"; }
+// if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
+// if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

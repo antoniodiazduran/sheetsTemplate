@@ -35,7 +35,7 @@ class Pareto extends DB\SQL\Mapper {
 	$sqlstx .= "WHERE  (length(paretoreason) > 0 and paretoreason is not null) and customer = ? ";
 	$sqlstx .= "GROUP BY customer, reason, line ";
 	$sqlstx .= "ORDER BY customer, reason, total DESC ";
-	$result = $this->db->exec($sqlstx,'%');
+	$result = $this->db->exec($sqlstx,'');
 	return $result;
     }
 }

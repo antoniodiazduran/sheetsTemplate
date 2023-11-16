@@ -13,55 +13,55 @@ class Controller {
 //  Secure Before and After route
 //  *****************************
 
-     function new_beforeroute() {
-      if ($this->f3->get('SECURE')) {
-        if($this->f3->get('SESSION.user') === null ) {
-           $this->f3->reroute('/login');
-           exit;
-        }
-        if ( $this->f3->get('SESSION.timeout') < time() ) {
-           $this->f3->set('SESSION.user', null);
-           $this->f3->set('SESSION.bp_id', null);
-           $this->f3->reroute('/login');
-	   exit;
-        }
-        // Refresh timer on every click
-        date_default_timezone_set('America/New_York');
-        $this->f3->set('SESSION.timeout', time()+$this->f3->get('expire'));
-        $this->f3->set('SESSION.timeoutdate',date('Y.m.d h:i:s',time()+$this->f3->get('expire')) );
-      }
+     function beforeroute() {
+		if($this->f3->get('SESSION.logged_in'))
+		{
+			if(time() - $this->f3->get('SESSION.timestamp') > $this->f3->get('auto_logout'))
+			{
+				$this->f3->clear('SESSION');
+				$this->f3->reroute('/login');
+			}
+			else {
+				$this->f3->set('SESSION.timestamp', time());
+			}
+		}
+		$csrf_page = $this->f3->get('PARAMS.0'); //URL route !with preceding slash!
+
+		if( NULL === $this->f3->get('POST.session_csrf') )
+		{
+			$this->f3->CSRF = $this->f3->session->csrf();
+			$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');
+		}
+		if ($this->f3->VERB==='POST')
+		{
+			if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') )
+			{	// Things check out! No CSRF attack was detected.
+				$this->f3->set('CSRF', $this->f3->session->csrf()); // Reset csrf token for next post request
+				$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');  // copy the token to the variable
+			}
+			else
+			{	// DANGER: CSRF attack!
+				$this->f3->error(403);
+			}
+		}
+		// Access routes 
+		$access=Access::instance();
+		$access->policy('allow'); // allow access to all routes by default
+		$access->deny('/admin*');
+
+		// admin routes
+		$access->allow('/admin*','100'); //100 = admin ; 10 = superuser ; 1 = user
+		$access->deny('/user*');
+		// user login routes
+		$access->allow('/user*',['100','10','1']);
+		$access->authorize($this->f3->exists('SESSION.user_type') ? $this->f3->get('SESSION.user_type') : 0 );
     }
 
-    function new_afterroute() {
-      if ($this->f3->get('SECURE')) {
-        if($this->f3->get('SESSION.user') != null ) {
-          if ( $this->f3->get('SESSION.ip') === $this->f3->ip() ) {
-            echo Template::instance()->render('layout.htm');
-          } else {
-	          echo "Session Terminated..".$this->f3->get('SESSION.ip');
-	        }
-        }
-      } else {
-        echo Template::instance()->render('layout.htm');
-      }
-    }
-
-
-//  ****************************
-
-    function beforeRoute() {
-
-    }
-
-    function afterRoute() {
-	// Testing array in config file
-	//echo "w".$this->f3->get('DMZ.2');
-	foreach ($this->dmz as $key=>$page) { 
-	  //echo "w".$page;
-	}
+    function afterroute() {
 	//echo \Template::instance()->render('layout.htm');
 	echo \Template::instance()->render($this->f3->get('layout'));
     }
+
 
     function GSheetsInsert($sheetid,$row,$fileid) {
                 //require '/home/antoniodiazduran/vendor/autoload.php';
@@ -109,12 +109,6 @@ class Controller {
 	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 	$aev = new DB\SQL('sqlite:data/aev.sqlite');
 	$sales = new DB\SQL('sqlite:data/sales.sqlite');
-
-//        $db=new DB\SQL(
-//            $f3->get('db_dns') . $f3->get('db_name'),
-//            $f3->get('db_user'),
-//            $f3->get('db_pass')
-//        );
 
         // De-Militirizaed Zone for public pages
 	$dmz = array('/mat/screen','/mat/receiving','/sf');

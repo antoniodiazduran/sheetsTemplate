@@ -1,0 +1,119 @@
+<check if="{{ @navs == 'yes' }}">
+<include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:green; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Shortage Report</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	<check if="{{ strlen(@res)>0  }}">
+		<true>
+		<div style="background-color: lightgreen; border-radius: 15px; color: black; text-align: center; vertical-align: middle; height: 100px ">
+			<br><b>{{ @res }}</b>
+		</div>
+		</true>
+	</check>
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="po">PO</label><p>
+        <input type="text" id="po" name="po" placeholder="PO Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="sap">SAP</label><p>
+        <input type="text" id="sap" name="sap" placeholder="SAP Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ax">AX Number</label><p>
+        <input type="text" id="ax" name="ax" placeholder="AX Number">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="customer">Customer</label><p>
+        <input type="text" id="customer" name="customer" placeholder="Customer name...">
+      </div>
+    </div>
+      <p>
+    <div class="row">
+      <div class="col-25">
+        <!--<label for="line">Line</label>//-->
+      </div>
+      <div class="col-75">
+        <label class="titles" for="ship">Ship month</label><p>
+	<select name="ship" id="ship">
+		<option>
+		<option value="JAN">JAN
+		<option value="FEB">FEB
+		<option value="MAR">MAR
+		<option value="APR">APR
+		<option value="MAY">MAY
+		<option value="JUN">JUN
+		<option value="JUL">JUL
+		<option value="AUG">AUG
+		<option value="SEP">SEP
+		<option value="OCT">OCT
+		<option value="NOV">NOV
+		<option value="DEC">DEC
+	</select>
+      </div>
+    </div>
+    <p>
+    <div class="row">
+      <div class="col-25">
+      </div>
+	<div class="col-75">
+      		<input type="reset" value="Clear"> &nbsp; &nbsp; &nbsp;
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+ const alerts = document.getElementById("alertnotes");
+ alerts.innerHTML='';
+ let po  = document.forms["wipform"]["po"].value;
+ let sap = document.forms["wipform"]["sap"].value;
+ let ax  = document.forms["wipform"]["ax"].value;
+ let cus = document.forms["wipform"]["customer"].value;
+ let shi = document.forms["wipform"]["ship"].value;
+
+ let ale = "";
+ if ( po.length=== 0) { ale = ale + "Type PO Number <br>"; }
+ if ( sap.length=== 0) { ale = ale + "Type SAP Number <br>"; }
+ if ( ax.length=== 0) { ale = ale + "Type AX Number <br>"; }
+ if ( cus.length=== 0) { ale = ale + "Add Customer Name <br>"; }
+ if ( shi.length=== 0) { ale = ale + "Select Ship Month <br>"; }
+
+ if ( ale.length > 0) { 
+ 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
+	alerts.style.backgroundColor = "red";
+	alerts.style.color = "white";
+	alerts.style.textAlign = "center";
+	alerts.insertAdjacentHTML('beforeend',ale);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	return false;
+ } else {
+	return true;
+ }
+  
+
+}
+</script>

@@ -1,0 +1,9 @@
+<tr>
+	<td align="center"><a href="/mat/delivery/{{ @cols.rid }}" target="_blank"><i class="bi-journals"></i></a></td>
+	<td align="left"><a href="/mat/delivery/filter/po/{{@cols.po}}" style="color:black;">{{ @cols.po }} </a></td>
+	<td align="left"><a href="/mat/delivery/filter/sap/{{@cols.sap}}" style="color:black;">{{ @cols.sap }} </a></td>
+	<td align="left"><a href="/mat/delivery/filter/ax/{{@cols.ax}}" style="color:black;">{{ @cols.ax }} </a></td>
+	<td align="left"><a href="/mat/delivery/filter/customer/{{@cols.customer}}" style="color:black;">{{ @cols.customer }} </a></td>
+	<td align="left"><a href="/mat/delivery/filter/ship/{{@cols.ship}}" style="color:black;">{{ @cols.ship }} </a></td>
+	<td align="center"><input type="checkbox" name="choosedate" value="{{ @cols.rid }}" onClick="getCheckboxValue(this)"></td>
+</tr>

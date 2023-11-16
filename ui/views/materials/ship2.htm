@@ -1,0 +1,54 @@
+<check if="{{ @nav == 'yes' }}">
+<include href="{{ @nav_menu }}">
+</check>
+<div style="padding:1px; background-color:maroon; opacity:0.8;">
+	<h3>&nbsp; &nbsp; Ship Update</h3>
+</div>
+<div class="container">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm();">
+    <div class="row">
+	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	</div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+	<repeat group="{{ @record }}" value="{{ @vals }}">
+	  <label class="titles"><b>{{ @vals.customer }}</b> [ {{@vals.po}} | {{ @vals.sap }} | {{ @vals.ax}} ] <i>Ship Date: </i>{{@vals.ship}}</label><p>
+	</repeat>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="shipdate">Ship Date</label><p>
+	<select name="ship" id="ship">
+		<option>
+		<option value="JAN" <check if="{{@vals.ship=='JAN'}}">selected</check>>JAN
+		<option value="FEB" <check if="{{@vals.ship=='FEB'}}">selected</check>>FEB
+		<option value="MAR" <check if="{{@vals.ship=='MAR'}}">selected</check>>MAR
+		<option value="APR" <check if="{{@vals.ship=='APR'}}">selected</check>>APR
+		<option value="MAY" <check if="{{@vals.ship=='MAY'}}">selected</check>>MAY
+		<option value="JUN" <check if="{{@vals.ship=='JUN'}}">selected</check>>JUN
+		<option value="JUL" <check if="{{@vals.ship=='JUL'}}">selected</check>>JUL
+		<option value="AUG" <check if="{{@vals.ship=='AUG'}}">selected</check>>AUG
+		<option value="SEP" <check if="{{@vals.ship=='SEP'}}">selected</check>>SEP
+		<option value="OCT" <check if="{{@vals.ship=='OCT'}}">selected</check>>OCT
+		<option value="NOV" <check if="{{@vals.ship=='NOV'}}">selected</check>>NOV
+		<option value="DEC" <check if="{{@vals.ship=='DEC'}}">selected</check>>DEC
+	</select>
+      </div>
+    </div>
+    <p>
+    <div class="row">
+	<div class="col-75">
+		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+ 		<input type="reset" value="Clear">
+      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</div>
+    </div>
+  </form>
+</div>
+

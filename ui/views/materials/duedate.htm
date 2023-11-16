@@ -2,6 +2,7 @@
 <!-- <label>From:<input type="date" id="startdate">&nbsp; To:<input type="date" id="enddate" placeholder="yyyy/mm/dd"></label>
  <input type="submit" value="Search">//-->
 <p>
+{{ @PARAMS.0 }}
  <div class="canvas">
    <repeat group="{{ @custx }}" value="{{ @names }}">
     <a href="{{ @customer_route}}/{{@names.custx}}"><canvas  id="{{ @names.custx }}" width="{{@canvas_width }}" height="{{ @canvas_height }}" ></canvas></a>
@@ -10,6 +11,7 @@
 </div>
 
 <script>
+
 function ajax(){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "/mat/apidb", true);

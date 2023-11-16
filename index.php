@@ -22,9 +22,13 @@ if ((float)PCRE_VERSION<8.0)
 // Load configuration
 $f3->config('config/config.ini');
 $f3->config('config/routes.ini');
+
+// Language setup
+$f3->LANGUAGE = $f3->get('sitelang');
+
 // Catching errors
 //$f3->set('ONERROR','Errors->msgs');
 
-new Session();
+$f3->session = new Session();
 
 $f3->run();
