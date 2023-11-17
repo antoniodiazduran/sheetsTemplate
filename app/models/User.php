@@ -22,9 +22,9 @@ class User extends DB\SQL\Mapper {
 		return date("Y-m-d H:i:s");
 	}
 
-	public function __construct(DB\SQL $db)
+	public function __construct(DB\SQL $usr)
 	{
-		parent::__construct($db,'users');
+		parent::__construct($usr,'users');
 	}
 
 	public function all()

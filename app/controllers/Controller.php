@@ -2,6 +2,7 @@
 
 class Controller {
 
+    protected $usr;
     protected $f3;
     protected $db;
     protected $rev;
@@ -27,6 +28,7 @@ class Controller {
 		}
 		$csrf_page = $this->f3->get('PARAMS.0'); //URL route !with preceding slash!
 
+/*
 		if( NULL === $this->f3->get('POST.session_csrf') )
 		{
 			$this->f3->CSRF = $this->f3->session->csrf();
@@ -44,6 +46,8 @@ class Controller {
 				$this->f3->error(403);
 			}
 		}
+
+*/
 		// Access routes 
 		$access=Access::instance();
 		$access->policy('allow'); // allow access to all routes by default
@@ -52,14 +56,19 @@ class Controller {
 		// admin routes
 		$access->allow('/admin*','100'); //100 = admin ; 10 = superuser ; 1 = user
 		$access->deny('/user*');
+		$access->allow('/mat*',['100','10','1']);
+
 		// user login routes
 		$access->allow('/user*',['100','10','1']);
 		$access->authorize($this->f3->exists('SESSION.user_type') ? $this->f3->get('SESSION.user_type') : 0 );
     }
 
+    function o_beforeroute() {
+	// no security
+    }
     function afterroute() {
 	//echo \Template::instance()->render('layout.htm');
-	echo \Template::instance()->render($this->f3->get('layout'));
+	echo Template::instance()->render($this->f3->get('layout'));
     }
 
 
@@ -105,6 +114,7 @@ class Controller {
         $f3=Base::instance();
 
 	// Enabling saving data to sqlite
+	$usr = new DB\SQL('sqlite:data/users.sqlite');
 	$db = new DB\SQL('sqlite:data/enc.sqlite');
 	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 	$aev = new DB\SQL('sqlite:data/aev.sqlite');
@@ -113,6 +123,7 @@ class Controller {
         // De-Militirizaed Zone for public pages
 	$dmz = array('/mat/screen','/mat/receiving','/sf');
 
+	$this->usr=$usr;
 	$this->dmz=$dmz;
 	$this->f3=$f3;
 	$this->db=$db;
