@@ -23,14 +23,22 @@ class Notes extends \Controller {
 		$note = $data['notes'];
 		$rel = $data['relation'];
 		$record = $this->db->exec('INSERT INTO notes (epoch, datetime, enc_log, notes) values (?,?,?,?)', array($epoch, $datetime, $rel, $note) );
-	        $this->f3->set('navs','yes');
+	/*
+	      $this->f3->set('navs','yes');
 		$this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','upd');
 		$this->f3->reroute('/sfadm');		
+	*/
+		$this->f3->set('result','Record Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
     }
     public function delete() {
 		$record = $this->db->exec('DELETE FROM notes WHERE Epoch = ?',$this->f3->get('PARAMS.id'));
-		$this->f3->reroute('/sfadm');
+		//$this->f3->reroute('/sfadm');
+		$this->f3->set('result','Record Deleted !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
     }
 
 }
