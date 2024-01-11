@@ -47,6 +47,10 @@
 	</check>
 
 	<check if="{{ @cols.Urgency =='Line Stopper' }}">
+	  <set tdcolor='#ff0000'/>
+	  <set urcolor='#ffffff'/>
+	</check>
+	<check if="{{ @cols.Urgency =='Critical' }}">
 	  <set tdcolor='#ff2548'/>
 	  <set urcolor='#ffffff'/>
 	</check>

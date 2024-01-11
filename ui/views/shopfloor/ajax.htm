@@ -76,11 +76,14 @@ function createTable(data) {
 		if(rows[cols] == 'Line Stopper') {
                         td.setAttribute('class','bg-danger fontSize');
                 }
-		if(rows[cols] == 'See due date') {
+		if(rows[cols] == 'Critical') {
                         td.setAttribute('class','bg-warning fontSize');
                 }
+		if(rows[cols] == 'See due date') {
+                        td.setAttribute('class','bg-info fontSize');
+                }
 		if(rows[cols].toLowerCase() == 'as available') {
-                        td.setAttribute('class','bg-white fontSize');
+                        td.setAttribute('class','bg-white text-black fontSize');
                 }
                 if(key == 'DueDate') {
 			if(rows[cols] < today) {

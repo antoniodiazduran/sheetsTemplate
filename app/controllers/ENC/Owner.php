@@ -55,10 +55,10 @@ class Owner extends \Controller {
                 $description = $this->db->exec('SELECT Description FROM enc_log WHERE Epoch = ?',$id);
                 $to =  'casey.kackman@eldorado-ca.com,'.$oldowner[0]['email'].','.$newowner[0]['email'];
                 // Adding notes to the notification email to owner of the record
-                $msg  = ',<p>You are the new owner of <a href="http://35.225.79.133/req/edit/'.$id.'"><b>'.$description[0]['Description'].'</b></a>, Lucky you!!, click on the link to see the details.<br/> ';
+                $msg  = ',<p>You are the new owner of <b>'.$description[0]['Description'].'</b>, Lucky you!!, click on the link to see the details.<br/> ';
                 $msg .= 'This is just for your information, but you can update the record as needed. <br/> ';
                 $msg .= 'Sorry, you cannot delete the task!<p>';
-                $msg .= 'If you wish to add notes to the record, you can click <a href="http://35.225.79.133/nts/edit/'.$id.'">here</a><p>Joey<br/>The admin<p>';
+                $msg .= 'Joey<br/>The admin<p>';
                 // Sending the email using parent function in Controller
                 parent::sendMail($to,$name.$msg);
                 // Logging changes

@@ -1,19 +1,30 @@
+<check if="{{ @navs == 'yes'}}">
 <include href="{{ @nav_menu }}">
-
+</check>
 <div style="padding:1px; background-color:red; opacity:0.8;">
 	<h3>&nbsp; &nbsp; Engineering Support</h3>
 </div>
 <div class="container">
   <form action="/{{ @breadcrumbs }}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+
     <div class="row">
       <div class="col-25x">
-        <label for="owner">History...</label>
+        <label for="owner">Original</label>
+      </div>
+      <div class="col-75x">
+	<label for="original"><i>{{ @original[0]['Notes']}}</i></label>
+	<p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25x">
+        <label for="owner">History</label>
       </div>
       <div class="col-75x">
 	<check if="{{ count(@record) > 0 }}">
 	<true>
         <repeat group="{{ @record }}" value="{{ @cols }}">
-                <label for="owner">{{ @cols.datetime }}<br>{{ @cols.notes }} </label>
+                <label for="owner">{{ @cols.datetime }}<br>{{ @cols.notes }} <br> <i>{{ @cols.owner }}</i></label>
                 <a href="/nts/del/{{@cols.epoch}}"><i class="bi-trash" style="font-size: 1em" role="img" aria-label="Trash"></i></a><br>
 		<p>
         </repeat>
@@ -33,6 +44,14 @@
         <label for="notes">Add new note</label><p>
         <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
       </div>
+    </div>
+    <div class="row">
+	<div class="col-25x">
+	<label for="owner">Owner</label><br>
+	</div>
+	<div class="col-75x">
+	<input type="text" name="owner" id="owner" value="" required style="width:230px;" placeholder="Owner's name">
+	</div>
     </div>
 	<p>
 	<input type="hidden" name="relation" id="relation" value="{{ @epoch }}">

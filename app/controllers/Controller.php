@@ -102,12 +102,14 @@ class Controller {
     public function sendMail($to,$msg) {
       // In case any of our lines are larger than 70 characters, we should use wordwrap()
       // Always set content-type when sending HTML email
-      $headers = "MIME-Version: 1.0" . "\r\n";
-      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+      $headers[] = "MIME-Version: 1.0";
+      $headers[] = "Content-type:text/html;charset=iso-8859-1";
+      $headers[] = "Reply-To:joeycamanei@gmail.com";
+      $headers[] = "From: joeycamanei@gmail.com";
       $to = 'antonio.diazduranborja@revgroup.com,'.$to;
-      $msg = wordwrap($msg, 300, "<br/>");
+      $msg = wordwrap($msg, 300, "<br/>\n");
       // Send - to, subject, message
-      $bool = mail($to,'Engineering owner/priority change', $msg, $headers);
+      $bool = mail($to,'Engineering owner/priority change', $msg, implode("\r\n",$headers));
     }
 
     function __construct() {

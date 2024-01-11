@@ -1,15 +1,8 @@
 <tr>
-	<td align="left">&nbsp;</td>
-	<td align="left">{{ substr(@cols.DateTime,0,11) }}</td>
 	<td align="left">{{ @cols.Line }} </td>
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left">{{ (strlen(@cols.Customer)>30)?substr(@cols.Customer,0,30)."...":@cols.Customer }} </td>
-	<td align="left">{{ (strlen(@cols.UnitNumber)>15)?substr(@cols.UnitNumber,0,15)."...":@cols.UnitNumber }} </td>
 	<td align="left">{{ @cols.DueDate }} </td>
 	<td align="left">{{ @cols.Owner }}</td>
-	<td align="left">{{ @cols.Urgency }}</td>
-	<td align="left">{{ @cols.Completedate }}</td>
-	<td align="left"><check if="{{ @cols.Display == 'y' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></td>
-	<td align="left"><a href="nts/edit/{{ @cols.Epoch }}" target="_blank"><i class="bi-journal-text"></a></td>
-	<td align="left">{{ @cols.Sort }}</td>
+	<td align="left"><a href="nts/edit/{{ @cols.Epoch }}" target="_blank"><i class="bi-journal-text" style="font-size:1.5em;"></a></td>
 </tr>

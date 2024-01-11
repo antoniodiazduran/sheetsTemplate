@@ -58,7 +58,7 @@ class Urgency extends \Controller {
                 // Sending a notification email to owner of the record
                 $owner = $this->db->exec('SELECT Owner from enc_log WHERE Epoch = ?', $id);
                 $email = $this->db->exec('SELECT email FROM owners WHERE names = (SELECT Owner from enc_log WHERE Epoch = ?)', $id);
-                $msg  = $owner[0]['Owner'].'<p>Your prioirty has change, click on the <a href="http://35.225.79.133/req/edit/'.$id.'">link</a> to see the changes.<br/> ';
+                $msg  = $owner[0]['Owner'].'<p>Your prioirty has change, click on the <a href="https://info.diaz.works/req/edit/'.$id.'">link</a> to see the changes.<br/> ';
                 $msg .= 'This is just for your information, but you can update the record as needed.<p>Joey<br/>The admin<p>';
                 // using parent function in Controller
                 parent::sendMail('casey.kackman@eldorado-ca.com,'.$email[0]['email'],$msg);

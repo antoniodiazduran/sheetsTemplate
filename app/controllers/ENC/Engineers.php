@@ -13,7 +13,7 @@ class Engineers extends \Controller {
          return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
     public function sf() {
-		$data[] = $this->db->exec("SELECT * FROM enc_log ORDER BY display DESC, sort ASC, DueDate ASC");
+		$data[] = $this->db->exec("SELECT * FROM enc_log WHERE display = 'y' ORDER BY display DESC, sort ASC, DueDate ASC");
                 $this->f3->set('details',$data);
                 $this->f3->set('breadcrumbs','owr');
                 $this->f3->set('field','all');
@@ -22,6 +22,7 @@ class Engineers extends \Controller {
 	        $this->f3->set('navs','yes');
 	        $this->f3->set('nav_menu','naveng.htm');
 	        $this->f3->set('customer','yes');
+		$this->f3->set('isMobile',$this->isMobile());
                 $this->f3->set('headers','admin/engheaders.htm');
                 $this->f3->set('fields','admin/engfields.htm');
 		$this->f3->set('layout','layout.htm');
