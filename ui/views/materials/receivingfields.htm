@@ -14,6 +14,6 @@
 	<td align="left">{{ @cols.Buyer }} </td>
 	<td align="left">{{ @cols.ArrivedDate }}</td>
 	<td align="center"><check if="{{ @cols.Display == 'n' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></td>
-	<td align="center"></td>
+	<td align="center"><input type="checkbox" name="choosedate" value="{{ @cols.rid }}" onClick="getCheckboxValue(this);"></td>
 	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><i class="bi-person" style="font-size:1.3em"></true></check></td>
 </tr>

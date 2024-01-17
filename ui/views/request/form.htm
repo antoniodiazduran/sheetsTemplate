@@ -71,6 +71,8 @@
         <label class="titles" for="urgency">Urgency</label><p>
         <input type="radio" id="urgency" name="urgency" value="Line Stopper" <check if="{{ @record.Urgency=='Line Stopper' }}">checked</check>>
         <label for="html">Line Stopper</label><br>
+        <input type="radio" id="urgency" name="urgency" value="Critical" <check if="{{ @record.Urgency=='Critical' }}">checked</check>>
+        <label for="html">Critical</label><br>
         <input type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See due date' }}">checked</check>>
         <label for="html">See due date</label><br>
         <input type="radio" id="urgency" name="urgency" value="As available" <check if="{{ @record.Urgency=='As available' }}">checked</check>>
