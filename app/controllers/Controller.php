@@ -118,7 +118,7 @@ class Controller {
 	// Enabling saving data to sqlite
 	$usr = new DB\SQL('sqlite:data/users.sqlite');
 	$db = new DB\SQL('sqlite:data/enc.sqlite');
-	$rev = new DB\SQL('sqlite:data/rev.sqlite');
+//	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 	$aev = new DB\SQL('sqlite:data/aev.sqlite');
 	$sales = new DB\SQL('sqlite:data/sales.sqlite');
 
@@ -129,7 +129,7 @@ class Controller {
 	$this->dmz=$dmz;
 	$this->f3=$f3;
 	$this->db=$db;
-	$this->rev=$rev;
+//	$this->rev=$rev;
 	$this->aev=$aev;
 	$this->sales=$sales;
 
