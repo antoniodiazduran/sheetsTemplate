@@ -31,7 +31,8 @@ class Esfs extends Controller {
 		date_default_timezone_set("America/Los_Angeles");
 		$fields[] = $this->f3->get('POST');
 		$sorts = "";
-		if($fields[0]['urgency'] == 'Line Stopper') { $sorts = 1; }
+		if($fields[0]['urgency'] == 'Line Stopper') { $sorts = 0; }
+		if($fields[0]['urgency'] == 'Critical')     { $sorts = 1; }
 		if($fields[0]['urgency'] == 'See due date') { $sorts = 2; }
 		if($fields[0]['urgency'] == 'As available') { $sorts = 3; }
 		// Creating array to insert into Google Sheets

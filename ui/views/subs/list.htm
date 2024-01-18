@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="1200">
+<meta http-equiv="refresh" content="3600">
 
 <!-- bootstrap code //-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -8,20 +8,219 @@
 </check>
 
 <div class="table-responsive">
-	<table id="shorts" style="text-align: left; position:relative;">
-
+<table id="shorts" style="text-align: left; position:relative;">
 <include href="{{ @headers }}"/>
 <repeat group="{{ @details }}" key="{{ @ikey }}" value="{{ @cols}}" >
 	<set trcolor="white"/>
 	<set ftcolor="black"/>
 	<include href="{{ @fields }}"/>
 </repeat>
-
+<input type="hidden" id="chkbox" name="chkbox">
 </table>
 
 </div>
 
-<!-- Bootstrap code //-->
+<script>
+
+    // Used on every list.htm file to filter "dvdata" table object
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        // Columns to inspect
+        var columns = {{ @columns }};
+        filter = document.getElementById("search").value.toUpperCase();
+        table = document.getElementById("shorts");
+        tr = table.getElementsByTagName("tr");
+        td = [];
+        for (i = 1; i < tr.length; i++) {
+         for (var j of columns) {
+            td[j] = tr[i].getElementsByTagName("td")[j];
+            if (td[j].innerText != '') {
+                if (td[j].innerText.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+         }
+        }
+    }
+
+        // JavaScript program to illustrate
+        // Table sort for both columns and
+        // both directions
+        function sortTable(n) {
+            let table;
+            table = document.getElementById("shorts");
+            var rows, i, x, y, count = 0;
+            var switching = true;
+
+            // Order is set as ascending
+            var direction = "ascending";
+ 
+            // Run loop until no switching is needed
+            while (switching) {
+                switching = false;
+                var rows = table.rows;
+ 
+                //Loop to go through all rows
+                for (i = 1; i < (rows.length - 1); i++) {
+                    var Switch = false;
+ 
+                    // Fetch 2 elements that need to be compared
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+ 
+                    // Check the direction of order
+                    if (direction == "ascending") {
+ 
+                        // Check if 2 rows need to be switched
+                        if (x.innerHTML.toLowerCase() >
+                        y.innerHTML.toLowerCase()) {
+                             
+                            // If yes, mark Switch as needed
+                            // and break loop
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == "descending") {
+ 
+                        // Check direction
+                        if (x.innerHTML.toLowerCase() <
+                        y.innerHTML.toLowerCase()) {
+ 
+                            // If yes, mark Switch as needed
+                            // and break loop
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) { 
+                    // Function to switch rows and mark
+                    // switch as completed
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+ 
+                    // Increase count for each switch
+                    count++;
+                } else {
+ 
+                    // Run while loop again for descending order
+                    if (count == 0 && direction == "ascending") {
+                        direction = "descending";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+
+ function getCheckboxValue(va) {
+	strw = window.document.getElementById('chkbox').value;
+	if (va.checked) { 
+	  console.log('checked');
+  	  if (!strw.includes(va.value)) {
+	    window.document.getElementById('chkbox').value += va.value +",";
+	    strw += va.value+",";
+          }
+	} else { 
+            console.log('unchecked');
+	    strw = strw.replace(va.value+',',''); 
+	    window.document.getElementById('chkbox').value = strw;		
+	}
+		
+    console.log('v:'+window.document.getElementById('chkbox').value);
+    console.log('f:'+strw);
+
+ }
+ function goCheckboxDate() {
+	val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+	urltodate = "/subs/buyer/"+val;
+	console.log(urltodate)
+	window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+	alert('Select something... Please!');
+    }
+ }
+ function goCheckboxSupplier() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/subs/supplier/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
+ function goCheckboxNotes() {
+	val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+	urltodate = "/subs/notes/"+val;
+	console.log(urltodate)
+	window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+	alert('Select something... Please!');
+    }
+ }
+ function goCheckboxShipdate() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/subs/ship/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
+ function goCheckboxReason() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/subs/reason/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
+ function goCheckboxReceive() {
+        val = window.document.getElementById('chkbox').value;
+    if(val.length>0) {
+        urltodate = "/subs/log/"+val;
+        console.log(urltodate)
+        window.open("https://info.diaz.works"+urltodate,"_blank");
+    } else {
+        alert('Select something... Please!');
+    }
+ }
+ function questions() {
+	const question = [
+	"Are you sure?",
+	"It's going to disappear forever..",
+	"You will not get it back!",
+	"Do you really want to remove it?",
+	"Record will be deleted for goooood!",
+	"You can cancel by clicking -cancel-",
+	"Record will be deleted!",
+	"Do you have a backup?",
+	"Did you ask for permission?",
+	"Data wil be lost",
+	]
+	var rdm = Math.floor(Math.random()*10);
+	return question[rdm];
+ }
+
+ function checkremove(ids) {
+   var answer = window.confirm(questions()); 
+   if (answer) {
+     window.location.replace("/subs/remove/"+ids);
+   } 
+ }
+</script>
+
+<!-- Bootstrap code 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+//-->
