@@ -15,7 +15,7 @@ class PaymentsController extends \Controller {
 
 	public function all()
 	{
-        $payment = new Payments($this->bpllc);
+        $payment = new \Payments($this->bpllc);
         $this->f3->set('apartment','::');
         $this->f3->set('apartmentName','');
 		$this->f3->set('payments',$payment->all());
@@ -26,7 +26,7 @@ class PaymentsController extends \Controller {
         $apt = $this->f3->get('PARAMS.id');
 		if($this->f3->exists('POST.new')) 
         {
-        	$payment = new Payments($this->bpllc);
+        	$payment = new \Payments($this->bpllc);
 			$payment_added=$payment->add($this->f3->get('POST'));
             $apt = $this->f3->get('POST.Apartment');
             echo $apt;
