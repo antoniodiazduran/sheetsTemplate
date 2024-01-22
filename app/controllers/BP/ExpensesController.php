@@ -8,14 +8,14 @@ class ExpensesController extends \Controller {
 	protected $db;
 
 	public function aptName($id) {
-		$apartment = new Apartments($this->bpllc);
+		$apartment = new \Apartments($this->bpllc);
         $apartment->getRecord($id);
         return $apartment->Name;
 	}
 
     public function all()
 	{
-        $expense = new Expenses($this->bpllc);
+        $expense = new \Expenses($this->bpllc);
         $this->f3->set('apartment','::');
         $this->f3->set('apartmentName','');
 		$this->f3->set('expenses',$expense->all());
@@ -27,7 +27,7 @@ class ExpensesController extends \Controller {
         $apt = $this->f3->get('PARAMS.id');
 		if($this->f3->exists('POST.new')) 
         {
-        	$expense = new Expenses($this->bpllc);
+        	$expense = new \Expenses($this->bpllc);
 			$expense_added=$expense->add($this->f3->get('POST'));
             $apt = $this->f3->get('POST.Apartment');
             echo "add".$apt;
@@ -54,7 +54,7 @@ class ExpensesController extends \Controller {
 	public function delete_expenses() {
 		$id = $this->f3->get('PARAMS.id');
         $apt = $this->f3->get('PARAMS.apt');
-		$expense = new Expenses($this->bpllc);
+		$expense = new \Expenses($this->bpllc);
 		$expense->delete($id);
         $this->f3->set('apartment',$apt);
         $this->f3->set('apartmentName',$this->aptName($apt));
@@ -65,7 +65,7 @@ class ExpensesController extends \Controller {
 
     public function edit_expenses() {
         $id = $this->f3->get('PARAMS.id'); 
-		$expense = new Expenses($this->bpllc);
+		$expense = new \Expenses($this->bpllc);
         if($this->f3->exists('POST.edit')) {
             $expense->edit($id, $this->f3->get('POST'));
         }
@@ -80,7 +80,7 @@ class ExpensesController extends \Controller {
 	public function show_expenses() 
 	{
 		$id = $this->f3->get('PARAMS.id'); 
-		$expense = new Expenses($this->bpllc);
+		$expense = new \Expenses($this->bpllc);
         
         $this->f3->set('apartment',$id);
         $this->f3->set('apartmentName',$this->aptName($id));

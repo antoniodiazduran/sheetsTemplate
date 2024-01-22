@@ -54,7 +54,7 @@ class PaymentsController extends \Controller {
 	public function delete_payments() {
 		$id = $this->f3->get('PARAMS.id');
         $apt = $this->f3->get('PARAMS.apt');
-		$payment = new Payments($this->bpllc);
+		$payment = new \Payments($this->bpllc);
 		$payment->delete($id);
         $this->f3->set('apartment',$apt);
 		$this->f3->set('apartmentName',$this->aptName($apt));
@@ -65,7 +65,7 @@ class PaymentsController extends \Controller {
 
     public function edit_payments() {
         $id = $this->f3->get('PARAMS.id'); 
-		$payment = new Payments($this->bpllc);
+		$payment = new \Payments($this->bpllc);
         if($this->f3->exists('POST.edit')) {
             $payment->edit($id, $this->f3->get('POST'));
         }
@@ -82,7 +82,7 @@ class PaymentsController extends \Controller {
 	public function show_payments() 
 	{
 		$id = $this->f3->get('PARAMS.id'); 
-		$payment = new Payments($this->bpllc);
+		$payment = new \Payments($this->bpllc);
         $this->f3->set('apartment',$id);
 		$this->f3->set('payments',$payment->getByApartment($id));
 		$this->f3->set('apartmentName',$this->aptName($id));

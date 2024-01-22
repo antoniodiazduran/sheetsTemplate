@@ -9,7 +9,7 @@ class ApartmentsController extends \Controller {
 
 	public function apartments()
 	{
-        $apartment = new Apartments($this->bpllc);
+        $apartment = new \Apartments($this->bpllc);
 		$this->f3->set('apartments',$apartment->all());
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','apartments/list.htm');
@@ -17,7 +17,7 @@ class ApartmentsController extends \Controller {
     
 	public function modify_apartments() {
 		if($this->f3->exists('POST.new')) {
-			$apartment = new Apartments($this->bpllc);
+			$apartment = new \Apartments($this->bpllc);
 			$apartment_added=$apartment->add($this->f3->get('POST'));
 			//$this->f3->set('message','Added');
 		} else {
@@ -34,7 +34,7 @@ class ApartmentsController extends \Controller {
 
 	public function delete_apartments() {
 		$id = $this->f3->get('PARAMS.id');
-		$apartment = new Apartments($this->bpllc);
+		$apartment = new \Apartments($this->bpllc);
 		$apartment->delete($id);
 		$this->f3->set('apartments',$apartment->all());
 		$this->f3->set('layout','layout.htm');
@@ -46,12 +46,12 @@ class ApartmentsController extends \Controller {
 		$id = $this->f3->get('PARAMS.id'); 
 		if($this->f3->exists('POST.edit'))
         {
-			$apartment = new Apartments($this->bpllc);
+			$apartment = new \Apartments($this->bpllc);
 			$apartment->edit($id, $this->f3->get('POST'));
 		}
 		else
 		{
-			$apartment = new Apartments($this->bpllc);
+			$apartment = new \Apartments($this->bpllc);
 			$apartment->getById($id);
 
 			if($apartment->dry()) { //throw a 404, order does not exist
