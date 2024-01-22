@@ -9,6 +9,7 @@ class Controller {
     protected $aev;
     protected $sales;
     protected $dmz;
+    protected $bpllc;
 
 //  *****************************
 //  Secure Before and After route
@@ -121,6 +122,7 @@ class Controller {
 //	$rev = new DB\SQL('sqlite:data/rev.sqlite');
 	$aev = new DB\SQL('sqlite:data/aev.sqlite');
 	$sales = new DB\SQL('sqlite:data/sales.sqlite');
+	$bpllc = new DB\SQL('sqlite:data/bpllc.sqlite');
 
         // De-Militirizaed Zone for public pages
 	$dmz = array('/mat/screen','/mat/receiving','/sf');
@@ -132,6 +134,7 @@ class Controller {
 //	$this->rev=$rev;
 	$this->aev=$aev;
 	$this->sales=$sales;
+	$this->bpllc=$bpllc;
 
     }
 }
