@@ -8,7 +8,7 @@ class PaymentsController extends \Controller {
 	protected $db;
 
 	public function aptName($id) {
-		$apartment = new Apartments($this->bpllc);
+		$apartment = new \Apartments($this->bpllc);
         $apartment->getRecord($id);
         return $apartment->Name;
 	}
