@@ -11,23 +11,8 @@ class ApartmentsController extends \Controller {
 	{
         $apartment = new Apartments($this->bpllc);
 		$this->f3->set('apartments',$apartment->all());
-		$this->f3->set('view','apartments/list.htm');
-	}
-
-	private function check_password($pw, $confirm)
-	{
-		if(strlen($pw) < 8)
-		{
-			return $this->f3->get('i18n_password_too_short');
-		}
-		else if($pw != $confirm)
-		{
-			return $this->f3->get('i18n_user_wrong_confirm');
-		}
-		else 
-		{
-			return "";
-		}
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','apartments/list.htm');
 	}
     
 	public function modify_apartments() {
@@ -43,8 +28,8 @@ class ApartmentsController extends \Controller {
 			$this->f3->set('POST.State',"");
 			$this->f3->set('POST.Zipcode',"");
 		}
-
-		$this->f3->set('view','apartments/form.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','apartments/form.htm');
 	}
 
 	public function delete_apartments() {
@@ -52,7 +37,8 @@ class ApartmentsController extends \Controller {
 		$apartment = new Apartments($this->bpllc);
 		$apartment->delete($id);
 		$this->f3->set('apartments',$apartment->all());
-		$this->f3->set('view','apartments/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','apartments/list.htm');
 	}
 
 	public function show_apartments() 
@@ -73,6 +59,7 @@ class ApartmentsController extends \Controller {
 			}
 		}
 		$this->f3->set('apartments',$apartment->all());
-		$this->f3->set('view','apartments/form.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','apartments/form.htm');
 	}
 }

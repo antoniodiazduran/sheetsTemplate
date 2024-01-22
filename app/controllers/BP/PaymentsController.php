@@ -19,7 +19,8 @@ class PaymentsController extends \Controller {
         $this->f3->set('apartment','::');
         $this->f3->set('apartmentName','');
 		$this->f3->set('payments',$payment->all());
-		$this->f3->set('view','payments/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','payments/list.htm');
 	}
     
 	public function add_payments() {
@@ -44,7 +45,8 @@ class PaymentsController extends \Controller {
 			$this->f3->set('POST.LateFee',"");
             $this->f3->set('POST.Notes',"");
             $this->f3->set('apartment',$apt);
-            $this->f3->set('view','payments/form.htm');
+			$this->f3->set('layout','layout.htm');
+            $this->f3->set('content','payments/form.htm');
 		}
        
 	}
@@ -57,7 +59,8 @@ class PaymentsController extends \Controller {
         $this->f3->set('apartment',$apt);
 		$this->f3->set('apartmentName',$this->aptName($apt));
 		$this->f3->set('payments',$payment->getByApartment($apt));
-		$this->f3->set('view','payments/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','payments/list.htm');
 	}
 
     public function edit_payments() {
@@ -71,8 +74,9 @@ class PaymentsController extends \Controller {
 		//$this->f3->set('apartmentName',$this->aptName($id));
 		$this->f3->set('payments',$payment->getById($id));
 		//$this->f3->set('apartmentName',$this->aptName($payment->Apartment));
-		$this->f3->set('apartmentName',$this->aptName($payment->Apartment));		
-		$this->f3->set('view','payments/form.htm');
+		$this->f3->set('apartmentName',$this->aptName($payment->Apartment));	
+		$this->f3->set('layout','layout.htm');	
+		$this->f3->set('content','payments/form.htm');
     }
 
 	public function show_payments() 
@@ -82,6 +86,7 @@ class PaymentsController extends \Controller {
         $this->f3->set('apartment',$id);
 		$this->f3->set('payments',$payment->getByApartment($id));
 		$this->f3->set('apartmentName',$this->aptName($id));
-		$this->f3->set('view','payments/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','payments/list.htm');
 	}
 }

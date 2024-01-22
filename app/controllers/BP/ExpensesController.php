@@ -19,7 +19,8 @@ class ExpensesController extends \Controller {
         $this->f3->set('apartment','::');
         $this->f3->set('apartmentName','');
 		$this->f3->set('expenses',$expense->all());
-		$this->f3->set('view','expenses/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','expenses/list.htm');
 	}
     
 	public function add_expenses() {
@@ -44,7 +45,8 @@ class ExpensesController extends \Controller {
 			$this->f3->set('POST.Supplier',"");
             $this->f3->set('POST.Notes',"");
             $this->f3->set('apartment',$apt);
-            $this->f3->set('view','expenses/form.htm');
+			$this->f3->set('layout','layout.htm');
+            $this->f3->set('content','expenses/form.htm');
 		}
        
 	}
@@ -57,7 +59,8 @@ class ExpensesController extends \Controller {
         $this->f3->set('apartment',$apt);
         $this->f3->set('apartmentName',$this->aptName($apt));
 		$this->f3->set('expenses',$expense->getByApartment($apt));
-		$this->f3->set('view','expenses/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','expenses/list.htm');
 	}
 
     public function edit_expenses() {
@@ -70,7 +73,8 @@ class ExpensesController extends \Controller {
         $this->f3->set('POST.edit',"edit");
         $this->f3->set('apartment',$id);
 		$this->f3->set('expenses',$expense->getById($id));
-		$this->f3->set('view','expenses/form.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','expenses/form.htm');
     }
 
 	public function show_expenses() 
@@ -81,6 +85,7 @@ class ExpensesController extends \Controller {
         $this->f3->set('apartment',$id);
         $this->f3->set('apartmentName',$this->aptName($id));
 		$this->f3->set('expenses',$expense->getByApartment($id));
-		$this->f3->set('view','expenses/list.htm');
+		$this->f3->set('layout','layout.htm');
+		$this->f3->set('content','expenses/list.htm');
 	}
 }
