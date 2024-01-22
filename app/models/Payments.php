@@ -30,7 +30,7 @@ class Payments extends DB\SQL\Mapper {
 	{ //get all records
 		$this->aptName="SELECT Name AS aptName FROM apartments WHERE apartments.id = payments.Apartment";
 		$this->load();
-		return $this->query;
+		return$this->query;
 	}
 
 	public function add( $unsanitizeddata )
