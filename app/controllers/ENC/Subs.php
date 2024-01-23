@@ -14,6 +14,21 @@ class Subs extends \Controller {
         $this->f3->set('fields','subs/fields.htm');
         $this->f3->set('content','subs/list.htm');
     }
+    public function edit_record() {
+        $this->f3->set('breadcrumbs','subs/rec');
+        $this->f3->set('mode','upd');
+        $rids = $this->f3->get('PARAMS.id');
+        $record  = $this->db->exec('SELECT Epoch, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
+        
+        $this->f3->set('navs','yes');
+        $this->f3->set('nav_menu','nav_subs.htm');
+        $this->f3->set('isMobile',parent::isMobile()); 
+        $this->f3->set('epoch',$rids);
+        $this->f3->set('record',$record);
+        $this->f3->set('layout','admin.htm');
+        $this->f3->set('content','subs/edit.htm');
+    }
+    
     public function edit() {
                 $this->f3->set('breadcrumbs','subs/log');
                 $rids = $this->f3->get('PARAMS.id');
@@ -57,11 +72,12 @@ class Subs extends \Controller {
     }
     public function form() {
         $this->f3->set('breadcrumbs','subs');
-	    $this->f3->set('navs','yes');
+	$this->f3->set('navs','yes');
         $this->f3->set('layout','layout.htm');
-		$this->f3->set('mode','create');
+	$this->f3->set('mode','create');
         $this->f3->set('content','subs/form.htm');
     }
+
     public function insertRow() {
 		// Gathering data from form
 		date_default_timezone_set("America/Los_Angeles");

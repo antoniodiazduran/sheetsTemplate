@@ -1,0 +1,103 @@
+<include href="nav_subs.htm">
+
+    <div style="padding:1px; color:white; background-color:maroon; opacity:0.8;">
+        <h3>&nbsp; &nbsp; Part Substitution</h3>
+    </div>
+    <div class="container">
+      <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+      <div class="row">
+        <div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+        </div>
+      </div>
+        <p>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="unitnumber">Unit AX number</label><p>
+          <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit AX number" value="{{@POST.UnitID}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="current">Current Part Number</label><p>
+          <input type="text" id="current" name="current" placeholder="Current part number" value="{{@POST.Current}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="substitution">Substitution</label><p>
+          <input type="text" id="substitution" name="substitution" placeholder="Substitute part number" value="{{@POST.Substitution}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="approvedby">Approved by</label><p>
+          <input type="text" id="approvedby" name="approvedby" placeholder="Name of engineer approving" value="{{@POST.ApprovedBy}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="notes">Notes</label><p>
+          <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{@POST>Notes}}</textarea>
+        </div>
+      </div>
+        <p>
+        <div class="row">
+          <div class="col-25">
+            <input type="submit" value="Submit" size="20" onclick="this.value='Submitting...'">
+          </div>
+          <div class="col-75">
+            &nbsp;
+          </div>
+        </div>
+        <input type="hidden" name="mode" id="mode" value="update">
+        <input type="hidden" name="Epoch" id="Epoch" value="{{@POST.Epoch}}">
+      </form>
+    </div>
+    
+    <script>
+    function validateForm() {
+     const alerts = document.getElementById("alertnotes");
+     alerts.innerHTML='';
+     let lin = document.forms["wipform"]["line"].value;
+     let des = document.forms["wipform"]["description"].value;
+     let cus = document.forms["wipform"]["customer"].value;
+     let uni = document.forms["wipform"]["unitnumber"].value;
+     let due = document.forms["wipform"]["duedate"].value;
+     let urg = document.forms["wipform"]["urgency"].value;
+     let ecn = document.forms["wipform"]["ecn"].value;
+     let req = document.forms["wipform"]["requestor"].value;
+     let ale = "";
+     if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
+     if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
+     if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
+     if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
+     if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
+     if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
+     if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
+     if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
+     if ( ale.length > 0) { 
+         document.body.scrollTop = document.documentElement.scrollTop = 0; 
+        alerts.style.backgroundColor = "red";
+        alerts.style.color = "white";
+        alerts.style.textAlign = "center";
+        alerts.insertAdjacentHTML('beforeend',ale);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        return false;
+     } else {
+        return true;
+     }
+      
+    
+    }
+    </script>
+    
