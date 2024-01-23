@@ -15,7 +15,7 @@
         </div>
         <div class="col-75">
           <label class="titles" for="unitnumber">Unit AX number</label><p>
-          <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit AX number" value="{{@POST.UnitID}}">
+          <input type="text" id="UnitID" name="UnitID" placeholder="Unit AX number" value="{{@POST.UnitID}}">
         </div>
       </div>
       <div class="row">
@@ -23,7 +23,7 @@
         </div>
         <div class="col-75">
           <label class="titles" for="current">Current Part Number</label><p>
-          <input type="text" id="current" name="current" placeholder="Current part number" value="{{@POST.Current}}">
+          <input type="text" id="Current" name="Current" placeholder="Current part number" value="{{@POST.Current}}">
         </div>
       </div>
       <div class="row">
@@ -31,7 +31,7 @@
         </div>
         <div class="col-75">
           <label class="titles" for="substitution">Substitution</label><p>
-          <input type="text" id="substitution" name="substitution" placeholder="Substitute part number" value="{{@POST.Substitution}}">
+          <input type="text" id="Substitution" name="Substitution" placeholder="Substitute part number" value="{{@POST.Substitution}}">
         </div>
       </div>
       <div class="row">
@@ -39,7 +39,7 @@
         </div>
         <div class="col-75">
           <label class="titles" for="approvedby">Approved by</label><p>
-          <input type="text" id="approvedby" name="approvedby" placeholder="Name of engineer approving" value="{{@POST.ApprovedBy}}">
+          <input type="text" id="ApprovedBy" name="ApprovedBy" placeholder="Name of engineer approving" value="{{@POST.ApprovedBy}}">
         </div>
       </div>
       <div class="row">
@@ -47,7 +47,7 @@
         </div>
         <div class="col-75">
           <label class="titles" for="notes">Notes</label><p>
-          <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{@POST.Notes}}</textarea>
+          <textarea id="Notes" name="Notes" placeholder="Add any other piece of information..." style="height:200px">{{@POST.Notes}}</textarea>
         </div>
       </div>
         <p>
@@ -59,7 +59,6 @@
             &nbsp;
           </div>
         </div>
-        <input type="hidden" name="mode" id="mode" value="update">
         <input type="hidden" name="Epoch" id="Epoch" value="{{@POST.Epoch}}">
       </form>
     </div>
@@ -68,23 +67,17 @@
     function validateForm() {
      const alerts = document.getElementById("alertnotes");
      alerts.innerHTML='';
-     let lin = document.forms["wipform"]["line"].value;
-     let des = document.forms["wipform"]["description"].value;
-     let cus = document.forms["wipform"]["customer"].value;
-     let uni = document.forms["wipform"]["unitnumber"].value;
-     let due = document.forms["wipform"]["duedate"].value;
-     let urg = document.forms["wipform"]["urgency"].value;
-     let ecn = document.forms["wipform"]["ecn"].value;
-     let req = document.forms["wipform"]["requestor"].value;
+     let uni = document.forms["wipform"]["Unitnumber"].value;
+     let cur = document.forms["wipform"]["Current"].value;
+     let sub = document.forms["wipform"]["Substitution"].value;
+     let app = document.forms["wipform"]["ApprovedBy"].value;
+     let not = document.forms["wipform"]["Notes"].value;
      let ale = "";
-     if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
-     if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
-     if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
-     if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
-     if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
-     if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
-     if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
-     if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
+     if ( uni.length=== 0) { ale = ale + "Add Unit AX number<br>"; }
+     if ( cur.length=== 0) { ale = ale + "Current part number<br>"; }
+     if ( sub.length=== 0) { ale = ale + "Subtitution part number<br>"; }
+     if ( app.length=== 0) { ale = ale + "Who approved?<br>"; }
+     if ( not.length=== 0) { ale = ale + "Add a small Note<br>"; }
      if ( ale.length > 0) { 
          document.body.scrollTop = document.documentElement.scrollTop = 0; 
         alerts.style.backgroundColor = "red";

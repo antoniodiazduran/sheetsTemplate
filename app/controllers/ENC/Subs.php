@@ -19,10 +19,10 @@ class Subs extends \Controller {
         $this->f3->set('mode','upd');
         $rids = $this->f3->get('PARAMS.id');
         $record = $this->db->exec('SELECT Epoch, UnitID, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
-        
+
         $this->f3->set('navs','yes');
         $this->f3->set('nav_menu','nav_subs.htm');
-        $this->f3->set('isMobile',parent::isMobile()); 
+        $this->f3->set('isMobile',parent::isMobile());
         $this->f3->set('epoch',$rids);
         $this->f3->set('POST',$record[0]);
         $this->f3->set('layout','admin.htm');
@@ -32,7 +32,15 @@ class Subs extends \Controller {
         // Getting POST variables, epoch and datetime for logs
         $reqs = $this->f3->get('POST');
         date_default_timezone_set('America/Los_Angeles');
-        $id = $reqs['POST.Epoch'];
+	$upds = array(
+		$reqs['UnitID'],
+		$reqs['Current'],
+		$reqs['Substitution'],
+		$reqs['ApprovedBy'],
+		$reqs['Notes'],
+	);
+	$sql_upd = "UPDATE subs_log SET UnitID = ?, Current=?, Substitution=?, ApprovedBy=?, Notes=? WHERE Epoch = ".$reqs['Epoch'];
+	$this->db->exec($sql_upd, $upds);
 
         // Setting up variables for the display
         $this->f3->set('nav_menu','nav_subs.htm');
