@@ -18,17 +18,16 @@ class Subs extends \Controller {
         $this->f3->set('breadcrumbs','subs/rec');
         $this->f3->set('mode','upd');
         $rids = $this->f3->get('PARAMS.id');
-        $record  = $this->db->exec('SELECT Epoch, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
-        
+        $this->db->exec('SELECT Epoch, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
+        $this->copyTo('POST');
         $this->f3->set('navs','yes');
         $this->f3->set('nav_menu','nav_subs.htm');
         $this->f3->set('isMobile',parent::isMobile()); 
         $this->f3->set('epoch',$rids);
-        $this->f3->set('record',$record);
         $this->f3->set('layout','admin.htm');
         $this->f3->set('content','subs/edit.htm');
     }
-    
+
     public function edit() {
                 $this->f3->set('breadcrumbs','subs/log');
                 $rids = $this->f3->get('PARAMS.id');
