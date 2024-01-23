@@ -10,7 +10,9 @@ class ApartmentsController extends \Controller {
 	public function apartments()
 	{
         $apartment = new \Apartments($this->bpllc);
+		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('apartments',$apartment->all());
+		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','apartments/list.htm');
 	}
@@ -28,6 +30,7 @@ class ApartmentsController extends \Controller {
 			$this->f3->set('POST.State',"");
 			$this->f3->set('POST.Zipcode',"");
 		}
+		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','apartments/form.htm');
 	}
@@ -37,6 +40,7 @@ class ApartmentsController extends \Controller {
 		$apartment = new \Apartments($this->bpllc);
 		$apartment->delete($id);
 		$this->f3->set('apartments',$apartment->all());
+		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','apartments/list.htm');
 	}
@@ -59,6 +63,7 @@ class ApartmentsController extends \Controller {
 			}
 		}
 		$this->f3->set('apartments',$apartment->all());
+		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','apartments/form.htm');
 	}
