@@ -28,7 +28,19 @@ class Subs extends \Controller {
         $this->f3->set('layout','admin.htm');
         $this->f3->set('content','subs/edit.htm');
     }
+    public function upd_record() {
+        // Getting POST variables, epoch and datetime for logs
+        $reqs = $this->f3->get('POST');
+        date_default_timezone_set('America/Los_Angeles');
+        $id = $reqs['POST.Epoch'];
 
+        // Setting up variables for the display
+        $this->f3->set('nav_menu','nav_subs.htm');
+        $this->f3->set('isMobile',parent::isMobile());
+        $this->f3->set('result','Record Updated !');
+        $this->f3->set('layout','admin.htm');
+        $this->f3->set('content','subs/status.htm');
+    }
     public function edit() {
                 $this->f3->set('breadcrumbs','subs/log');
                 $rids = $this->f3->get('PARAMS.id');
