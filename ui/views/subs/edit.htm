@@ -11,6 +11,23 @@
       </div>
         <p>
       <div class="row">
+       <div class="col-25">
+       </div>
+       <div class="col-75">
+         <label class="titles" for="line">Line</label><p>
+           <select name="Line" ide="Line">
+                <option>
+                <option value="Weld" <check if="{{ @POST.Line=='Weld'}}">selected</check>>Weld
+                <option value="Line 5" <check if="{{ @POST.Line=='Line 5'}}">selected</check>>Line 5
+                <option value="Paint" <check if="{{ @POST.Line=='Paint'}}">selected</check>>Paint
+                <option value="Line 1" <check if="{{ @POST.Line=='Line 1'}}">selected</check>>Line 1
+                <option value="Line 3" <check if="{{ @POST.Line=='Line 3'}}">selected</check>>Line 3
+                <option value="Final" <check if="{{ @POST.Line=='Final'}}">selected</check>>Final
+                <option value="Office" <check if="{{ @POST.Line=='Office'}}">selected</check>>Office
+           </select>
+         </div>
+      </div>
+      <div class="row">
         <div class="col-25">
         </div>
         <div class="col-75">
@@ -32,6 +49,22 @@
         <div class="col-75">
           <label class="titles" for="substitution">Substitution</label><p>
           <input type="text" id="Substitution" name="Substitution" placeholder="Substitute part number" value="{{@POST.Substitution}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="qty">Qty</label><p>
+          <input type="text" id="Qty" name="Qty" placeholder="Quantity by part number" value="{{@POST.Qty}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+        </div>
+        <div class="col-75">
+          <label class="titles" for="Requestedby">Requested by</label><p>
+          <input type="text" id="RequestedBy" name="RequestedBy" placeholder="Name of requestor" value="{{@POST.RequestedBy}}">
         </div>
       </div>
       <div class="row">
@@ -67,7 +100,7 @@
     function validateForm() {
      const alerts = document.getElementById("alertnotes");
      alerts.innerHTML='';
-     let uni = document.forms["wipform"]["Unitnumber"].value;
+     let uni = document.forms["wipform"]["UnitID"].value;
      let cur = document.forms["wipform"]["Current"].value;
      let sub = document.forms["wipform"]["Substitution"].value;
      let app = document.forms["wipform"]["ApprovedBy"].value;

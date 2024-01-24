@@ -18,7 +18,7 @@ class Subs extends \Controller {
         $this->f3->set('breadcrumbs','subs/rec');
         $this->f3->set('mode','upd');
         $rids = $this->f3->get('PARAMS.id');
-        $record = $this->db->exec('SELECT Epoch, UnitID, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
+        $record = $this->db->exec('SELECT Epoch, Line, UnitID, DateTime, Current, Substitution, Qty, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
 
         $this->f3->set('navs','yes');
         $this->f3->set('nav_menu','nav_subs.htm');
@@ -33,13 +33,16 @@ class Subs extends \Controller {
         $reqs = $this->f3->get('POST');
         date_default_timezone_set('America/Los_Angeles');
 	$upds = array(
+		$reqs['Line'],
 		$reqs['UnitID'],
 		$reqs['Current'],
+		$reqs['Qty'],
 		$reqs['Substitution'],
+		$reqs['RequestedBy'],
 		$reqs['ApprovedBy'],
 		$reqs['Notes'],
 	);
-	$sql_upd = "UPDATE subs_log SET UnitID = ?, Current=?, Substitution=?, ApprovedBy=?, Notes=? WHERE Epoch = ".$reqs['Epoch'];
+	$sql_upd = "UPDATE subs_log SET Line = ?, UnitID = ?, Current=?, Qty = ?, Substitution=?, RequestedBy = ?, ApprovedBy=?, Notes=? WHERE Epoch = ".$reqs['Epoch'];
 	$this->db->exec($sql_upd, $upds);
 
         // Setting up variables for the display
@@ -54,10 +57,10 @@ class Subs extends \Controller {
                 $rids = $this->f3->get('PARAMS.id');
                 if (strpos($rids,",")>0) {
                         $rids = rtrim($rids,",");
-                        $sqlstrm = 'SELECT Epoch, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch in ('.$rids.')';
+                        $sqlstrm = 'SELECT Epoch, DateTime, Line, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch in ('.$rids.')';
                         $record  = $this->db->exec($sqlstrm);
                 } else {
-                        $record  = $this->db->exec('SELECT Epoch, DateTime, Current, Substitution, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$this->f3->get('POST.rids'));
+                        $record  = $this->db->exec('SELECT Epoch, DateTime, Line, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$this->f3->get('POST.rids'));
                 }
                 $this->f3->set('navs','yes');
 		$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
@@ -105,18 +108,21 @@ class Subs extends \Controller {
 		$rowv = array(
 			    time(),
                 date('m/d/Y H:i:s'),
-                $fields[0]['unitnumber'],
-                $fields[0]['current'],
-                $fields[0]['substitution'],
-                $fields[0]['approvedby'],
-                $fields[0]['notes'],
+                $fields[0]['Line'],
+                $fields[0]['UnitID'],
+                $fields[0]['Current'],
+                $fields[0]['Substitution'],
+                $fields[0]['Qty'],
+                $fields[0]['RequestedBy'],
+                $fields[0]['ApprovedBy'],
+                $fields[0]['Notes'],
         );
 		// Inserting data into Google Sheets
 		// $data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		// Inserting into sqlite database
             $sql_insert  = "insert into subs_log ";
-            $sql_insert .= "(Epoch, DateTime, UnitID, Current, Substitution, ApprovedBy, Notes) ";
-            $sql_insert .= "VALUES (?,?,?,?,?,?,?)";
+            $sql_insert .= "(Epoch, DateTime, Line, UnitID, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes) ";
+            $sql_insert .= "VALUES (?,?,?,?,?,?,?,?,?,?)";
 		$this->db->exec($sql_insert,$rowv);
 		// Displaying new data
 		$this->f3->reroute('/subs');

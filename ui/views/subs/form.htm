@@ -9,13 +9,30 @@
 	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
 	</div>
   </div>
-	<p>
+  <p>
   <div class="row">
     <div class="col-25">
     </div>
     <div class="col-75">
-      <label class="titles" for="unitnumber">Unit AX number</label><p>
-      <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit AX number">
+      <label class="titles" for="line">Line</label><p>
+      <select name="Line" ide="Line">
+		<option>
+		<option value="Weld">Weld
+		<option value="Line 5">Line 5
+		<option value="Paint">Paint
+		<option value="Line 1">Line 1
+		<option value="Line 3">Line 3
+		<option value="Final">Final
+		<option value="Office">Office
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+    </div>
+    <div class="col-75">
+      <label class="titles" for="unitid">Unit AX number</label><p>
+      <input type="text" id="UnitID" name="UnitID" placeholder="Unit AX number">
     </div>
   </div>
   <div class="row">
@@ -23,7 +40,7 @@
     </div>
     <div class="col-75">
       <label class="titles" for="current">Current Part Number</label><p>
-      <input type="text" id="current" name="current" placeholder="Current part number">
+      <input type="text" id="Current" name="Current" placeholder="Current part number">
     </div>
   </div>
   <div class="row">
@@ -31,7 +48,23 @@
     </div>
     <div class="col-75">
       <label class="titles" for="substitution">Substitution</label><p>
-      <input type="text" id="substitution" name="substitution" placeholder="Substitute part number">
+      <input type="text" id="Substitution" name="Substitution" placeholder="Substitute part number">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+    </div>
+    <div class="col-75">
+      <label class="titles" for="qty">Quantity</label><p>
+      <input type="text" id="Qty" name="Qty" style="align:right;" placeholder="Quantity by part number">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+    </div>
+    <div class="col-75">
+      <label class="titles" for="requestedby">Requested by</label><p>
+      <input type="text" id="RequestedBy" name="RequestedBy" placeholder="Requestor">
     </div>
   </div>
   <div class="row">
@@ -39,7 +72,7 @@
     </div>
     <div class="col-75">
       <label class="titles" for="approvedby">Approved by</label><p>
-      <input type="text" id="approvedby" name="approvedby" placeholder="Name of engineer approving">
+      <input type="text" id="ApprovedBy" name="ApprovedBy" placeholder="Name of engineer approving">
     </div>
   </div>
   <div class="row">
@@ -47,7 +80,7 @@
     </div>
     <div class="col-75">
       <label class="titles" for="notes">Notes</label><p>
-      <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
+      <textarea id="Notes" name="Notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
     </div>
   </div>
 	<p>
@@ -63,38 +96,34 @@
 </div>
 
 <script>
-function validateForm() {
- const alerts = document.getElementById("alertnotes");
- alerts.innerHTML='';
- let lin = document.forms["wipform"]["line"].value;
- let des = document.forms["wipform"]["description"].value;
- let cus = document.forms["wipform"]["customer"].value;
- let uni = document.forms["wipform"]["unitnumber"].value;
- let due = document.forms["wipform"]["duedate"].value;
- let urg = document.forms["wipform"]["urgency"].value;
- let ecn = document.forms["wipform"]["ecn"].value;
- let req = document.forms["wipform"]["requestor"].value;
- let ale = "";
- if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
- if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
- if ( cus.length=== 0) { ale = ale + "Type Customer name<br>"; }
- if ( uni.length=== 0) { ale = ale + "Type unit number<br>"; }
- if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
- if ( urg.length=== 0) { ale = ale + "Select urgency level<br>"; }
- if ( ecn.length=== 0) { ale = ale + "Add ECN number or none<br>"; }
- if ( req.length=== 0) { ale = ale + "Add Your name<br>"; }
- if ( ale.length > 0) { 
- 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
-	alerts.style.backgroundColor = "red";
-	alerts.style.color = "white";
-	alerts.style.textAlign = "center";
-	alerts.insertAdjacentHTML('beforeend',ale);
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
-	return false;
- } else {
-	return true;
+ function validateForm() {
+     const alerts = document.getElementById("alertnotes");
+     alerts.innerHTML='';
+     let uni = document.forms["wipform"]["UnitID"].value;
+     let cur = document.forms["wipform"]["Current"].value;
+     let sub = document.forms["wipform"]["Substitution"].value;
+     let qty = document.forms["wipform"]["Qty"].value;
+     let req = document.forms["wipform"]["RequestedBy"].value;
+     let app = document.forms["wipform"]["ApprovedBy"].value;
+     let not = document.forms["wipform"]["Notes"].value;
+     let ale = "";
+     if ( uni.length=== 0) { ale = ale + "Add Unit AX number<br>"; }
+     if ( cur.length=== 0) { ale = ale + "Current part number<br>"; }
+     if ( sub.length=== 0) { ale = ale + "Subtitution part number<br>"; }
+     if ( qty.length=== 0) { ale = ale + "Add some quantities<br>"; }
+     if ( req.length=== 0) { ale = ale + "Who requested?<br>"; }
+     if ( app.length=== 0) { ale = ale + "Who approved?<br>"; }
+     if ( not.length=== 0) { ale = ale + "Add a small Note<br>"; }
+     if ( ale.length > 0) {
+         document.body.scrollTop = document.documentElement.scrollTop = 0;
+        alerts.style.backgroundColor = "red";
+        alerts.style.color = "white";
+        alerts.style.textAlign = "center";
+        alerts.insertAdjacentHTML('beforeend',ale);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        return false;
+     } else {
+        return true;
+     }
  }
-  
-
-}
 </script>
