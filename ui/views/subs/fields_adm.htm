@@ -1,4 +1,5 @@
 <tr style="background-color:{{ @trcolor }}; color:{{ @ftcolor}};">
+        <td><a href="/subs/rec/{{@cols.Epoch}}" target="_blank"><i class="bi-pencil"></i></a></td>
         <td align="left">{{ @cols.DateTime }}</td>
         <td align="left">{{ @cols.Line }}</td>
         <td align="left">{{ @cols.UnitID }}</td>
@@ -8,4 +9,5 @@
         <td align="left">{{ @cols.RequestedBy }}</td>
         <td align="left">{{ @cols.ApprovedBy }}</td>
         <td align="left">{{ @cols.Logged }}</td>
+	<td align="center"><input type="checkbox" name="choosedate" value="{{ @cols.Epoch }}" onClick="getCheckboxValue(this)"></td>
 </tr>

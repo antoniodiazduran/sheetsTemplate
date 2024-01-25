@@ -8,10 +8,23 @@ class Subs extends \Controller {
         $this->f3->set('details',$data);
         $this->f3->set('breadcrumbs','subs');
       	$this->f3->set('navs','yes');
+	$this->f3->set('navfile','nav_subs.htm');
 	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9]');
         $this->f3->set('layout','layout.htm');
         $this->f3->set('headers','subs/headers.htm');
         $this->f3->set('fields','subs/fields.htm');
+        $this->f3->set('content','subs/list.htm');
+    }
+    public function adm() {
+ 	$data = $this->db->exec("SELECT * FROM subs_log ORDER BY Epoch desc");
+        $this->f3->set('details',$data);
+        $this->f3->set('breadcrumbs','subs');
+      	$this->f3->set('navs','yes');
+	$this->f3->set('navfile','nav_subs_adm.htm');
+	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9]');
+        $this->f3->set('layout','layout.htm');
+        $this->f3->set('headers','subs/headers_adm.htm');
+        $this->f3->set('fields','subs/fields_adm.htm');
         $this->f3->set('content','subs/list.htm');
     }
     public function edit_record() {
