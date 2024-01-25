@@ -29,7 +29,7 @@ class Payments extends DB\SQL\Mapper {
 	public function all() 
 	{ //get all records
 		$this->aptName="SELECT Name AS aptName FROM apartments WHERE apartments.id = payments.Apartment";
-		$this->load();
+		$this->load(array(),array('order'=>'TransactionDate ASC'));
 		return$this->query;
 	}
 
@@ -51,8 +51,8 @@ class Payments extends DB\SQL\Mapper {
 
 	public function getByApartment($id)
 	{
-		$this->load(array('Apartment=?', $id));
-        return $this->query;
+		$this->load(array('Apartment=?', $id),array('order'=>'Transactiondate ASC'));
+        	return $this->query;
 	}
 
 	public function getById($id) 

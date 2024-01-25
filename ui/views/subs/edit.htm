@@ -100,13 +100,13 @@
     function validateForm() {
      const alerts = document.getElementById("alertnotes");
      alerts.innerHTML='';
-     let uni = document.forms["wipform"]["UnitID"].value;
+//     let uni = document.forms["wipform"]["UnitID"].value;
      let cur = document.forms["wipform"]["Current"].value;
      let sub = document.forms["wipform"]["Substitution"].value;
      let app = document.forms["wipform"]["ApprovedBy"].value;
      let not = document.forms["wipform"]["Notes"].value;
      let ale = "";
-     if ( uni.length=== 0) { ale = ale + "Add Unit AX number<br>"; }
+ //    if ( uni.length=== 0) { ale = ale + "Add Unit AX number<br>"; }
      if ( cur.length=== 0) { ale = ale + "Current part number<br>"; }
      if ( sub.length=== 0) { ale = ale + "Subtitution part number<br>"; }
      if ( app.length=== 0) { ale = ale + "Who approved?<br>"; }

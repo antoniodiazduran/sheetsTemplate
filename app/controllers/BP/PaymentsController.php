@@ -9,15 +9,15 @@ class PaymentsController extends \Controller {
 
 	public function aptName($id) {
 		$apartment = new \Apartments($this->bpllc);
-        $apartment->getRecord($id);
-        return $apartment->Name;
+        	$apartment->getRecord($id);
+        	return $apartment->Name;
 	}
 
 	public function all()
 	{
-        $payment = new \Payments($this->bpllc);
-        $this->f3->set('apartment','::');
-        $this->f3->set('apartmentName','');
+ 	       $payment = new \Payments($this->bpllc);
+        	$this->f3->set('apartment','::');
+        	$this->f3->set('apartmentName','');
 		$this->f3->set('payments',$payment->all());
 		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('layout','layout.htm');
@@ -27,15 +27,16 @@ class PaymentsController extends \Controller {
 	public function add_payments() {
         $apt = $this->f3->get('PARAMS.id');
 		if($this->f3->exists('POST.new')) 
-        {
-        	$payment = new \Payments($this->bpllc);
+        	{
+        		$payment = new \Payments($this->bpllc);
 			$payment_added=$payment->add($this->f3->get('POST'));
-            $apt = $this->f3->get('POST.Apartment');
-            echo $apt;
-            $this->f3->set('apartment',$apt);
+           	 	$apt = $this->f3->get('POST.Apartment');
+            		echo $apt;
+            		$this->f3->set('apartment',$apt);
 			$this->f3->set('apartmentName',$this->aptName($apt));
-            $this->f3->set('payments',$payment->getByApartment($apt));
-            $this->f3->set('view','payments/list.htm');
+            		$this->f3->set('payments',$payment->getByApartment($apt));
+			$this->f3->set('layout','layout.htm');
+            		$this->f3->set('content','payments/list.htm');
 		} else {
 			$this->f3->set('POST.new',"new");
 			$this->f3->set('POST.id',"_");
@@ -44,11 +45,11 @@ class PaymentsController extends \Controller {
 			$this->f3->set('POST.TransactionDate',"");
 			$this->f3->set('POST.Amount',"");
 			$this->f3->set('POST.LateFee',"");
-            $this->f3->set('POST.Notes',"");
-            $this->f3->set('apartment',$apt);
+            		$this->f3->set('POST.Notes',"");
+            		$this->f3->set('apartment',$apt);
 			$this->f3->set('isMobile',parent::isMobile());
 			$this->f3->set('layout','layout.htm');
-            $this->f3->set('content','payments/form.htm');
+            		$this->f3->set('content','payments/form.htm');
 		}
        
 	}

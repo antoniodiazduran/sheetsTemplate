@@ -8,7 +8,7 @@ class Subs extends \Controller {
         $this->f3->set('details',$data);
         $this->f3->set('breadcrumbs','subs');
       	$this->f3->set('navs','yes');
-	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
+	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9]');
         $this->f3->set('layout','layout.htm');
         $this->f3->set('headers','subs/headers.htm');
         $this->f3->set('fields','subs/fields.htm');
@@ -18,7 +18,7 @@ class Subs extends \Controller {
         $this->f3->set('breadcrumbs','subs/rec');
         $this->f3->set('mode','upd');
         $rids = $this->f3->get('PARAMS.id');
-        $record = $this->db->exec('SELECT Epoch, Line, UnitID, DateTime, Current, Substitution, Qty, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
+        $record = $this->db->exec('SELECT Epoch, Line, UnitID, DateTime, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
 
         $this->f3->set('navs','yes');
         $this->f3->set('nav_menu','nav_subs.htm');
@@ -63,7 +63,6 @@ class Subs extends \Controller {
                         $record  = $this->db->exec('SELECT Epoch, DateTime, Line, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$this->f3->get('POST.rids'));
                 }
                 $this->f3->set('navs','yes');
-		$this->f3->set('columns','[1,2,3,4,5,6,7,8,9,10,11,12]');
                 $this->f3->set('nav_menu','nav_subs.htm');
                 $this->f3->set('isMobile',parent::isMobile());
                 $this->f3->set('mode','upd');
@@ -106,17 +105,17 @@ class Subs extends \Controller {
 		date_default_timezone_set("America/Los_Angeles");
 		$fields[] = $this->f3->get('POST');
 		$rowv = array(
-			    time(),
-                date('m/d/Y H:i:s'),
-                $fields[0]['Line'],
-                $fields[0]['UnitID'],
-                $fields[0]['Current'],
-                $fields[0]['Substitution'],
-                $fields[0]['Qty'],
-                $fields[0]['RequestedBy'],
-                $fields[0]['ApprovedBy'],
-                $fields[0]['Notes'],
-        );
+	          time(),
+                  date('m/d/Y H:i:s'),
+                  $fields[0]['Line'],
+                  $fields[0]['UnitID'],
+                  $fields[0]['Current'],
+                  $fields[0]['Substitution'],
+                  $fields[0]['Qty'],
+                  $fields[0]['RequestedBy'],
+                  $fields[0]['ApprovedBy'],
+                  $fields[0]['Notes'],
+                );
 		// Inserting data into Google Sheets
 		// $data[] = $this->GSheetsInsert('enc.esfs',$row,'1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		// Inserting into sqlite database
