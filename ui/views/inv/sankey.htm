@@ -1,0 +1,41 @@
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="sankey_multiple" style="width: 2800px; height: 900px;"></div>
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Weight');
+    data.addRows([
+	['Electronics','EVO Electronics', 5.0 ],
+	['EVO Electronics','Proterra', 3.8 ],
+	['Electronics','NON EVO Electronics', 1.2],
+	['EVO Electronics','Scrap', 1],
+	['NON EVO Electronics','Sell Mkt', 0.7],
+	['NON EVO Electronics','Recycle', 0.5],
+	['Parts & Service','Slow Moving',3],
+	['Parts & Service','No Demand',1.2],
+	['Metals','Recycle',1.2],
+	['Electrical','Recycle',2.3],
+	['Return to Vendors','Bentech', 0.2],
+	['Return to Vendors','Ryerson',0.3],
+	['Off-the-Self','Fire', 1],
+	['Off-the-Self','Ambulance', 1],
+	['Off-the-Self','RV', 1],
+
+    ]);
+
+    // Set chart options
+    var options = {
+      width: 1200,
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    chart.draw(data, options);
+   }
+</script>

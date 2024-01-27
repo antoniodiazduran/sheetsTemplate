@@ -9,7 +9,7 @@ class Subs extends \Controller {
         $this->f3->set('breadcrumbs','subs');
       	$this->f3->set('navs','yes');
 	$this->f3->set('navfile','nav_subs.htm');
-	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9]');
+	$this->f3->set('columns','[0,1,2,3,4,5,6,7,8]');
         $this->f3->set('layout','layout.htm');
         $this->f3->set('headers','subs/headers.htm');
         $this->f3->set('fields','subs/fields.htm');
@@ -21,7 +21,7 @@ class Subs extends \Controller {
         $this->f3->set('breadcrumbs','subs');
       	$this->f3->set('navs','yes');
 	$this->f3->set('navfile','nav_subs_adm.htm');
-	$this->f3->set('columns','[1,2,3,4,5,6,7,8,9]');
+	$this->f3->set('columns','[0,1,2,3,4,5,6,7,8]');
         $this->f3->set('layout','layout.htm');
         $this->f3->set('headers','subs/headers_adm.htm');
         $this->f3->set('fields','subs/fields_adm.htm');
@@ -34,7 +34,7 @@ class Subs extends \Controller {
         $record = $this->db->exec('SELECT Epoch, Line, UnitID, DateTime, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$rids);
 
         $this->f3->set('navs','yes');
-        $this->f3->set('nav_menu','nav_subs.htm');
+        $this->f3->set('nav_menu','nav_subs_adm.htm');
         $this->f3->set('isMobile',parent::isMobile());
         $this->f3->set('epoch',$rids);
         $this->f3->set('POST',$record[0]);
@@ -42,7 +42,6 @@ class Subs extends \Controller {
         $this->f3->set('content','subs/edit.htm');
     }
     public function upd_record() {
-        // Getting POST variables, epoch and datetime for logs
         $reqs = $this->f3->get('POST');
         date_default_timezone_set('America/Los_Angeles');
 	$upds = array(
@@ -59,7 +58,7 @@ class Subs extends \Controller {
 	$this->db->exec($sql_upd, $upds);
 
         // Setting up variables for the display
-        $this->f3->set('nav_menu','nav_subs.htm');
+        $this->f3->set('nav_menu','nav_subs_adm.htm');
         $this->f3->set('isMobile',parent::isMobile());
         $this->f3->set('result','Record Updated !');
         $this->f3->set('layout','admin.htm');
@@ -76,7 +75,7 @@ class Subs extends \Controller {
                         $record  = $this->db->exec('SELECT Epoch, DateTime, Line, Current, Substitution, Qty, RequestedBy, ApprovedBy, Notes, Logged FROM subs_log WHERE Epoch = ?',$this->f3->get('POST.rids'));
                 }
                 $this->f3->set('navs','yes');
-                $this->f3->set('nav_menu','nav_subs.htm');
+                $this->f3->set('nav_menu','nav_subs_adm.htm');
                 $this->f3->set('isMobile',parent::isMobile());
                 $this->f3->set('mode','upd');
                 $this->f3->set('epoch',$rids);
@@ -99,9 +98,29 @@ class Subs extends \Controller {
                 $this->db->exec($sql_update,$rowv);
 
                 // Setting up variables for the display
-                $this->f3->set('nav_menu','nav_subs.htm');
+                $this->f3->set('nav_menu','nav_subs_adm.htm');
                 $this->f3->set('isMobile',parent::isMobile());
-                $this->f3->set('result','Record Updated !');
+                $this->f3->set('result','Record(s) Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','subs/status.htm');
+    }
+    public function del() {
+                // Getting POST variables, epoch and datetime for logs
+                $rids = $this->f3->get('PARAMS.id');
+                if (strpos($rids,",")>0) {
+                        $rids = rtrim($rids,",");
+		}
+                date_default_timezone_set('America/Los_Angeles');
+                $datet = date('Y-m-d H:i:s',time());
+                //$sql_update .= "WHERE rid = ?";
+                $sql_update  = "DELETE FROM subs_log ";
+                $sql_update .= "WHERE Epoch in (".$rids.")";
+                $this->db->exec($sql_update);
+
+                // Setting up variables for the display
+                $this->f3->set('nav_menu','nav_subs_adm.htm');
+                $this->f3->set('isMobile',parent::isMobile());
+                $this->f3->set('result','Record(s) deletedd !');
                 $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','subs/status.htm');
     }
