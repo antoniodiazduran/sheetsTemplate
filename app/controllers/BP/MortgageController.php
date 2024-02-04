@@ -16,7 +16,7 @@ class MortgageController extends \Controller {
 		$this->f3->set('layout','layout.htm');
 		$this->f3->set('content','mortgage/list.htm');
 	}
-    
+
 	public function modify_mortgage() {
 		if($this->f3->exists('POST.new')) {
 			$mortgage = new \Mortgage($this->bpllc);
