@@ -4,10 +4,10 @@ class Mortgage extends DB\SQL\Mapper {
 
 /* only these db fields are allowed to be changed */
 	protected $allowed_fields = array(
-		"Name",
-		"Address",
-		"State",
-		"Zipcode"
+		"Apartment",
+		"Bank",
+		"Amount",
+		"Notes"
 	);
 
 	private function sanitizeInput(array $data, array $fieldNames) 
@@ -25,8 +25,10 @@ class Mortgage extends DB\SQL\Mapper {
 		parent::__construct($db,'mortgage');
 	}
 
-	public function all() 
-	{ //get all records
+	public function all()
+	{
+		//get all records
+		$this->aptName="SELECT Name AS aptName FROM apartments WHERE apartments.id = mortgage.Apartment";
 		$this->load();
 		return $this->query;
 	}
@@ -34,12 +36,7 @@ class Mortgage extends DB\SQL\Mapper {
 	public function add( $unsanitizeddata )
 	{
 		$data=$this->sanitizeInput($unsanitizeddata, $this->allowed_fields);
-		//check if name already exists in db
-		$this->load(array('Name=?',$data['Name']));
-		if(!$this->dry())
-		{
-			return 10;
-		}
+		// adding timestamps
 		$data['created_at']=$this->getCurrentdate();
 		$data['updated_at']=$this->getCurrentdate();
 		$this->copyFrom($data);

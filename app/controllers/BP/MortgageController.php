@@ -17,7 +17,8 @@ class MortgageController extends \Controller {
 		$this->f3->set('content','mortgage/list.htm');
 	}
 
-	public function modify_mortgage() {
+	public function modify_mortgage() 
+        {
 		if($this->f3->exists('POST.new')) {
 			$mortgage = new \Mortgage($this->bpllc);
 			$mortgage_added=$mortgage->add($this->f3->get('POST'));
@@ -25,6 +26,7 @@ class MortgageController extends \Controller {
 		} else {
 			$this->f3->set('POST.new',"new");
 			$this->f3->set('POST.id',"_");
+			$this->f3->set('POST.Apartment',"");
 			$this->f3->set('POST.Bank',"");
 			$this->f3->set('POST.Amount',"");
 			$this->f3->set('POST.Notes',"");
@@ -34,7 +36,8 @@ class MortgageController extends \Controller {
 		$this->f3->set('content','mortgage/form.htm');
 	}
 
-	public function delete_mortgage() {
+	public function delete_mortgage()
+        {
 		$id = $this->f3->get('PARAMS.id');
 		$mortgage = new \Mortgage($this->bpllc);
 		$mortgage->delete($id);
@@ -44,9 +47,9 @@ class MortgageController extends \Controller {
 		$this->f3->set('content','mortgage/list.htm');
 	}
 
-	public function show_mortgage() 
+	public function show_mortgage()
 	{
-		$id = $this->f3->get('PARAMS.id'); 
+		$id = $this->f3->get('PARAMS.id');
 		if($this->f3->exists('POST.edit'))
         {
 			$mortgage = new \Mortgage($this->bpllc);

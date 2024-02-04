@@ -22,6 +22,9 @@
         <form action="" method="post" class="form-horizontal">
         <div class="row py-5">
             <div class="col-8">
+		<h4>Apartment</h4>
+		<h4><select name="Apartment" id="Apartment"><option value="1">Selma</select></h4>
+		<p>
                 <check if="{{ isset(@POST.new) }}">
                     <h4>Bank: {{ @POST.Bank }}</h4>
                     <h4><input type="text" name="Bank" id="Bank" value="{{ @POST.Bank }}"></h4>	

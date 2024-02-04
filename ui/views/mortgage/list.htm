@@ -4,8 +4,8 @@
 <true>
 	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
 		<thead>
-				<tr class="bg-secondary">
-				<th scope="col">Date</th>
+			<tr class="bg-secondary" style="background-color:black;">
+				<th scope="col">Apartment</th>
 				<th scope="col">Bank</th>
 				<th scope="col">Amount</th>
 				<th scope="col">Notes</th>
@@ -15,13 +15,11 @@
 	<tbody>
 	<repeat group="{{ @mortgage }}" value="{{ @apts }}">
 		<tr onclick="window.document.location='tenant/mortgage/{{ @apts.id }}';" style="cursor: pointer;">
-			<td>{{ @apts.TransactionDate }}</td>
+			<td>{{ @apts.aptName}}</td>
 			<td>{{ @apts.Bank }}</td>
 			<td>{{ @apts.Amount }}</td>
 			<td>{{ @apts.Notes }}</td>
 			<td>
-				<a href="/tenant/payments/{{@apts.id}}"><i class="bi-cash-coin"></i></a> &nbsp; &nbsp;
-				<a href="/tenant/expenses/{{@apts.id}}"><i class="bi-receipt"></i></a>
 			</td>
 		</tr>	
 	</repeat>
