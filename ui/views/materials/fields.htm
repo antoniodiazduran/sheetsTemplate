@@ -8,7 +8,7 @@
 	<td align="left">{{ (strlen(@cols.Description)>70)?substr(@cols.Description,0,70)."...":@cols.Description }} </td>
 	<td align="left">{{ @cols.paretoReason }}</td>
 	<td align="left"><a href="/mat/filter/partnumber/{{@cols.PartNumber}}" style="color:black;">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }}</a> </td>
-	<td align="left">{{ @cols.Qty }} </td>
+	<td align="left">{{ @cols.Qty }}/{{ @cols.QtyUnit }} </td>
 <!--	<td align="left"><a href="/mat/filter/lowInventory/{{@cols.lowInventory}}" style="color:black;">{{ @cols.lowInventory }}</a> </td>//-->
 <td>{{ @cols.supplier }} </td>
 	<td align="left">{{ @cols.DueDate }}</td>

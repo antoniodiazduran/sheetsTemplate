@@ -1,33 +1,42 @@
-<check if="{{ @navs == 'yes' }}">
-  <include href="{{ @nav_menu }}">
+<check if="{{ @nav == 'yes' }}">
+<include href="{{ @nav_menu }}">
 </check>
 <div style="padding:1px; background-color:red; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Engineering Support</h3>
+	<h3>&nbsp; &nbsp; Urgency Update</h3>
 </div>
 <div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
     <div class="row">
 	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
 	</div>
     </div>
     <div class="row">
-      <div class="col-45">
-        <label for="urgency">Owner:</label>
+      <div class="col-25">
       </div>
-      <div class="col-55">
-	<repeat group="{{ @urgency }}" value="{{ @cols }}">
-		<input type="radio" id="urgency" name="urgency" value="{{ @cols.names }}" <check if="{{ @actual[0]['Urgency'] == @cols.names }}"> checked </check> >
-		<label for="urgency">{{ @cols.names }}</label><br>
+      <div class="col-75">
+	<repeat group="{{ @record }}" value="{{ @vals }}">
+	  <label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}}</label><p>
 	</repeat>
       </div>
     </div>
-	<p>
+
     <div class="row">
-	<dic class="col-45">
-	</div>
-	<div class="col-55">
-		<input type="hidden" value="{{ @epoch }}" id="epoch" name="epoch">
-      		<input type="reset" value="Clear">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <label class="titles" for="reason">Urgency</label><p>
+	<select name="urgency" id="urgency">
+		<option>
+		<option <check if="{{ @vals.Urgency=='Critical' }}"> selected</check>>Critical
+		<option <check if="{{ @vals.Urgency=='Hot' }}"> selected</check>>Hot
+	</select>
+      </div>
+    </div>
+    <p>
+    <div class="row">
+	<div class="col-75">
+		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+ 		<input type="reset" value="Clear">
       		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
 	</div>
     </div>
@@ -38,9 +47,9 @@
 function validateForm() {
  const alerts = document.getElementById("alertnotes");
  alerts.innerHTML='';
- let own = document.forms["wipform"]["owner"].value;
+ let due = document.forms["wipform"]["urgency"].value;
  let ale = "";
- if ( own.length=== 0) { ale = ale + "Select owner<br>"; }
+ if ( due.length=== 0) { ale = ale + "Add Urgency<br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
 	alerts.style.backgroundColor = "red";
