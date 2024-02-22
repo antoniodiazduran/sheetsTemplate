@@ -10,7 +10,15 @@
 	<td align="right">{{ @cols.Qty }}/{{ @cols.QtyUnit}} </td>
 <!--	<td align="left"><a href="/mat/rank/lowInventory/{{@cols.lowInventory}}" style="color:black;">{{ @cols.lowInventory }}</a> </td>//-->
 	<td>{{ @cols.supplier }} </td>
-	<td align="left" <check if="{{ @cols.DueDate < date('Y-m-d') }}"> class="textblinker" style="color:red;" </check>>{{ @cols.DueDate}}</td>
+	<check if="{{ @cols.DueDate < date('Y-m-d') }}"> 
+		<true><td align="left" class="textblinker" style="color:red;">{{ @cols.DueDate }}</td></true>
+		<false>
+			<check if="{{ @cols.DueDate == '2024-12-25' }}">  
+				<true><td align="center" class="textblinker" style="color:blue;font-size:1.1em;"> <i class="bi-person-workspace"></i></td></true>
+				<false><td align="left">{{ @cols.DueDate }}</td></false>
+			</check>	
+		</false>
+	</check>
 <!--	<td align="left"><a href="/mat/buyer/{{@cols.rid}}" target="_blank"><i class="bi-calendar"></i></a>
                   &nbsp; <a href="/mat/supplier/{{@cols.rid}}" target="_blank"><i class="bi-bookmark"></i></a></td>//-->
 	<td align="left"<check if="{{ @cols.Urgency=='Critical' }}">style="color:red; opacity:0.6;" </check>>{{ @cols.Urgency }}</td>
