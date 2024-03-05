@@ -15,7 +15,13 @@
 		<false>
 			<check if="{{ @cols.DueDate == '2024-12-25' }}">  
 				<true><td align="center" class="textblinker" style="color:blue;font-size:1.1em;"> <i class="bi-person-workspace"></i></td></true>
-				<false><td align="left">{{ @cols.DueDate }}</td></false>
+				<false>
+				<td align="left">{{ @cols.DueDate }}
+				<check if="{{ strtoupper(date('M')) == @cols.ship }}">
+				<check if="{{ (substr(@cols.DueDate,-2)*1) > 15 }}"><i class="bi-person-raised-hand"></i></check>
+				</check>
+				</td>
+				</false>
 			</check>	
 		</false>
 	</check>
