@@ -13,7 +13,8 @@ class MortgageController extends \Controller {
 		$this->f3->set('mortgage',$mortgage->all());
 		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','mortgage/list.htm');
 	}
 
@@ -32,7 +33,8 @@ class MortgageController extends \Controller {
 			$this->f3->set('POST.Notes',"");
 		}
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','mortgage/form.htm');
 	}
 
@@ -43,7 +45,8 @@ class MortgageController extends \Controller {
 		$mortgage->delete($id);
 		$this->f3->set('mortgage',$mortgage->all());
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','mortgage/list.htm');
 	}
 
@@ -66,7 +69,8 @@ class MortgageController extends \Controller {
 		}
 		$this->f3->set('mortgage',$mortgage->all());
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','mortgage/form.htm');
 	}
 }

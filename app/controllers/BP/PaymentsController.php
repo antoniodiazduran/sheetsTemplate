@@ -20,7 +20,8 @@ class PaymentsController extends \Controller {
         	$this->f3->set('apartmentName','');
 		$this->f3->set('payments',$payment->all());
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','payments/list.htm');
 	}
     
@@ -35,7 +36,8 @@ class PaymentsController extends \Controller {
             		$this->f3->set('apartment',$apt);
 			$this->f3->set('apartmentName',$this->aptName($apt));
             		$this->f3->set('payments',$payment->getByApartment($apt));
-			$this->f3->set('layout','layout.htm');
+			$this->f3->set('nav_menu','navtenant.htm');
+	                $this->f3->set('layout','tenant.htm');
             		$this->f3->set('content','payments/list.htm');
 		} else {
 			$this->f3->set('POST.new',"new");
@@ -48,7 +50,8 @@ class PaymentsController extends \Controller {
             		$this->f3->set('POST.Notes',"");
             		$this->f3->set('apartment',$apt);
 			$this->f3->set('isMobile',parent::isMobile());
-			$this->f3->set('layout','layout.htm');
+			$this->f3->set('nav_menu','navtenant.htm');
+	                $this->f3->set('layout','tenant.htm');
             		$this->f3->set('content','payments/form.htm');
 		}
        
@@ -59,11 +62,12 @@ class PaymentsController extends \Controller {
         $apt = $this->f3->get('PARAMS.apt');
 		$payment = new \Payments($this->bpllc);
 		$payment->delete($id);
-        $this->f3->set('apartment',$apt);
+        	$this->f3->set('apartment',$apt);
 		$this->f3->set('apartmentName',$this->aptName($apt));
 		$this->f3->set('payments',$payment->getByApartment($apt));
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','payments/list.htm');
 	}
 
@@ -79,20 +83,22 @@ class PaymentsController extends \Controller {
 		$this->f3->set('payments',$payment->getById($id));
 		//$this->f3->set('apartmentName',$this->aptName($payment->Apartment));
 		$this->f3->set('apartmentName',$this->aptName($payment->Apartment));
-		$this->f3->set('isMobile',parent::isMobile());	
-		$this->f3->set('layout','layout.htm');	
+		$this->f3->set('isMobile',parent::isMobile());
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','payments/form.htm');
     }
 
-	public function show_payments() 
+	public function show_payments()
 	{
-		$id = $this->f3->get('PARAMS.id'); 
+		$id = $this->f3->get('PARAMS.id');
 		$payment = new \Payments($this->bpllc);
-        $this->f3->set('apartment',$id);
+        	$this->f3->set('apartment',$id);
 		$this->f3->set('payments',$payment->getByApartment($id));
 		$this->f3->set('apartmentName',$this->aptName($id));
 		$this->f3->set('isMobile',parent::isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','payments/list.htm');
 	}
 }
