@@ -1,0 +1,46 @@
+<div class="table-responsive">
+	<h2>Statements for {{ @apartment['Name'] }}</h2>
+<check if="{{@isMobile==0}}">
+<true>
+	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+		<thead>
+			<tr style="background-color:black;">
+				<th scope="col">Transaction Date</th>
+				<th scope="col">Description</th>
+				<th scope="col">Amount</th>
+			</tr>
+		</thead>
+	<tbody>
+	<repeat group="{{ @statement }}" value="{{ @apts }}">
+		<tr>
+			<td>{{ @apts.TransactionDate }}</td>
+			<td>{{ @apts.Description }}</td>
+			<td align=right>{{ @apts.Amount }}</td>
+		</tr>	
+	</repeat>
+	</tbody>
+</table>
+</true>
+<false>
+	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+		<thead>
+			<tr style="background-color:black;">
+				<th scope="col">Date<br>Description</th>
+				<th scope="col">Amount</th>
+			</tr>
+		</thead>
+	<tbody>
+	<repeat group="{{ @statement }}" value="{{ @apts }}">
+		<tr>
+			<td>
+				{{ @apts.TransactionDate }}<br>{{@apts.Description}}
+			</td>
+			<td align="right" valign="middle">{{ @apts.Amount }}</td>
+		</tr>	
+	</repeat>
+	</tbody>
+	</table>
+</check>
+</false>
+</div>
+

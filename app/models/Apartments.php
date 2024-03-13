@@ -46,6 +46,11 @@ class Apartments extends DB\SQL\Mapper {
 		$this->save();
 		return 1;
 	}
+	public function getName($id) 
+	{
+		return $this->load(array('id=?',$id));
+
+	}
 
 	public function getRecord($id)
 	{

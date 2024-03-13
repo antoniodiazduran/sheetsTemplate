@@ -7,17 +7,26 @@ class ApartmentsController extends \Controller {
 	protected $f3;
 	protected $db;
 
+	public function payexpreport() 
+	{
+		$apartment = new \Apartments($this->bpllc);
+		$this->f3->set('isMobile',parent::isMobile());
+		$this->f3->set('report',$apartment->payexp());
+		$this->f3->set('layout','tenant.htm');
+		$this->f3->set('content','apartments/payexpreport.htm');
+	}
+
+
 	public function apartments()
 	{
-        $apartment = new \Apartments($this->bpllc);
-		$this->f3->set('isMobile',parent::isMobile());
+		$apartment = new \Apartments($this->bpllc);
 		$this->f3->set('apartments',$apartment->all());
 		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('nav_menu','navtenant.htm');
 		$this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','apartments/list.htm');
 	}
-    
+
 	public function modify_apartments() {
 		if($this->f3->exists('POST.new')) {
 			$apartment = new \Apartments($this->bpllc);
