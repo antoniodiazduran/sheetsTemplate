@@ -7,11 +7,64 @@ class ExpensesController extends \Controller {
 	protected $f3;
 	protected $db;
 
-	public function aptName($id) {
+    public function aptName($id) {
 		$apartment = new \Apartments($this->bpllc);
-        $apartment->getRecord($id);
-        return $apartment->Name;
+        	$apartment->getRecord($id);
+        	return $apartment->Name;
+    }
+
+    public function fileUpload() {
+	$target_dir = "uploads/";
+	//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$uploadOk = 1;
+	$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
+	$target_file = $target_dir . "exp_". uniqid().".".$imageFileType;
+
+	// Check if image file is a actual image or fake image
+	if(isset($_POST["submit"])) {
+		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+		if($check !== false) {
+			echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			echo "File is not an image.";
+			$uploadOk = 0;
+		}
 	}
+
+	// Check if file already exists
+	if (file_exists($target_file)) {
+		echo "Sorry, file already exists.";
+		$uploadOk = 0;
+	}
+
+	// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 500000) {
+		echo "Sorry, your file is too large.";
+		$uploadOk = 0;
+	}
+
+	// Allow certain file formats
+	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		$uploadOk = 0;
+	}
+
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+		echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+	} else {
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+		} else {
+			echo "Sorry, there was an error uploading your file.";
+		}
+	}
+
+   }
+
 
     public function all()
 	{
@@ -32,6 +85,7 @@ class ExpensesController extends \Controller {
 	        	$expense = new \Expenses($this->bpllc);
 			$expense_added=$expense->add($this->f3->get('POST'));
 	                $apt = $this->f3->get('POST.Apartment');
+                        $this->fileUpload();
         		$this->f3->set('apartmentName',$this->aptName($apt));
             		$this->f3->set('apartment',$apt);
             		$this->f3->set('expenses',$expense->getByApartment($apt));
@@ -43,6 +97,7 @@ class ExpensesController extends \Controller {
 			$this->f3->set('POST.new',"new");
 			$this->f3->set('POST.id',"_");
 			$this->f3->set('POST.Apartment',$apt);
+        		$this->f3->set('apartmentName',$this->aptName($apt));
 			$this->f3->set('POST.TransactionDate',"");
 			$this->f3->set('POST.Amount',"0.00");
 			$this->f3->set('POST.Supplier',"");

@@ -12,11 +12,6 @@
 		<!-- {{ @t1++ }}//-->
 <include href="{{ @headers }}"/>
 <repeat group="{{ @details.0 }}" key="{{ @ikey }}" value="{{ @cols}}" >
-<check if="{{ @c1 < @t1 }}">
-	<true>
-		<!-- {{ @c1++ }}//-->
-	</true>
-	<false>
 	<set trcolor="white"/>
 	<set ftcolor="black"/>
 	<set tdcolor="white"/>
@@ -25,8 +20,6 @@
 	<check if="{{ @field == 'all' }}">
        		<include href="{{ @fields }}"/>
 	</check>
-	</false>
-</check>
 </repeat>
 
 </table>
