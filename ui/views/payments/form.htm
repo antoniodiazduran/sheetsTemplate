@@ -13,10 +13,10 @@
     </true>
     </check>		 
     <h2>
-        <a href="/tenant/payments/{{@POST.Apartment}}"><i class="bi-arrow-left"></i></a> 
+        <a href="/bowline/payments/{{@POST.Apartment}}"><i class="bi-arrow-left"></i></a> 
         {{ @apartmentName }}
         <check if="{{ !isset(@POST.new) }}">
-            <a href="/tenant/payments/delete/{{ @POST.id }}/{{@POST.Apartment}}"><i class="bi-trash"></i></a>
+            <a href="/bowline/payments/delete/{{ @POST.id }}/{{@POST.Apartment}}"><i class="bi-trash"></i></a>
         </check>
         
     </h2>
