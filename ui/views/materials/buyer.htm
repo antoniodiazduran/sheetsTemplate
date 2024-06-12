@@ -1,61 +1,49 @@
 <check if="{{ @nav == 'yes' }}">
 <include href="{{ @nav_menu }}">
 </check>
-<div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Buyer Update</h3>
+<div class="w3-container w3-green">
+	<h3>Buyer Update</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm();">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm();">
+	<div class="w3-container w3-red" id="alertnotes">
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
 	<repeat group="{{ @record }}" value="{{ @vals }}">
-	  <label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}}</label><p>
 	</repeat>
+	<p>
+        <h3>Buyer</h3>
+        <input class="w3-input" type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @vals.Buyer }}"></p>
+	<p>
+        <h3>Due Date</h3>
+        <input class="w3-input" type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @vals.DueDate }}"></p>
+
+	<br><br>
+	<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+	<input class="w3-button w3-gray" type="reset" value="Clear">
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'"></p>
+
+    <div class="w3-row">
+      <div class="w3-half">
+	<h3 class="w3-text">Records</h3>
+	<ul class="w3-ul">	
+	<repeat group="{{ @record }}" value="{{ @vals }}">
+	  <li>{{ @vals.PartNumber}} {{@vals.Description}}</li>
+	</repeat>
+	</ul>
+      </div>
+      <div class="w3-half">
+	<p>
+	<h3 class="w3-text">Changes...</h3>
+	<ul class="w3-ul">
+	<repeat group="{{ @duedate }}" value="{{ @log }}">
+		<li>{{ @log.PartNumber }} {{ @log.Description }} was Change to {{ @log.DueDate }} on {{ @log.timeStamp }}</li>
+	</repeat>
+	</ul>
+	</p>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="unitnumber">Buyer</label><p>
-        <input type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @vals.Buyer }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @vals.DueDate }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-	<label class="titles">Changes...</label><br>
-	<repeat group="{{ @duedate }}" value="{{ @log }}">
-		<li><label>{{ @log.PartNumber }} {{ @log.Description }} was Change to {{ @log.DueDate }} on {{ @log.timeStamp }}</label><br>
-	</repeat>
-      </div>
-    </div>
-    <p>
-    <div class="row">
-	<div class="col-75">
-		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
- 		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+
   </form>
-</div>
 
 <script>
 function validateForm() {

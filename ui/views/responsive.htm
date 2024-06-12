@@ -3,15 +3,10 @@
 	<head>
 		<title>{{ @URI }}</title>
 		<meta charset="{{ @ENCODING }}" />
+                <base href="{{ @SCHEME .'://'.@HOST.':'.@PORT.@BASE.'/' }}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<base href="{{ @SCHEME .'://'.@HOST.':'.@PORT.@BASE.'/' }}" />
-		<!--<link rel="stylesheet" href="lib/code.css" type="text/css" /> 
-		<link rel="stylesheet" href="ui/css/base.css" type="text/css" />
-		<link rel="stylesheet" href="ui/css/sforms.css" type="text/css" /> 
-		<link rel="stylesheet" href="ui/css/theme.css" type="text/css" /> //-->
 		<link rel="stylesheet" href="/ui/css/w3.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
 	</head>
 	<body>
 		<include href="{{ @content }}">

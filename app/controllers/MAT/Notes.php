@@ -24,7 +24,7 @@ class Notes extends \Controller {
                 $this->f3->set('mode','upd');
                 $this->f3->set('epoch',$rids);
                 $this->f3->set('isMobile',parent::isMobile());
-                $this->f3->set('layout','layout.htm');
+                $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/notes.htm');
     }
     public function upd() {

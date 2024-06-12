@@ -75,8 +75,8 @@ class Admin extends \Controller {
                 $this->f3->set('bgcolor','red');
                 $this->f3->set('headers','materials/buyersheaders.htm');
                 $this->f3->set('fields','materials/buyersfields.htm');
-                $this->f3->set('layout','layout.htm');
-                $this->f3->set('content','materials/list.htm');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/list2.htm');
     }
     public function sort() {
 		$fld = $this->f3->get('PARAMS.field');

@@ -21,8 +21,8 @@ class Esfs extends Controller {
 	 	//$eng[] = $this->GSheetsRead('enc.eng','1QrOuTaG8r_1ZjIdujTVzXbiiydjk-2rk8XxZpprOQD0');
 		//$this->f3->set('engineers',$eng[0]);
                 $this->f3->set('breadcrumbs','esfs');
-	        $this->f3->set('navs','yes');
-                $this->f3->set('layout','layout.htm');
+	        $this->f3->set('navs','no');
+                $this->f3->set('layout','responsive.htm');
 		$this->f3->set('mode','create');
                 $this->f3->set('content','esfs/form.htm');
     }

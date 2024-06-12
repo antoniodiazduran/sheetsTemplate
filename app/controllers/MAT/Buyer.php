@@ -21,7 +21,7 @@ class Buyer extends \Controller {
                 $fld = $this->f3->get('PARAMS.field');
                 $val = $this->f3->get('PARAMS.value');
                 if ($fld == '') {
-                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC LIMIT 250");
+                $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE arriveddate is null ORDER BY rid DESC LIMIT 300");
                 } else {
                 $data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? AND arriveddate is null ORDER BY rid DESC",$val);
                 }
@@ -38,8 +38,8 @@ class Buyer extends \Controller {
                 $this->f3->set('bgcolor','red');
                 $this->f3->set('headers','materials/buyersheaders.htm');
                 $this->f3->set('fields','materials/buyersfields.htm');
-                $this->f3->set('layout','layout.htm');
-                $this->f3->set('content','materials/list.htm');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/list2.htm');
     }
     public function edit() {
                 $this->f3->set('breadcrumbs','mat/buyer');

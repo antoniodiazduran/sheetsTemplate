@@ -1,67 +1,30 @@
 <check if="{{ @nav == 'yes' }}">
 <include href="{{ @nav_menu }}">
 </check>
-<div style="padding:1px; background-color:red; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Urgency Update</h3>
+<div class="w3-container w3-red">
+	<h3>Urgency Update</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form calss="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
+	<div class="w3-container w3-red" id="alertnotes">
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-	<repeat group="{{ @record }}" value="{{ @vals }}">
-	  <label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}}</label><p>
-	</repeat>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="reason">Urgency</label><p>
-	<select name="urgency" id="urgency">
+	<p>
+        <h3>Urgency</h3>
+	<select class="w3-select" name="urgency" id="urgency">
 		<option>
 		<option <check if="{{ @vals.Urgency=='Critical' }}"> selected</check>>Critical
 		<option <check if="{{ @vals.Urgency=='Hot' }}"> selected</check>>Hot
 	</select>
-      </div>
-    </div>
-    <p>
-    <div class="row">
-	<div class="col-75">
-		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
- 		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+	<p>
+	<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+	<input class="w3-button w3-gray" type="reset" value="Clear">
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
+	<p>
+	<br>
+	<ul class="w3-ul">
+	<repeat group="{{ @record }}" value="{{ @vals }}">
+	  <li>{{ @vals.PartNumber}} {{@vals.Description}}</li>
+	</repeat>
+	</ul>
   </form>
 </div>
 
-<script>
-function validateForm() {
- const alerts = document.getElementById("alertnotes");
- alerts.innerHTML='';
- let due = document.forms["wipform"]["urgency"].value;
- let ale = "";
- if ( due.length=== 0) { ale = ale + "Add Urgency<br>"; }
- if ( ale.length > 0) { 
- 	document.body.scrollTop = document.documentElement.scrollTop = 0; 
-	alerts.style.backgroundColor = "red";
-	alerts.style.color = "white";
-	alerts.style.textAlign = "center";
-	alerts.insertAdjacentHTML('beforeend',ale);
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
-	return false;
- } else {
-	return true;
- }
-  
-
-}
-</script>

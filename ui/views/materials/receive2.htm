@@ -1,66 +1,37 @@
 <check if="{{ @nav == 'yes' }}">
 <include href="{{ @nav_menu }}">
 </check>
-<div style="padding:1px; background-color:orange; opacity:0.8;">
-	<h3>&nbsp; &nbsp; <font color="black">Receiving Update</font></h3>
+<div class="w3-container w3-orange">
+	<h3>Receiving Update</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<div class="w3-container w3-red" id="alertnotes">
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
+	<p>
+        <h3>Arrival Date</h3>
+        <input class="w3-input" type="date" id="arriveddate" name="arriveddate" placeholder="mm/dd/yyyy" value="{{ @record.ArrivedDate }}">
+	<p>
+	<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+	<input class="w3-button w3-gray" type="reset" value="Clear">
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
+	</p>
+	<br>	
+	<ul class="w3-ul">
         <repeat group="{{ @record }}" value="{{ @vals }}">
-          <label class="titles">{{ @vals.PartNumber}}<br>{{@vals.Description}}</label><p>
+          <li>{{ @vals.PartNumber}} {{@vals.Description}}</li>
         </repeat>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="arriveddate">Arrival Date</label><p>
-        <input type="date" id="arriveddate" name="arriveddate" placeholder="mm/dd/yyyy" value="{{ @record.ArrivedDate }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-    </div>
-    <p>
-    <div class="row">
-	<div class="col-75">
-		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
- 		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+	</ul>
   </form>
-</div>
 
 <script>
 function validateForm() {
  const alerts = document.getElementById("alertnotes");
  alerts.innerHTML='';
- let lin = document.forms["wipform"]["line"].value;
- let des = document.forms["wipform"]["description"].value;
- let par = document.forms["wipform"]["partnumber"].value;
- let buy = document.forms["wipform"]["buyer"].value;
- let due = document.forms["wipform"]["duedate"].value;
+ let lin = document.forms["wipform"]["arriveddate"].value;
  let ale = "";
- if ( lin.length=== 0) { ale = ale + "Select the line <br>"; }
- if ( des.length=== 0) { ale = ale + "Type a description<br>"; }
- if ( par.length=== 0) { ale = ale + "Type Part number AX/SAP<br>"; }
- if ( buy.length=== 0) { ale = ale + "Type buyer initials<br>"; }
- if ( due.length=== 0) { ale = ale + "Select Due date<br>"; }
+ if ( lin.length=== 0) { ale = ale + "<br>Select a date <br><br>"; }
  if ( ale.length > 0) { 
  	document.body.scrollTop = document.documentElement.scrollTop = 0; 
-	alerts.style.backgroundColor = "red";
-	alerts.style.color = "white";
 	alerts.style.textAlign = "center";
 	alerts.insertAdjacentHTML('beforeend',ale);
 	document.body.scrollTop = document.documentElement.scrollTop = 0;

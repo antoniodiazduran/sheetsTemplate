@@ -11,14 +11,14 @@ input[type=text], select, textarea {
   border-radius: 4px;
   resize: vertical;
   font-family: Verdana, Geneva;
-  font-size: 1em;
+  font-size: 2em;
   font-weight:normal;
 }
 
 label {
   padding: 5px 5px 5px 0;
   font-family: Verdana, Geneva;
-  font-size: 1em;
+  font-size: 2em;
   font-weight:normal;
   display: inline;
   vertical-align: middle;
@@ -54,7 +54,7 @@ input[type="number"] {
   width: 100%;
   padding: 5px;
   font-family: Verdana, Geneva;
-  font-size: 1em;
+  font-size: 2em;
   font-weight:normal;
 }
 

@@ -1,122 +1,68 @@
 <include href="nav.htm">
-
-<div style="padding:1px; background-color:red; opacity:0.8;">
+<div class="w3-container w3-red">
 	<h3>&nbsp; &nbsp; Engineering Support</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
-	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <!--<label for="line">Line</label>//-->
-      </div>
-      <div class="col-75">
-        <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld">
-	<label for="html">Weld</label><br>
-	<input type="radio" id="line" name="line" value="Line 5">
-        <label for="html">Line 5</label><br>
-	<input type="radio" id="line" name="line" value="Paint">
-        <label for="html">Paint</label><br>
-	<input type="radio" id="line" name="line" value="Line 1">
-        <label for="html">Line 1</label><br>
-	<input type="radio" id="line" name="line" value="Line 3">
-        <label for="html">Line 3</label><br>
-	<input type="radio" id="line" name="line" value="Final">
-        <label for="html">Final</label><br>
-	<input type="radio" id="line" name="line" value="Office">
-        <label for="html">Office</label><br>
-      </div>
-    </div>
-	<p>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Describe the problem...">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Customer</label><p>
-        <input type="text" id="customer" name="customer" placeholder="Customer Name">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="unitnumber">Unit</label><p>
-        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="urgency">Urgency</label><p>
-        <input type="radio" id="urgency" name="urgency" value="Line Stopper">
-        <label for="html">Line Stopper</label><br>
-        <input type="radio" id="urgency" name="urgency" value="Critical">
-        <label for="html">Critical</label><br>
-        <input type="radio" id="urgency" name="urgency" value="See due date">
-        <label for="html">See due date</label><br>
-        <input type="radio" id="urgency" name="urgency" value="As available">
-        <label for="html">As available</label><br>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="ecn">ECN #</label><p>
-        <input type="text" id="ecn" name="ecn" placeholder="ECN number/none">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="ecn">Requestor</label><p>
-        <input type="text" id="requestor" name="requestor" placeholder="Type your name">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
-      </div>
-    </div>
-	<p>
-    <div class="row">
-      <div class="col-25">
-        <input type="submit" value="Submit" size="20" onclick="this.value='Submitting...'">
-      </div>
-      <div class="col-75">
-      </div>
-    </div>
-  </form>
+<div class="w3-panel w3-red" id="alertnotes">
 </div>
+
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Weld">
+	<label>Weld</label></p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 5">
+	<label>Line 5</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Paint">
+        <label>Paint</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 1">
+        <label>Line 1</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 3">
+	<label>Line 3</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Final">
+        <label>Final</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Office">
+	<label>Office</label></p>
+        <br>
+	<br>
+        <label>Description</label>
+        <input class="w3-input" type="text" id="description" name="description" placeholder="Describe the problem..."></p>
+	<p>
+        <label>Customer</label>
+        <input class="w3-input" type="text" id="customer" name="customer" placeholder="Customer Name"></p>
+	<p>
+        <label>Unit</label>
+        <input class="w3-input" type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID"></p>
+	<p>
+        <label>Due Date</label>
+        <input class="w3-input" type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy"></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="Line Stopper">
+        <label>Line Stopper</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="Critical">
+        <label>Critical</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="See due date">
+        <label>See due date</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="As available">
+        <label>As available</label></p>
+	<br>
+	<br>
+        <label>ECN #</label>
+        <input class="w3-input" type="text" id="ecn" name="ecn" placeholder="ECN number/none"></p>
+	<p>
+        <label>Requestor</label>
+        <input class="w3-input" type="text" id="requestor" name="requestor" placeholder="Type your name"></p>
+	<p>
+        <label>Notes</label>
+        <textarea class="w3-input" id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea></p>
+        <input class="w3-button w3-green" type="submit" value="Submit" size="20" onclick="this.value='Submitting...'">
+  </form>
 
 <script>
 function validateForm() {

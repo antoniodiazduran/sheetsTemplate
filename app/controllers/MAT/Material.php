@@ -56,7 +56,7 @@ class Material extends \Controller {
                 $this->f3->set('isMobile',parent::isMobile());
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->set('mode','create');
-                $this->f3->set('layout','layout.htm');
+                $this->f3->set('layout','responsive.htm');
                 $this->f3->set('content','materials/form.htm');
     }
     public function add() {

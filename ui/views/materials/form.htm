@@ -1,13 +1,11 @@
 <check if="{{ @navs == 'yes' }}">
 <include href="{{ @nav_menu }}">
 </check>
-<div style="padding:1px; background-color:green; opacity:0.8;">
+<div class="w3-container w3-green">
 	<h3>&nbsp; &nbsp; Shortage Report</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<div class="w3-container w3-red" id="alertnotes">
 	<check if="{{ strlen(@res)>0  }}">
 		<true>
 		<div style="background-color: lightgreen; border-radius: 15px; color: black; text-align: center; vertical-align: middle; height: 100px ">
@@ -16,102 +14,54 @@
 		</true>
 	</check>
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <!--<label for="line">Line</label>//-->
-      </div>
-      <div class="col-75">
-        <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld">
-	<label for="html">Weld</label><br>
-	<input type="radio" id="line" name="line" value="Line 5">
-        <label for="html">Line 5</label><br>
-	<input type="radio" id="line" name="line" value="Paint">
-        <label for="html">Paint</label><br>
-	<input type="radio" id="line" name="line" value="Line 1">
-        <label for="html">Line 1</label><br>
-	<input type="radio" id="line" name="line" value="Line 3">
-        <label for="html">Line 3</label><br>
-	<input type="radio" id="line" name="line" value="Final">
-        <label for="html">Final</label><br>
-	<input type="radio" id="line" name="line" value="Harness">
-        <label for="html">Harness</label><br>
-      </div>
-    </div>
+	<br>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Weld">
+	<label>Weld</label></p>
 	<p>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Unit ID</label><p>
-        <input type="text" id="unitid" name="unitid" placeholder="Unit number">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="requestorname">Requestor Name</label><p>
-        <input type="text" id="requestorname" name="requestorname" placeholder="Who requested?">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Part Number</label><p>
-        <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Material description...">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Qty</label><p>
-        <input type="text" id="qty" name="qty" placeholder="Qty in units"> /
-        <input type="text" id="qtyunit" name="qtyunit" placeholder="Qty per Bus">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        &nbsp; <input type="checkbox" id="lowinventory" name="lowinventory" value="y"> &nbsp; Low Inventory 
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-25">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea>
-      </div>
-    </div>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 5">
+        <label>Line 5</label></p>
 	<p>
-    <div class="row">
-      <div class="col-25">
-      </div>
-	<div class="col-75">
-      		<input type="reset" value="Clear"> &nbsp; &nbsp; &nbsp;
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Paint">
+	<label>Paint</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 1">
+	<label>Line 1</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 3">
+	<label>Line 3</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Final">
+	<label>Final</label></p>
+        <p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Harness">
+	<label>Harness</label></p>
+        <br><br>
+	<p>
+        <label>Unit ID</label><p>
+        <input class="w3-input" type="text" id="unitid" name="unitid" placeholder="Unit number"></p>
+	<p>
+        <label>Requestor Name</label><p>
+        <input class="w3-input" type="text" id="requestorname" name="requestorname" placeholder="Who requested?"></p>
+	<p>
+        <label>Part Number</label><p>
+        <input class="w3-input" type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP"></p>
+	<p>
+        <label>Description</label><p>
+        <input class="w3-input" type="text" id="description" name="description" placeholder="Material description..."></p>
+	<p>
+        <label>Qty</label><br>
+        <input class="w3-input w3-third" type="text" id="qty" name="qty" placeholder="Qty in units">
+        <input class="w3-input w3-third" type="text" id="qtyunit" name="qtyunit" placeholder="Qty per Bus"></p>
+	<br><br>
+        <input class="w3-checkbox" type="checkbox" id="lowinventory" name="lowinventory" value="y">
+	<label>Low Inventory</label></p> 
+	<br><br>
+        <label>Notes</label>
+        <textarea class="w3-input" id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px"></textarea></p>
+	<p>
+ 	<input class="w3-button w3-gray" type="reset" value="Clear"> 
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
   </form>
-</div>
 
 <script>
 function validateForm() {

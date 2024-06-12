@@ -1,7 +1,7 @@
 
-body {
+tbody {
 	font-family: Arial, Helvetica,Verdana;
-	font-size:1.8em;
+	font-size:1.0em;
 	background: #ffffff;
 }
 
@@ -12,7 +12,7 @@ h2 {	color:#e88;
 }
 
 h3 {	color:#999;
-	font-size:0.8em;
+	font-size:1.0em;
 }
 
 h4 {	color:#944;
@@ -24,7 +24,7 @@ h5 {	color:#722;
 h6 {	color:#500;
 }
 
-small {	font-size:0.75em
+small {	font-size:1.0em
 }
 
 a {	text-decoration:none;
@@ -38,7 +38,7 @@ img {	max-width:100%
 }
 
 table {
-	font-size:.8em;
+	font-size:1.0em;
 	color:#666 !important;
 	background:#fefefe; 
 	width:98%;
@@ -66,8 +66,8 @@ tr:last-child { 	border-bottom:none;
 }
 
 th,td {
-	font-size:1em;
-	line-height:1.25em;
+	font-size:1.0em;
+	line-height:1em;
 	margin:2;
 	padding:0.5em;
 	white-space:nowrap;
@@ -139,7 +139,7 @@ code {		background:#eee;
 }
 
 .footer {
-	font-size:0.9em;
+	font-size:1.0em;
 	background:#333;
 }
 
@@ -152,14 +152,14 @@ code {		background:#eee;
 
 
 .footer .stats {
-	font-size:.9em;
+	font-size:1.0em;
 }
 
 @media screen and (max-width:1600px) {
 
 	body {
 		font-family: Arial, Geneva;
-		font-size:2em;
+		font-size:1.0em;
 	}
 
 }
