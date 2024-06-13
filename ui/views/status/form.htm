@@ -1,47 +1,29 @@
 <include href="{{ @nav_menu }}">
 
-<div style="padding:1px; background-color:red; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Engineering Support</h3>
+<div class="w3-container w3-black">
+	<h3>Engineering Support</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<div class="w3-container" id="alertnotes">
 	</div>
-    </div>
-    <div class="row">
-	<div class="col-45">
-		<label for="radio">Status</label>
-	</div>
-	<div class="col-55">
-		<label for="radio">Select from options</label><p>
+	<h3>Status</h3>
+	<label>Select from options</label>
+	<ul class="w3-ul">
 	<repeat group="{{ @record }}" value="{{ @cols }}">
-		<input type="radio" name="display" id="display" value="y" <check if="{{ @cols.Display == 'y' }}">checked</check>> Open <br>
-		<input type="radio" name="display" id="display" value="n" <check if="{{ @cols.Display == 'n' }}">checked</check>> Complete 
-			<check if="{{ @cols.Display == 'n' }}">on {{ @cols.completedate }} </check>
 		<p>
+		<input class="w3-radio" type="radio" name="display" id="display" value="y" <check if="{{ @cols.Display == 'y' }}">checked</check>> Open <br>
+		<input class="w3-radio"type="radio" name="display" id="display" value="n" <check if="{{ @cols.Display == 'n' }}">checked</check>> Complete 
+		<check if="{{ @cols.Display == 'n' }}">on {{ @cols.completedate }} </check>
+		</p>
 	</repeat>
-	</div>
-    </div>
-    <div class="row">
-      <div class="col-45">
-	<label for="">Complete date</label>
-      </div>
-      <div class="col-55">
-        <label for="completedate">Select date of completion</label><p>
-        <input type="date" id="completedate" name="completedate" placeholder="mm/dd/yyyy" value="{{ @cols.DueDate }}">
-      </div>
-    </div>
-	<p>
+	</ul>
+	<br>
+        <label>Select date of completion</label>
+        <input class="w3-input" type="date" id="completedate" name="completedate" placeholder="mm/dd/yyyy" value="{{ @cols.DueDate }}">
+	<br><br>
 	<input type="hidden" name="epoch" id="epoch" value="{{ @cols.Epoch }}">
-    <div class="row">
-	<div class="col-45">
-      		<input type="reset" value="Clear">
-	</div>
-	<div class="col-55">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+	<input class="w3-button w3-gray"type="reset" value="Clear">
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
   </form>
 </div>
 
@@ -49,7 +31,7 @@
 function validateForm() {
  const alerts = document.getElementById("alertnotes");
  alerts.innerHTML='';
- let due = document.forms["wipform"]["duedate"].value;
+ let due = document.forms["wipform"]["completedate"].value;
  let ale = "";
  if ( due.length=== 0 && urg != 'As available') { ale = ale + "Add Due Date<br>"; }
  if ( ale.length > 0) { 

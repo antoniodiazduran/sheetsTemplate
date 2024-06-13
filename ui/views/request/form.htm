@@ -1,122 +1,72 @@
 <include href="{{ @nav_menu }}">
 
-<div style="padding:1px; background-color:red; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Engineering Support</h3>
+<div class="w3-container w3-black">
+	<h3>Engineering Support</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<div class="w3-container" id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <!--<label for="line">Line</label>//-->
-      </div>
-      <div class="col-75">
-        <label class="titles" for="line">Line</label><p>
-	<input type="radio" id="line" name="line" value="Weld" <check if="{{ @record.Line=='Weld' }}">checked</check>>
-	<label for="html">Weld</label><br>
-	<input type="radio" id="line" name="line" value="Line 5" <check if="{{ @record.Line=='Line 5' }}">checked</check>>
-        <label for="html">Line 5</label><br>
-	<input type="radio" id="line" name="line" value="Paint" <check if="{{ @record.Line=='Print' }}">checked</check>>
-        <label for="html">Paint</label><br>
-	<input type="radio" id="line" name="line" value="Line 1" <check if="{{ @record.Line=='Line 1' }}">checked</check>>
-        <label for="html">Line 1</label><br>
-	<input type="radio" id="line" name="line" value="Line 3" <check if="{{ @record.Line=='Line 3' }}">checked</check>>
-        <label for="html">Line 3</label><br>
-	<input type="radio" id="line" name="line" value="Final" <check if="{{ @record.Line=='Final' }}">checked</check>>
-        <label for="html">Final</label><br>
-	<input type="radio" id="line" name="line" value="Office" <check if="{{ @record.Line=='Office' }}">checked</check>>
-        <label for="html">Office</label><br>
-      </div>
-    </div>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Weld" <check if="{{ @record.Line=='Weld' }}">checked</check>>
+	<label for="html">Weld</label></p>
 	<p>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Describe the problem..." value="{{ @record.Description }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Customer</label><p>
-        <input type="text" id="customer" name="customer" placeholder="Customer Name" value="{{ @record.Customer }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="unitnumber">Unit</label><p>
-        <input type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID" value="{{ @record.UnitNumber }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="urgency">Urgency</label><p>
-        <input type="radio" id="urgency" name="urgency" value="Line Stopper" <check if="{{ @record.Urgency=='Line Stopper' }}">checked</check>>
-        <label for="html">Line Stopper</label><br>
-        <input type="radio" id="urgency" name="urgency" value="Critical" <check if="{{ @record.Urgency=='Critical' }}">checked</check>>
-        <label for="html">Critical</label><br>
-        <input type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See due date' }}">checked</check>>
-        <label for="html">See due date</label><br>
-        <input type="radio" id="urgency" name="urgency" value="As available" <check if="{{ @record.Urgency=='As available' }}">checked</check>>
-        <label for="html">As available</label><br>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="ecn">ECN #</label><p>
-        <input type="text" id="ecn" name="ecn" placeholder="ECN number/none" value="{{ @record.ECN }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="requestor">Requestor</label><p>
-        <input type="text" id="requestor" name="requestor" placeholder="Type your name" value="{{ @record.Requestor }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
-      </div>
-    </div>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 5" <check if="{{ @record.Line=='Line 5' }}">checked</check>>
+        <label for="html">Line 5</label></p>
 	<p>
-    <div class="row">
-	<div class="col-75">
-		<input type="hidden" name="epoch" id="epoch" value="{{ @record.Epoch }}">
-		<input type="hidden" name="display" id="display" value="{{ @record.Display }}">
-		<input type="hidden" name="sort" id="sort" value="{{ @record.Sort }}">
-      		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Paint" <check if="{{ @record.Line=='Print' }}">checked</check>>
+        <label for="html">Paint</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 1" <check if="{{ @record.Line=='Line 1' }}">checked</check>>
+        <label for="html">Line 1</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Line 3" <check if="{{ @record.Line=='Line 3' }}">checked</check>>
+        <label for="html">Line 3</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Final" <check if="{{ @record.Line=='Final' }}">checked</check>>
+        <label for="html">Final</label></p>
+	<p>
+	<input class="w3-radio" type="radio" id="line" name="line" value="Office" <check if="{{ @record.Line=='Office' }}">checked</check>>
+        <label for="html">Office</label></p>
+	<br>
+        <label>Description</label>
+        <input class="w3-input" type="text" id="description" name="description" placeholder="Describe the problem..." value="{{ @record.Description }}"></p>
+	<p>
+        <label>Customer</label>
+        <input class="w3-input" type="text" id="customer" name="customer" placeholder="Customer Name" value="{{ @record.Customer }}"></p>
+	<p>
+        <label>Unit</label>
+        <input class="w3-input" type="text" id="unitnumber" name="unitnumber" placeholder="Unit ID" value="{{ @record.UnitNumber }}">
+	<p>
+        <label>Due Date</label>
+        <input class="w3-input" type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
+	<p>
+        <label>Urgency</label>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="Line Stopper" <check if="{{ @record.Urgency=='Line Stopper' }}">checked</check>>
+        <label>Line Stopper</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="Critical" <check if="{{ @record.Urgency=='Critical' }}">checked</check>>
+        <label>Critical</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="See due date" <check if="{{ @record.Urgency=='See due date' }}">checked</check>>
+        <label>See due date</label></p>
+	<p>
+        <input class="w3-radio" type="radio" id="urgency" name="urgency" value="As available" <check if="{{ @record.Urgency=='As available' }}">checked</check>>
+        <label>As available</label></p>
+	<p>
+        <label>ECN #</label>
+        <input class="w3-input" type="text" id="ecn" name="ecn" placeholder="ECN number/none" value="{{ @record.ECN }}"></p>
+	<p>
+        <label>Requestor</label>
+        <input class="w3-input" type="text" id="requestor" name="requestor" placeholder="Type your name" value="{{ @record.Requestor }}">
+	<p>
+        <label>Notes</label><p>
+        <textarea class="w3-input" id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
+	<br><br>
+	<input type="hidden" name="epoch" id="epoch" value="{{ @record.Epoch }}">
+	<input type="hidden" name="display" id="display" value="{{ @record.Display }}">
+	<input type="hidden" name="sort" id="sort" value="{{ @record.Sort }}">
+	<input class="w3-button w3-gray" type="reset" value="Clear">
+	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
   </form>
 </div>
 

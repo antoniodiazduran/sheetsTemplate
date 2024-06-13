@@ -12,7 +12,7 @@ class Request extends \Controller {
 		$this->f3->set('nav_menu','navadmin.htm');
 		$this->f3->set('mode','upd');
 		$this->f3->set('record',$record[0]);
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('layout','admin.htm');
                 $this->f3->set('content','request/form.htm');
     }
     public function upd() {

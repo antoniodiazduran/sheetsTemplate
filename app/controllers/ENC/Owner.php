@@ -24,7 +24,7 @@ class Owner extends \Controller {
                 $this->f3->set('nav_menu','navadmin.htm');
                 $this->f3->set('mode','upd');
                 $this->f3->set('owners',$owners);
-                $this->f3->set('layout','layout.htm');
+                $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','admin/owner.htm');
     }
     public function del() {
