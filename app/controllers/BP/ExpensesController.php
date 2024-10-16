@@ -13,59 +13,6 @@ class ExpensesController extends \Controller {
         	return $apartment->Name;
     }
 
-    public function fileUpload($uniqfilename) {
-	$target_dir = "uploads/";
-	//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$uploadOk = 1;
-	$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
-	//$target_file = $target_dir . "exp_". uniqid().".".$imageFileType;
-	$target_file = $target_dir . $uniqfilename;
-	// Check if image file is a actual image or fake image
-	if(isset($_POST["submit"])) {
-		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-		if($check !== false) {
-			echo "File is an image - " . $check["mime"] . ".";
-			$uploadOk = 1;
-		} else {
-			echo "File is not an image.";
-			$uploadOk = 0;
-		}
-	}
-
-	// Check if file already exists
-	if (file_exists($target_file)) {
-		echo "Sorry, file already exists.";
-		$uploadOk = 0;
-	}
-
-	// Check file size
-	if ($_FILES["fileToUpload"]["size"] > 5000000) {
-		echo "Sorry, your file is too large.";
-		$uploadOk = 0;
-	}
-
-	// Allow certain file formats
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" && $imageFileType != "pdf" ) {
-		echo "Sorry, only PDF, JPG, JPEG, PNG & GIF files are allowed.";
-		$uploadOk = 0;
-	}
-
-	// Check if $uploadOk is set to 0 by an error
-	if ($uploadOk == 0) {
-		echo "Sorry, your file was not uploaded.";
-		// if everything is ok, try to upload file
-	} else {
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-			echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-		} else {
-			echo "Sorry, there was an error uploading your file.";
-		}
-	}
-
-   }
-
-
     public function all()
 	{
         $expense = new \Expenses($this->bpllc);
@@ -83,12 +30,31 @@ class ExpensesController extends \Controller {
 		if($this->f3->exists('POST.new')) 
         	{
 	        	$expense = new \Expenses($this->bpllc);
+
+			// Extracting file information
 			$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
 			$uniqfilename = "exp_".uniqid().".".$imageFileType;
-			$this->f3->set('POST.UpLoadFile',$uniqfilename);
-			$expense_added=$expense->add($this->f3->get('POST'));
-	                $apt = $this->f3->get('POST.Apartment');
-                        $this->fileUpload($uniqfilename);
+			//$this->f3->set('POST.UpLoadFile',$uniqfilename);
+
+			// Adding the expense record
+			$last_expense_id = $expense->add($this->f3->get('POST'));
+
+			// Adding the upload file record
+			$fileData = array();
+			$fileData["expenseId"] = $last_expense_id;
+			$fileData["originalFile"] = $_FILES["fileToUpload"]["name"];
+			$fileData["uploadFile"] = $uniqfilename;
+			$fileData["fileType"] = $imageFileType;
+
+			// Uploading the file
+                        $upload = parent::fileUpload($uniqfilename,$last_expense_id);
+			if($upload==1) {
+				$upld = new \Uploads($this->bpllc);
+				$upld->add($fileData);
+			}
+
+			// Refreshing the list
+	                //$apt = $this->f3->get('POST.Apartment');
         		$this->f3->set('apartmentName',$this->aptName($apt));
             		$this->f3->set('apartment',$apt);
             		$this->f3->set('expenses',$expense->getByApartment($apt));
@@ -117,7 +83,9 @@ class ExpensesController extends \Controller {
 		$id = $this->f3->get('PARAMS.id');
 	        $apt = $this->f3->get('PARAMS.apt');
 		$expense = new \Expenses($this->bpllc);
+		$uploaded = new \Uploads($this->bpllc);
 		$expense->delete($id);
+		$uploaded->delete($id);
         	$this->f3->set('apartment',$apt);
 	        $this->f3->set('apartmentName',$this->aptName($apt));
 		$this->f3->set('expenses',$expense->getByApartment($apt));
@@ -130,9 +98,31 @@ class ExpensesController extends \Controller {
     public function edit_expenses() {
         $id = $this->f3->get('PARAMS.id'); 
 	$expense = new \Expenses($this->bpllc);
+	$uploaded = new \Uploads($this->bpllc);
+
+	// Updating record
         if($this->f3->exists('POST.edit')) {
             $expense->edit($id, $this->f3->get('POST'));
         }
+	// Uploading a new file
+	$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
+	$uniqfilename = "exp_".uniqid().".".$imageFileType;
+	if($_FILES["fileToUpload"]["name"] != '') {
+		// Adding the upload file record
+		$fileData = array();
+		$fileData["expenseId"] = $id;
+		$fileData["originalFile"] = $_FILES["fileToUpload"]["name"];
+		$fileData["uploadFile"] = $uniqfilename;
+		$fileData["fileType"] = $imageFileType;
+
+		// Uploading the file
+                $upload = parent::fileUpload($uniqfilename,$id);
+		if($upload==1) {
+			$upld = new \Uploads($this->bpllc);
+			$upld->add($fileData);
+		}
+	}
+	$this->f3->set('uploaded',$uploaded->getByUploads($id));
         $this->f3->set('POST.edit',"edit");
         $this->f3->set('apartment',$id);
 	$this->f3->set('expenses',$expense->getById($id));
@@ -142,11 +132,11 @@ class ExpensesController extends \Controller {
 	$this->f3->set('content','expenses/form.htm');
     }
 
-    public function show_expenses() 
+ 
+   public function show_expenses() 
 	{
 		$id = $this->f3->get('PARAMS.id'); 
 		$expense = new \Expenses($this->bpllc);
-
 	        $this->f3->set('apartment',$id);
        		$this->f3->set('apartmentName',$this->aptName($id));
 		$this->f3->set('expenses',$expense->getByApartment($id));

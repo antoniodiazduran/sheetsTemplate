@@ -27,10 +27,11 @@
 	    <label>Receipt: </label>
 	    <input class="w3-input" type="file" name="fileToUpload" id="fileToUpload">
 	    <br>
-	    <check if="{{ @POST.UpLoadFile != ''}}">
-	    File Attached: <a href="uploads/{{ @POST.UpLoadFile }}" TARGET="_blank"><i class="material-icons">attach_file</i></a>
+	    File(s) Attached:<br>
+		<repeat group="{{ @uploaded}}" value="{{ @filesUp }}">  
+		&nbsp; <a href="uploads/{{ @filesUp.uploadFile }}" TARGET="_blank">{{ @filesUp.originalFile }}</a><br>
+		</repeat>
 	    <br>
-	    </check>
 	    <p>
             <label>Notes:</label>
             <textarea class="w3-input" id="Notes" name="Notes" cols="10" rows="5">{{ @POST.Notes }}</textarea></p>
