@@ -1,65 +1,43 @@
-<div class="container py-5">
+<div class="w3-container">
 <check if="{{ isset(@message) }}">
 <true>
-	<div class="row">
-		<div class="col-12">
-			<div class="alert alert-danger" role="alert">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				{{ @message | raw }}
-			</div>
-		</div>
+	<div class="w3-container w3-red">
+	{{ @message | raw }}
 	</div>
 </true>
 </check>		 
 <h2>
-	<a href="/bowline/apartments"><i class="bi-arrow-left"></i></a> {{ @POST.Name }} 
+	<a href="/bowline/apartments"><i class="material-icons">arrow_back</i></a> {{ @POST.Name }} 
 	<check if="{{ !isset(@POST.new) }}">
-		<a href="/bowline/apartments/delete/{{ @POST.id }}"><i class="bi-trash"></i></a>
+		<a href="/bowline/apartments/delete/{{ @POST.id }}"><i class="material-icons" title="Delete">delete</i></a>
 	</check>
 	
 </h2>
-	<form action="" method="post" class="form-horizontal">
-	<div class="row py-5">
-		<div class="col-8">
-			<check if="{{ isset(@POST.new) }}">
-				<h4>Name: {{ @POST.Name }}</h4>
-				<h4><input type="text" name="Name" id="Name" value="{{ @POST.Name }}"></h4>	
-			</check>		
-		  <h4>Address: {{ @POST.Address }}</h4>
-		  <h4><input type="text" name="Address" id="Address" value="{{ @POST.Address }}"></h4>
-		<p>
-		  <h4>State: {{ @POST.State }}</h4>
-		  <h4><input type="text" name="State" id="State" value="{{ @POST.State }}"></h4>
-		<p>
-		  <h4>Zipcode: {{ @POST.Zipcode }}</h4>
-		  <h4><input type="text" name="Zipcode" id="Zipcode" value="{{ @POST.Zipcode }}"></h4>
-		<p>
-		</div>
-		<check if="{{@isMobile==0}}">
-			<div class="col-4">
-				<h2>More Data</h2>
-				<p>Leave blank to keep the application open</p>
-			</div>
+	<form action="" method="post" class="w3-container">
+		<check if="{{ isset(@POST.new) }}">
+			<label>Name: </label>
+			<input class="w3-input" type="text" name="Name" id="Name" value="{{ @POST.Name }}"></p>
 		</check>
-	</div>
-	<div class="row">
-		<div class="col-12">
-			<div class="col-lg-xs text-center py-5">
-				<input type="hidden" name="session_csrf" value="{{ @CSRF }}" />
-				<check if="{{ isset(@POST.new) }}">
-					<true><input type="hidden" name="new" value="new" /></true>
-					<false>
-						<input type="hidden" name="edit" value="edit" />
-						<input type="hidden" name="Name" value="{{ @POST.Name }}" />
-					</false>
-				</check>
-				<input type="hidden" name="edit" value="edit" />
-				
-				<input type="hidden" name="id" value="{{ @POST.id }}" />
-				<button type="submit" class="btn btn-primary"> Submit </button>
-			</div>
-		</div>
-	</div>
+		<p>		
+		  <label>Address: </label>
+		  <input class="w3-input" type="text" name="Address" id="Address" value="{{ @POST.Address }}"></p>
+		<p>
+		  <label>State:</label>
+		  <input class="w3-input" type="text" name="State" id="State" value="{{ @POST.State }}"></p>
+		<p>
+		  <label>Zipcode: </label>
+		  <input class="w3-input" type="text" name="Zipcode" id="Zipcode" value="{{ @POST.Zipcode }}"></p>
+		<p>
+		<input type="hidden" name="session_csrf" value="{{ @CSRF }}" />
+		<check if="{{ isset(@POST.new) }}">
+		<true><input type="hidden" name="new" value="new" /></true>
+		<false>
+			<input type="hidden" name="edit" value="edit" />
+			<input type="hidden" name="Name" value="{{ @POST.Name }}" />
+		</false>
+		</check>
+		<input type="hidden" name="edit" value="edit" />
+		<input type="hidden" name="id" value="{{ @POST.id }}" />
+		<input class="w3-button w3-black" type="submit" value="Submit">
 	</form>
 </div>

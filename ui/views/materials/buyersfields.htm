@@ -4,7 +4,7 @@
 	<td align="left"><a href="/mat/rank/unitid/{{@cols.UnitID}}" style="color:black;"> {{ @cols.UnitID }} </a></td>
 	<td align="left"><a href="/mat/rank/customer/{{@cols.Customer}}" style="color:black;">{{ @cols.Customer }}</a></td>
 	<td align="center"><a href="/mat/rank/ship/{{@cols.ship}}" style="color:black;">{{ @cols.ship }}</a></td>
-	<td align="left">{{ (strlen(@cols.Description)>40)?substr(@cols.Description,0,40)."...":@cols.Description }} </td>
+	<td align="left">{{ (strlen(@cols.Description)>30)?substr(@cols.Description,0,30)."...":@cols.Description }} </td>
 	<td align="left"><a href="/mat/rank/partnumber/{{@cols.PartNumber}}" style="color:black;">{{ (strlen(@cols.PartNumber)>15)?substr(@cols.PartNumber,0,15)."...":@cols.PartNumber }}</a> </td>
 	<td align="right">{{ @cols.Qty }} :: {{ @cols.QtyUnit}} </td>
 <!--	<td align="left"><a href="/mat/rank/lowInventory/{{@cols.lowInventory}}" style="color:black;">{{ @cols.lowInventory }}</a> </td>//-->
@@ -29,7 +29,7 @@
 	<td align="left"<check if="{{ @cols.Urgency=='Critical' }}">style="color:red; opacity:0.6;" </check>>{{ @cols.Urgency }}</td>
 	<td align="left"><a href="/mat/rank/buyer/{{@cols.Buyer}}" style="color:black;">{{ @cols.Buyer }}</a></td>
 	<td align="left">{{ substr(strtolower(@cols.requestorName),0,15) }}</td>
-	<td align="left">{{ strtoupper(@cols.paretoReason) }}</td>
+	<td align="left">{{ substr(strtoupper(@cols.paretoReason),0,7) }}</td>
 <!--	<td align="center"><a href="/mat/rec/{{ @cols.rid }}" target="_blank"><check if="{{ @cols.ArrivedDate <> '' }}"><true><i class="bi-check-circle-fill"></true><false><i class="bi-x-circle"></false></check></a></td>//-->
 	<td align="center"><input type="checkbox" name="choosedate" value="{{ @cols.rid }}" onClick="getCheckboxValue(this)"></td>
 	<td align="center"><check if="{{ @cols.Buyer == ''}}"><true><a href="/mat/buyer/{{@cols.rid}}" target="_blank"><i class="bi-person" style="font-size:1.3em"></a></true><false></false></check></td>

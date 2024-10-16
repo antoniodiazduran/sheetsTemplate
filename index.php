@@ -27,7 +27,7 @@ $f3->config('config/routes.ini');
 $f3->LANGUAGE = $f3->get('sitelang');
 
 // Catching errors
-//$f3->set('ONERROR','Errors->msgs');
+$f3->set('ONERROR','Errors->msgs');
 
 $f3->session = new Session();
 

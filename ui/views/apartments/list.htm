@@ -1,28 +1,28 @@
-<div class="table-responsive">
-	<h2>&nbsp; Apartments  <a href="/bowline/apartments/new"><i class="bi-plus"></i></a></h2>
+<div class="w3-container">
+	<h2>Apartments  <a href="/bowline/apartments/new"><i class="material-icons">add_circle</i></a></h2>
 <check if="{{@isMobile==0}}">
 <true>
-	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+	<table class="w3-table w3-hoverable" id="list">
 		<thead>
-			<tr style="background-color:black;">
-				<th scope="col">name</th>
-				<th scope="col">address</th>
-				<th scope="col">state</th>
-				<th scope="col">zipcode</th>
-				<th scope="col">action</th>
+			<tr class="w3-black">
+				<th scope="col">Name</th>
+				<th scope="col">Address</th>
+				<th scope="col">State</th>
+				<th scope="col">Zip Code</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 	<tbody>
 	<repeat group="{{ @apartments }}" value="{{ @apts }}">
-		<tr onclick="window.document.location='bowline/apartments/{{ @apts.id }}';" style="cursor: pointer;">
-			<td>{{ @apts.Name }}</td>
+		<tr>
+			<td> {{ @apts.Name }} &nbsp; <a href="/bowline/apartments/{{ @apts.id }}"><i class="material-icons">edit</i></a></td>
 			<td>{{ @apts.Address }}</td>
 			<td>{{ @apts.State }}</td>
 			<td>{{ @apts.Zipcode }}</td>
 			<td>
-				<a href="/bowline/payments/{{@apts.id}}"><i class="bi-house" title="Rent"></i></a> &nbsp; &nbsp;
-				<a href="/bowline/expenses/{{@apts.id}}"><i class="bi-tools" title="Expenses"></i></a> &nbsp; &nbsp;
-				<a href="/bowline/statements/{{@apts.id}}"><i class="bi-bank" title="Statement"></i></a> &nbsp; &nbsp;
+				<a href="/bowline/payments/{{@apts.id}}"><i class="material-icons" title="Payments">payments</i></a> &nbsp; &nbsp;
+				<a href="/bowline/expenses/{{@apts.id}}"><i class="material-icons" title="Expenses">paid</i></a> &nbsp; &nbsp;
+				<a href="/bowline/statements/{{@apts.id}}"><i class="material-icons" title="Account Balance">summarize</i></a> &nbsp; &nbsp;
 			</td>
 		</tr>	
 	</repeat>
@@ -30,11 +30,11 @@
 </table>
 </true>
 <false>
-	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+	<table class="w3-table w3-hoverable" id="list">
 		<thead>
-				<tr style="background-color:black;">
-				<th scope="col">name<br>address<br>state,zip</th>
-				<th scope="col">payment<br>expenses</th>
+				<tr class="w3-black">
+				<th>name<br>address<br>state,zip</th>
+				<th>payment<br>expenses</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -44,9 +44,9 @@
 				<b>{{ @apts.Name }}</b><br>{{ @apts.Address }}<br>{{@apts.State}},{{@apts.Zipcode}}
 			</td>
 			<td align="center" valign="middle">
-				<a href="/bowline/payments/{{@apts.id}}"><i class="bi-house" style="font-size:1.5em;"></i></a> &nbsp; &nbsp; &nbsp;
-				<a href="/bowline/expenses/{{@apts.id}}"><i class="bi-tools" style="font-size:1.5em;"></i></a> &nbsp; &nbsp;
-				<a href="/bowline/statements/{{@apts.id}}"><i class="bi-bank" style="font-size:1.5em"></i></a> &nbsp; &nbsp;
+				<a href="/bowline/payments/{{@apts.id}}"><i class="material-icons">payments</i></a> &nbsp; &nbsp; &nbsp;
+				<a href="/bowline/expenses/{{@apts.id}}"><i class="material-icons">paid</i></a> &nbsp; &nbsp;
+				<a href="/bowline/statements/{{@apts.id}}"><i class="material-icons">account_balance</i></a> &nbsp; &nbsp;
 			</td>
 		</tr>	
 	</repeat>

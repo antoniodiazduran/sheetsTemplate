@@ -13,13 +13,13 @@ class ExpensesController extends \Controller {
         	return $apartment->Name;
     }
 
-    public function fileUpload() {
+    public function fileUpload($uniqfilename) {
 	$target_dir = "uploads/";
 	//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
-	$target_file = $target_dir . "exp_". uniqid().".".$imageFileType;
-
+	//$target_file = $target_dir . "exp_". uniqid().".".$imageFileType;
+	$target_file = $target_dir . $uniqfilename;
 	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -83,9 +83,12 @@ class ExpensesController extends \Controller {
 		if($this->f3->exists('POST.new')) 
         	{
 	        	$expense = new \Expenses($this->bpllc);
+			$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
+			$uniqfilename = "exp_".uniqid().".".$imageFileType;
+			$this->f3->set('POST.UpLoadFile',$uniqfilename);
 			$expense_added=$expense->add($this->f3->get('POST'));
 	                $apt = $this->f3->get('POST.Apartment');
-                        $this->fileUpload();
+                        $this->fileUpload($uniqfilename);
         		$this->f3->set('apartmentName',$this->aptName($apt));
             		$this->f3->set('apartment',$apt);
             		$this->f3->set('expenses',$expense->getByApartment($apt));

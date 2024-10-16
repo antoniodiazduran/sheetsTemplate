@@ -7,8 +7,9 @@ class Expenses extends DB\SQL\Mapper {
 		"Apartment",
 		"TransactionDate",
 		"Supplier",
-        "Amount",
-        "Notes"
+        	"Amount",
+        	"Notes",
+		"UpLoadFile"
 	);
 
 	private function sanitizeInput(array $data, array $fieldNames) 

@@ -35,9 +35,14 @@ class Admin extends \Controller {
 		$fld = $this->f3->get('PARAMS.field');
 		$val = $this->f3->get('PARAMS.value');
 		if ($fld == '') {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC Limit 450");
+		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m ORDER BY rid DESC Limit 250");
 		} else {
-		$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+			if ($fld != 'arrivedDate') {
+			$data[] = $this->db->exec("SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld = ? ORDER BY rid DESC",$val);
+			} else {
+			$sqlqry = "SELECT *, (SELECT substr(customer,1,3) FROM enc_so WHERE m.UnitID = AX) AS Customer,(SELECT ship FROM enc_so WHERE m.UnitID = AX) AS ship FROM enc_matlog m WHERE $fld is null ORDER BY rid DESC";
+			$data[] = $this->db->exec($sqlqry);
+			}
 		}
 		$this->f3->set('ourip',$_SERVER['REMOTE_ADDR']);
                 $this->f3->set('details',$data);
@@ -52,7 +57,7 @@ class Admin extends \Controller {
 		$this->f3->set('bgcolor','navy');
                 $this->f3->set('headers','materials/adminheaders.htm');
                 $this->f3->set('fields','materials/fields.htm');
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/list.htm');
     }
     public function rank() {

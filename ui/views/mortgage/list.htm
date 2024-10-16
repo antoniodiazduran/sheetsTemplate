@@ -1,44 +1,46 @@
-<div class="table-responsive">
-	<h2>Mortgage  <a href="/bowline/mortgage/new"><i class="bi-plus"></i></a></h2>
+<div class="w3-container">
+	<h2>Mortgage  <a href="/bowline/mortgage/new"><i class="material-icons">add_circle</i></a></h2>
 <check if="{{@isMobile==0}}">
 <true>
-	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+	<table class="w3-table w3-hoverable" id="list">
 		<thead>
-			<tr class="bg-secondary" style="background-color:black;">
-				<th scope="col">Apartment</th>
-				<th scope="col">Bank</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Notes</th>
-				<th scope="col"></th>
+			<tr class="w3-gray">
+				<th></th>
+				<th class="w3-left-align">Apartment</th>
+				<th class="w3-left-align">Bank</th>
+				<th class="w3-right-align">Amount</th>
+				<th>Notes</th>
 			</tr>
 		</thead>
 	<tbody>
 	<repeat group="{{ @mortgage }}" value="{{ @apts }}">
-		<tr onclick="window.document.location='bowline/mortgage/{{ @apts.id }}';" style="cursor: pointer;">
+		<tr>
+			<td><a href="bowline/mortgage/{{ @apts.id }}"><i class="material-icons">edit</i></td>
 			<td>{{ @apts.aptName}}</td>
 			<td>{{ @apts.Bank }}</td>
-			<td>{{ @apts.Amount }}</td>
+			<td class="w3-right-align">{{ @apts.Amount }}</td>
 			<td>{{ @apts.Notes }}</td>
-			<td>
-			</td>
 		</tr>	
 	</repeat>
 	</tbody>
 </table>
 </true>
 <false>
-	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+	<table class="w3-table w3-hoverable" id="list">
 		<thead>
-				<tr class="bg-secondary">
-				<th scope="col">Apartment<br>Bank<br>Amount<br>Notes</th>
-			</tr>
+		<tr class="w3-gray">
+			<th class="w3-left-align">Apartment<br>Bank<br>Notes</th>
+			<th class="w3-right-align">Amount</th>
+		</tr>
 		</thead>
 	<tbody>
 	<repeat group="{{ @mortgage }}" value="{{ @apts }}">
 		<tr>
-			<td onclick="window.document.location='bowline/mortgage/{{ @apts.id }}';" style="cursor: pointer;">
-				<b>{{ @apts.aptName }}</b><br>{{ @apts.Bank }}<br>$ {{@apts.Amount}}<br>{{ @apts.Notes}}
-			</td>
+		<td>
+		<a href="bowline/mortgage/{{ @apts.id }}"><i class="material-icons">edit</i></a>
+		<b>{{ @apts.aptName }}</b><br>{{ @apts.Bank }}<br>{{ @apts.Notes}}
+		</td>
+		<td>$ {{ @apts.Amount }}</td>
 		</tr>	
 	</repeat>
 	</tbody>

@@ -6,7 +6,7 @@ class Admin extends \Controller {
 
     public function index() {
 		$this->f3->set('isMobile',$this->isMobile());
-		$this->f3->set('layout','layout.htm');
+		$this->f3->set('layout','admin.htm');
                 $this->f3->set('content','welcome.htm');  
     }
     public function isMobile()  {

@@ -1,125 +1,66 @@
 <check if="{{ @nav == 'yes' }}">
 <include href="{{ @nav_menu }}">
 </check>
-<div style="padding:1px; background-color:green; opacity:0.8;">
-	<h3>&nbsp; &nbsp; Shortage Report</h3>
+<div class="w3-container w3-red">
+	<h3>Shortage Edit</h3>
 </div>
-<div class="container">
-  <form action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
-    <div class="row">
-	<div id="alertnotes" style="border-radius:25px; border: 2px solid white; padding:15px;">
+	<div class="w3-container" id="alertnotes">
 	</div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <!--<label for="line">Line</label>//-->
-      </div>
-      <div class="col-75">
-        <label class="titles" for="line">Line</label><p>
+  <form class="w3-container" action="/{{ @breadcrumbs}}/{{ @mode }}" method="POST" name="wipform" onsubmit="return validateForm()">
+	<p>
 	<input type="radio" id="line" name="line" value="Weld" <check if="{{ strtolower(@record.Line) == 'weld'}}"> checked </check>>
-	<label for="html">Weld</label><br>
+	<label>Weld</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Line 5" <check if="{{ @record.Line == 'Line 5'}}"> checked </check>>
-        <label for="html">Line 5</label><br>
+        <label>Line 5</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Paint" <check if="{{ @record.Line == 'Paint'}}"> checked </check>>
-        <label for="html">Paint</label><br>
+        <label >Paint</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Line 1" <check if="{{ @record.Line == 'Line 1'}}"> checked </check>>
-        <label for="html">Line 1</label><br>
+        <label >Line 1</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Line 3" <check if="{{ @record.Line == 'Line 3'}}"> checked </check>>
-        <label for="html">Line 3</label><br>
+        <label >Line 3</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Final" <check if="{{ @record.Line == 'Final'}}"> checked </check>>
-        <label for="html">Final</label><br>
+        <label >Final</label></p>
+	<p>
 	<input type="radio" id="line" name="line" value="Harness" <check if="{{ @record.Line == 'Harness'}}"> checked </check>>
-        <label for="html">Harness</label><br>
-      </div>
-    </div>
+        <label >Harness</label></p>
 	<p>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Requestor Name</label><p>
-        <input type="text" id="requestorname" name="requestorname" placeholder="Who requested?" value="{{ @record.requestorName }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Unit</label><p>
-        <input type="text" id="unitid" name="unitid" placeholder="Unit number" value="{{ @record.UnitID }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="description">Description</label><p>
-        <input type="text" id="description" name="description" placeholder="Material description..." value="{{ @record.Description }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Part Number</label><p>
-        <input type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP" value="{{ @record.PartNumber }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="customer">Qty</label><p>
-        <input type="text" id="qty" name="qty" placeholder="Qty in units" value="{{ @record.Qty }}"> /
-        <input type="text" id="qtyunit" name="qtyunit" placeholder="Qty per Bus" value="{{ @record.QtyUnit }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        &nbsp; <input type="checkbox" id="lowinventory" name="lowinventory" value="y" <check if="{{ @record.lowInventory =='y' }}">checked</check>> &nbsp; Low Inventory
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="unitnumber">Buyer</label><p>
-        <input type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @record.Buyer }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="duedate">Due Date</label><p>
-        <input type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-      </div>
-      <div class="col-75">
-        <label class="titles" for="notes">Notes</label><p>
-        <textarea id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea>
-      </div>
-    </div>
+        <label>Requestor Name</label><p>
+        <input class="w3-input" type="text" id="requestorname" name="requestorname" placeholder="Who requested?" value="{{ @record.requestorName }}">
 	<p>
-    <div class="row">
-	<div class="col-75">
-		<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
- 		<input type="reset" value="Clear">
-      		<input type="submit" value="Submit" onclick="this.value='Submitting...'">
-	</div>
-    </div>
+        <label>Unit</label>
+        <input class="w3-input" type="text" id="unitid" name="unitid" placeholder="Unit number" value="{{ @record.UnitID }}"></p>
+	<p>
+        <label>Description</label>
+        <input class="w3-input" type="text" id="description" name="description" placeholder="Material description..." value="{{ @record.Description }}"></p>
+	<p>
+        <label>Part Number</label><p>
+        <input class="w3-input" type="text" id="partnumber" name="partnumber" placeholder="Part Number AX/SAP" value="{{ @record.PartNumber }}"></p>
+	<p>
+        <label>Qty</label><p>
+        <input class="w3-input" type="text" id="qty" name="qty" placeholder="Qty in units" value="{{ @record.Qty }}" style="width:200px;"> /
+        <input class="w3-input" type="text" id="qtyunit" name="qtyunit" placeholder="Qty per Bus" value="{{ @record.QtyUnit }}" style="width:200px;"></p>
+        <p>
+	<input class="w3-checkbox" type="checkbox" id="lowinventory" name="lowinventory" value="y" <check if="{{ @record.lowInventory =='y' }}">checked</check>> &nbsp; Low Inventory</p>
+	<p>    
+        <label>Buyer</label><p>
+        <input class="w3-input" type="text" id="buyer" name="buyer" placeholder="Buyer initials" value="{{ @record.Buyer }}">
+	<p>
+        <label>Due Date</label><p>
+        <input class="w3-input" type="date" id="duedate" name="duedate" placeholder="mm/dd/yyyy" value="{{ @record.DueDate }}">
+	<p>
+        <label>Notes</label><p>
+        <textarea class="w3-input" id="notes" name="notes" placeholder="Add any other piece of information..." style="height:200px">{{ @record.Notes }}</textarea></p>
+	<br>
+	<input type="hidden" id="epoch"  name="epoch" value="{{ @epoch }}">
+ 	<input class="w3-button w3-gray" type="reset" value="Clear">
+      	<input class="w3-button w3-green" type="submit" value="Submit" onclick="this.value='Submitting...'">
+	<br>
   </form>
-</div>
 
 <script>
 function validateForm() {

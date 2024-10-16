@@ -47,7 +47,7 @@ class Material extends \Controller {
                 $this->f3->set('nav_menu','navmaterial.htm');
                 $this->f3->set('mode','upd');
                 $this->f3->set('isMobile',parent::isMobile());
-                $this->f3->set('layout','layout.htm');
+                $this->f3->set('layout','admin.htm');
                 $this->f3->set('content','materials/edit.htm');
     }
     public function form() {
@@ -81,6 +81,7 @@ class Material extends \Controller {
                 // Logging changes
                 $sqlstr = 'INSERT INTO enc_matlog (Epoch,DateTime,Line,UnitID,Description,PartNumber,Qty,QtyUnit,DueDate,Buyer,Notes,Display,lowInventory,requestorName,Urgency) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
                 $this->db->exec($sqlstr,array($epoch,$datet,$line,$unit,$desc,$part,$qty,$qtyu,$dued,$buye,$note,$disp,$low,$reqn,$urg));
+/*
                 $this->f3->set('res','Information sent...');
                 $this->f3->set('breadcrumbs','mat');
                 $this->f3->set('navs','no');
@@ -88,8 +89,17 @@ class Material extends \Controller {
                 $this->f3->set('isMobile',parent::isMobile());
                 $this->f3->set('mode','create');
                 $this->f3->set('isMobile',parent::isMobile());
-                $this->f3->set('layout','layout.htm');
-                $this->f3->set('content','materials/form.htm');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
+*/
+
+		// Setting up variables for the display
+                $this->f3->set('nav_menu','navbuyers.htm');
+                $this->f3->set('isMobile',parent::isMobile());
+                $this->f3->set('result','Record Updated !');
+                $this->f3->set('layout','admin.htm');
+                $this->f3->set('content','materials/status.htm');
+
     }
 }
 

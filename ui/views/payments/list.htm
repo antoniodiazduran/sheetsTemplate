@@ -1,31 +1,33 @@
-<div class="table-responsive">
-	<h2>&nbsp; <a href="/bowline/apartments"><i class="bi-arrow-left"></i></a> {{@apartmentName }} payments <check if="{{ @apartment != '::'}}"><a href="/bowline/payments/new/{{@apartment}}"><i class="bi-plus"></i></a></check> </h2>	
-	<table class="table table-hover table-striped table-bordered" id="list" style="width:95%; margin-left:10px;">
+<div class="w3-container">
+	<h2><a href="/bowline/apartments"><i class="material-icons">arrow_back</i></a> {{@apartmentName }} payments <check if="{{ @apartment != '::'}}"><a href="/bowline/payments/new/{{@apartment}}"><i class="material-icons">add_circle</i></a></check> </h2>	
+	<table class="w3-table w3-hoverable" id="list">
 			<thead>
-			<tr style="background-color:black;">
+			<tr class="w3-black">
+			<td></td>
                         <check if="{{ @apartment == '::'}}">
-                            <th scope="col">Apartment</th>
+                            <th>Apartment</th>
                         </check>
-			<th scope="col">Date</th>
-			<th scope="col">Amount</th>
-			<th scope="col">LateFee</th>
-			<th scope="col">Total</th>
-                    	<th scope="col">Action</th>
-                    	<th scope="col"></th>
+			<th class="w3-left-align">Date</th>
+			<th class="w3-right-align">Amount</th>
+			<th class="w3-right-align">LateFee</th>
+			<th class="w3-right-align">Total</th>
+                    	<th>Notes</th>
+                    	<th class="w3-right-align"></th>
 			</tr>
 			</thead>
 		<tbody>
 		<repeat group="{{ @payments }}" value="{{ @pays}}">
-			<tr onclick="window.document.location='/bowline/payments/edit/{{ @pays.id }}';" style="cursor: pointer;">
+			<tr> 
+			<td><a href="/bowline/payments/edit/{{ @pays.id }}"><i class="material-icons">edit</i></a></td>
                 	<check if="{{ @apartment == '::'}}">
                     		<td>{{ @pays.aptName}}</td>
                 	</check>
 			<td>{{ @pays.TransactionDate }}</td>
-			<td align="right">$ {{ number_format(@pays.Amount,2) }}</td>
-			<td align="right">$ {{ number_format(@pays.LateFee,2) }}</td>
-			<td align="right">$ {{ number_format(@pays.Amount+@pays.LateFee,2) }}</td>
-			<td > {{ @pays.Notes }}</td>
-                	<td align="center"><a href="/bowline/payments/delete/{{@pays.id}}/{{@apartment}}"><i class="bi-trash"></i></a></td>
+			<td class="w3-right-align">$ {{ number_format(@pays.Amount,2) }}</td>
+			<td class="w3-right-align">$ {{ number_format(@pays.LateFee,2) }}</td>
+			<td class="w3-right-align">$ {{ number_format(@pays.Amount+@pays.LateFee,2) }}</td>
+			<td> {{ @pays.Notes }}</td>
+                	<td class="w3-right-align"><a href="/bowline/payments/delete/{{@pays.id}}/{{@apartment}}"><i class="material-icons">delete</i></a></td>
 			</tr>	
 		</repeat>
 		</tbody>
