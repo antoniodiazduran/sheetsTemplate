@@ -16,8 +16,8 @@
 		<tr>
 			<td>{{ @apts.TransactionDate }}</td>
 			<td>{{ @apts.Description }}</td>
-			<td><check if="{{ @apts.Amount >= 0 }}"><true>{{ @apts.Amount }}</true><false></false></check></td>
-			<td><check if="{{ @apts.Amount < 0 }}"><true>{{ @apts.Amount }}</true><false></false></check></td>
+			<td class="w3-right-align"><check if="{{ @apts.Amount >= 0 }}"><true>$ {{ number_format((int)@apts.Amount,2) }}</true><false></false></check></td>
+			<td class="w3-right-align"><check if="{{ @apts.Amount < 0 }}"><true>$ {{ number_format((int)@apts.Amount,2) }}</true><false></false></check></td>
 		</tr>	
 	</repeat>
 	</tbody>
@@ -37,7 +37,7 @@
 			<td>
 				{{ @apts.TransactionDate }}<br>{{@apts.Description}}
 			</td>
-			<td align="right" valign="middle">{{ @apts.Amount }}</td>
+			<td align="right" valign="middle">{{ number_format((int)@apts.Amount,2) }}</td>
 		</tr>	
 	</repeat>
 	</tbody>

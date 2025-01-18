@@ -23,9 +23,9 @@
                     		<td>{{ @pays.aptName}}</td>
                 	</check>
 			<td>{{ @pays.TransactionDate }}</td>
-			<td class="w3-right-align">$ {{ number_format(@pays.Amount,2) }}</td>
-			<td class="w3-right-align">$ {{ number_format(@pays.LateFee,2) }}</td>
-			<td class="w3-right-align">$ {{ number_format(@pays.Amount+@pays.LateFee,2) }}</td>
+			<td class="w3-right-align">$ {{ number_format((int)@pays.Amount,2) }}</td>
+			<td class="w3-right-align">$ {{ number_format((int)@pays.LateFee,2) }}</td>
+			<td class="w3-right-align">$ {{ number_format((int)@pays.Amount+(int)@pays.LateFee,2) }}</td>
 			<td> {{ @pays.Notes }}</td>
                 	<td class="w3-right-align"><a href="/bowline/payments/delete/{{@pays.id}}/{{@apartment}}"><i class="material-icons">delete</i></a></td>
 			</tr>	

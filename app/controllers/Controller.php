@@ -4,10 +4,10 @@ class Controller {
 
     protected $usr;
     protected $f3;
-    protected $db;
-    protected $rev;
-    protected $aev;
-    protected $sales;
+//    protected $db;
+//    protected $rev;
+//    protected $aev;
+//    protected $sales;
     protected $dmz;
     protected $bpllc;
 
@@ -17,38 +17,41 @@ class Controller {
 
      function beforeroute() {
 		if($this->f3->get('SESSION.logged_in'))
-		{
-			if(time() - $this->f3->get('SESSION.timestamp') > $this->f3->get('auto_logout'))
-			{
-				$this->f3->clear('SESSION');
-				$this->f3->reroute('/login');
-			}
-			else {
-				$this->f3->set('SESSION.timestamp', time());
-			}
-		}
-		$csrf_page = $this->f3->get('PARAMS.0'); //URL route !with preceding slash!
+                {
+                        if(time() - $this->f3->get('SESSION.timestamp') > $this->f3->get('auto_logout')) 
+                        {
+                                $this->f3->clear('SESSION');
+                                $this->f3->reroute('/login');
+                        } 
+                        else {
+                                $this->f3->set('SESSION.timestamp', time());
+                        }
+                }
+                $csrf_page = $this->f3->get('PARAMS.0'); //URL route !with preceding slash!
+                //var_dump($this->f3->get('SESSION'));
+                if( NULL === $this->f3->get('POST.session_csrf') )
+                {
+                        $this->f3->CSRF = $this->f3->session->csrf();
+                        //$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');  // used for same Controller without mixing GET & POST
+                        $this->f3->copy('CSRF','SESSION.session_csrf');
+                }
 
-/*
-		if( NULL === $this->f3->get('POST.session_csrf') )
-		{
-			$this->f3->CSRF = $this->f3->session->csrf();
-			$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');
-		}
-		if ($this->f3->VERB==='POST')
-		{
-			if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') )
-			{	// Things check out! No CSRF attack was detected.
-				$this->f3->set('CSRF', $this->f3->session->csrf()); // Reset csrf token for next post request
-				$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');  // copy the token to the variable
-			}
-			else
-			{	// DANGER: CSRF attack!
-				$this->f3->error(403);
-			}
-		}
+                if ($this->f3->VERB==='POST')
+                {
+                        //if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') ) 
+                        if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.session_csrf') ) 
+                        {       // Things check out! No CSRF attack was detected.
+                                $this->f3->set('CSRF', $this->f3->session->csrf()); // Reset csrf token for next post request
+                                //$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');  // copy the token to the variable POST only
+                                $this->f3->copy('CSRF','SESSION.session_csrf');  // Used for GET and POST mixed
+                        }
+                        else
+                        {       // DANGER: CSRF attack!
+                                $this->f3->error(403); 
+                        }
+                }
 
-*/
+
 		// Access routes 
 		$access=Access::instance();
 		$access->policy('allow'); // allow access to all routes by default
@@ -61,6 +64,7 @@ class Controller {
 
 		// user login routes
 		$access->allow('/user*',['100','10','1']);
+
 		$access->authorize($this->f3->exists('SESSION.user_type') ? $this->f3->get('SESSION.user_type') : 0 );
     }
 
@@ -78,7 +82,7 @@ class Controller {
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
         $target_file = $target_dir . $uniqfilename;
-        echo $target_file;
+        //echo $target_file;
         // Check if image file is a actual image or fake image
         if(isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -98,7 +102,7 @@ class Controller {
         }
 
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 5000000) {
+        if ($_FILES["fileToUpload"]["size"] > 8000000) {
                 echo "Sorry, your file is too large.";
                 $uploadOk = 0;
         }
@@ -119,7 +123,7 @@ class Controller {
 			//echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded";
 			return 1;
                 } else {
-			//echo "Sorry, there was an error uploading your file.";
+			echo "Sorry, there was an error uploading your file.";
 			return 0;
                 }
         }
@@ -150,7 +154,7 @@ class Controller {
     }
 
     public function isMobile()  {
-         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", isset($_SERVER["HTTP_USER_AGENT"]));
     }
 
     public function sendMail($to,$msg) {
@@ -171,22 +175,22 @@ class Controller {
 
 	// Enabling saving data to sqlite
 	$usr = new DB\SQL('sqlite:data/users.sqlite');
-	$db = new DB\SQL('sqlite:data/enc.sqlite');
+//	$db = new DB\SQL('sqlite:data/enc.sqlite');
 //	$rev = new DB\SQL('sqlite:data/rev.sqlite');
-	$aev = new DB\SQL('sqlite:data/aev.sqlite');
-	$sales = new DB\SQL('sqlite:data/sales.sqlite');
+//	$aev = new DB\SQL('sqlite:data/aev.sqlite');
+//	$sales = new DB\SQL('sqlite:data/sales.sqlite');
 	$bpllc = new DB\SQL('sqlite:data/bpllc.sqlite');
 
         // De-Militirizaed Zone for public pages
 	$dmz = array('/mat/screen','/mat/receiving','/sf');
 
+	$this->f3=$f3;
 	$this->usr=$usr;
 	$this->dmz=$dmz;
-	$this->f3=$f3;
-	$this->db=$db;
+//	$this->db=$db;
 //	$this->rev=$rev;
-	$this->aev=$aev;
-	$this->sales=$sales;
+//	$this->aev=$aev;
+//	$this->sales=$sales;
 	$this->bpllc=$bpllc;
 
     }

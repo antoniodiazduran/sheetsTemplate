@@ -72,6 +72,7 @@ class ExpensesController extends \Controller {
 			$this->f3->set('POST.Supplier',"");
 	        	$this->f3->set('POST.Notes',"");
         	        $this->f3->set('apartment',$apt);
+			$this->f3->set('uploaded','');
 			$this->f3->set('isMobile',parent::isMobile());
 			$this->f3->set('nav_menu','navtenant.htm');
 	                $this->f3->set('layout','tenant.htm');

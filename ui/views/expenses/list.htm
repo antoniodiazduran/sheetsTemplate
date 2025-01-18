@@ -2,7 +2,7 @@
 	<h2><a href="/bowline/apartments"><i class="material-icons">arrow_back</i></a> {{@apartmentName }} expenses <check if="{{ @apartment != '::'}}"><a href="/bowline/expenses/new/{{@apartment}}"><i class="material-icons">add_circle</i></a></check> </h2>	
 	<table class="w3-table w3-hoverable" id="list">
 		<thead>
-			<tr class="w3-black">
+			<tr class="w3-gray">
 			<td></td>
                         <check if="{{ @apartment == '::'}}">
                             <th scope="col">Apartment</th>
@@ -10,7 +10,7 @@
 			<th scope="col">Date</th>
 			<th scope="col">Supplier</th>
 			<th scope="col">Amount</th>		
-                    	<th scope="col">Action</th>
+                    	<th scope="col" width="600px">Action</th>
                     	<th scope="col"></th>
 			</tr>
 		</thead>
@@ -23,7 +23,7 @@
                 	</check>
 			<td>{{ @pays.TransactionDate }}</td>
 			<td>{{ @pays.Supplier }}</td>
-			<td class="w3-right">$ {{ number_format(@pays.Amount,2) }}</td>
+			<td class="w3-right">$ {{ number_format((int)@pays.Amount,2) }}</td>
 			<td>{{ @pays.Notes }}</td>				
 		        <td class="w3-center"><a href="/bowline/expenses/delete/{{@pays.id}}/{{@apartment}}"><i class="material-icons" title="Delete">delete</i></a></td>
 			</tr>	
