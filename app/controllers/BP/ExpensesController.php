@@ -106,9 +106,10 @@ class ExpensesController extends \Controller {
             $expense->edit($id, $this->f3->get('POST'));
         }
 	// Uploading a new file
-	$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
-	$uniqfilename = "exp_".uniqid().".".$imageFileType;
-	if($_FILES["fileToUpload"]["name"] != '') {
+	if (isset($FILES['fileToUpload'])) {
+	  if($_FILES["fileToUpload"]["name"] != '') {
+			$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
+			$uniqfilename = "exp_".uniqid().".".$imageFileType;
 		// Adding the upload file record
 		$fileData = array();
 		$fileData["expenseId"] = $id;
@@ -122,15 +123,17 @@ class ExpensesController extends \Controller {
 			$upld = new \Uploads($this->bpllc);
 			$upld->add($fileData);
 		}
+ 	  }
 	}
-	$this->f3->set('uploaded',$uploaded->getByUploads($id));
-        $this->f3->set('POST.edit',"edit");
-        $this->f3->set('apartment',$id);
-	$this->f3->set('expenses',$expense->getById($id));
-	$this->f3->set('isMobile',parent::isMobile());
-	$this->f3->set('nav_menu','navtenant.htm');
-        $this->f3->set('layout','tenant.htm');
-	$this->f3->set('content','expenses/form.htm');
+	$this->f3->set('uploaded',$uploaded->getByUploads($id)); 
+	$this->f3->set('POST.edit',"edit"); 
+	$this->f3->set('apartment',$id); 
+        $this->f3->set('expenses',$expense->getById($id)); 
+	$this->f3->set('isMobile',parent::isMobile()); 
+        $this->f3->set('nav_menu','navtenant.htm'); 
+	$this->f3->set('apartmentName',$this->aptName($_POST['Apartment']));
+	$this->f3->set('layout','tenant.htm'); 
+        $this->f3->set('content','expenses/form.htm');
     }
 
  
