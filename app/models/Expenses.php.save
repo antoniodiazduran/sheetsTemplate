@@ -1,13 +1,15 @@
+
 <?php
 
-class Uploads extends DB\SQL\Mapper {
+class Expenses extends DB\SQL\Mapper {
 
 /* only these db fields are allowed to be changed */
 	protected $allowed_fields = array(
-		"expenseId",
-		"originalFile",
-        	"uploadFile",
-        	"fileType",
+		"Apartment",
+		"TransactionDate",
+		"Supplier",
+        	"Amount",
+        	"Notes",
 	);
 
 	private function sanitizeInput(array $data, array $fieldNames) 
@@ -22,14 +24,14 @@ class Uploads extends DB\SQL\Mapper {
 
 	public function __construct(DB\SQL $db) 
 	{
-		parent::__construct($db,'uploads');
+		parent::__construct($db,'expenses');
 	}
 
 	public function all() 
 	{ //get all records
-		//$this->aptName="SELECT originalFile, uploadFile FROM uploads WHERE uploads.id = expenses.Apartment";
-		//$this->load(array(),array('order'=>'TransactionDate ASC'));
-		//return $this->query;
+		$this->aptName="SELECT Name AS aptName FROM apartments WHERE apartments.id = expenses.Apartment";
+		$this->load(array(),array('order'=>'TransactionDate DESC'));
+		return $this->query;
 	}
 
 	public function add( $unsanitizeddata )
@@ -48,9 +50,9 @@ class Uploads extends DB\SQL\Mapper {
 		return $this->id;
 	}
 
-	public function getByUploads($id)
+	public function getByApartment($id)
 	{
-		$this->load(array('expenseId=?', $id),array('order'=>'created_at ASC'));
+		$this->load(array('Apartment=?', $id),array('order'=>'TransactionDate DESC'));
 	        return $this->query;
 	}
 
@@ -76,15 +78,9 @@ class Uploads extends DB\SQL\Mapper {
 		$this->update();
 	}
 
-	public function delete_solo($id) 
-	{
-		$this->load(array('id=?',$id));
-		$this->erase();
-	}
-
 	public function delete($id) 
 	{
-		$this->load(array('expenseId=?',$id));
+		$this->load(array('id=?',$id));
 		$this->erase();
 	}
 }

@@ -80,6 +80,23 @@ class ExpensesController extends \Controller {
 		}
 	}
 
+    public function delete_uploads() {
+		$id = $this->f3->get('PARAMS.id');
+	        $apt = $this->f3->get('PARAMS.apt');
+		$expense = new \Expenses($this->bpllc);
+		$uploaded = new \Uploads($this->bpllc);
+		$uploaded->delete_solo($id);
+        	$this->f3->set('apartment',$apt);
+		$this->f3->set('expenses',$expense->getById($apt));
+		$this->f3->set('apartmentName',$this->aptName($_POST['Apartment']));
+		$this->f3->set('uploaded',$uploaded->getByUploads($apt)); 
+		$this->f3->set('isMobile',parent::isMobile());
+		$this->f3->set('POST.edit',"edit"); 
+		$this->f3->set('nav_menu','navtenant.htm');
+                $this->f3->set('layout','tenant.htm');
+                $this->f3->set('content','expenses/form.htm');
+    }
+
     public function delete_expenses() {
 		$id = $this->f3->get('PARAMS.id');
 	        $apt = $this->f3->get('PARAMS.apt');
@@ -94,7 +111,7 @@ class ExpensesController extends \Controller {
 		$this->f3->set('nav_menu','navtenant.htm');
                 $this->f3->set('layout','tenant.htm');
 		$this->f3->set('content','expenses/list.htm');
-	}
+    }
 
     public function edit_expenses() {
         $id = $this->f3->get('PARAMS.id'); 
@@ -105,8 +122,9 @@ class ExpensesController extends \Controller {
         if($this->f3->exists('POST.edit')) {
             $expense->edit($id, $this->f3->get('POST'));
         }
+
 	// Uploading a new file
-	if (isset($FILES['fileToUpload'])) {
+	if (isset($_FILES['fileToUpload'])) {
 	  if($_FILES["fileToUpload"]["name"] != '') {
 			$imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
 			$uniqfilename = "exp_".uniqid().".".$imageFileType;
@@ -125,6 +143,7 @@ class ExpensesController extends \Controller {
 		}
  	  }
 	}
+
 	$this->f3->set('uploaded',$uploaded->getByUploads($id)); 
 	$this->f3->set('POST.edit',"edit"); 
 	$this->f3->set('apartment',$id); 

@@ -23,7 +23,7 @@
                 	</check>
 			<td>{{ @pays.TransactionDate }}</td>
 			<td>{{ @pays.Supplier }}</td>
-			<td class="w3-right">$ {{ number_format((int)@pays.Amount,2) }}</td>
+			<td class="w3-right">$ {{ number_format(@pays.Amount,2) }}</td>
 			<td>{{ @pays.Notes }}</td>				
 		        <td class="w3-center"><a href="/bowline/expenses/delete/{{@pays.id}}/{{@apartment}}"><i class="material-icons" title="Delete">delete</i></a></td>
 			</tr>	

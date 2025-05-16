@@ -35,7 +35,7 @@ class MortgageController extends \Controller {
 		$this->f3->set('isMobile',parent::isMobile());
 		$this->f3->set('nav_menu','navtenant.htm');
                 $this->f3->set('layout','tenant.htm');
-		$this->f3->set('content','mortgage/form.htm');
+		$this->f3->set('content','mortgage/list.htm');
 	}
 
 	public function delete_mortgage()

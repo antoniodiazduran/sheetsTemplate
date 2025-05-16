@@ -28,7 +28,8 @@
 	    <input class="w3-input" type="file" name="fileToUpload" id="fileToUpload">
 	    <br>
 	    File(s) Attached:<br>
-		<repeat group="{{ @uploaded}}" value="{{ @filesUp }}">  
+		<repeat group="{{ @uploaded}}" value="{{ @filesUp }}">
+		<a href="/bowline/uploads/delete/{{ @filesUp.id }}/{{ @POST.id }}"><span class="material-icons">delete</span></a>  
 		&nbsp; <a href="uploads/{{ @filesUp.uploadFile }}" TARGET="_blank">{{ @filesUp.originalFile }}</a><br>
 		</repeat>
 	    <br>
